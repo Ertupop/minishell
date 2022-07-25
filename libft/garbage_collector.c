@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 03:53:11 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/07/20 04:43:28 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/07/25 03:16:10 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,5 +71,3 @@ char	*gc_alloc_char(t_list **collector, int size)
 	ft_lstadd_back(collector, new);
 	return (str);
 }
-
-str = gc_alloc_char;
