@@ -6,7 +6,7 @@
 #    By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 09:30:42 by jule-mer          #+#    #+#              #
-#    Updated: 2022/07/25 03:29:15 by jule-mer         ###   ########.fr        #
+#    Updated: 2022/07/26 17:05:10 by jule-mer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ LIBFT	=	libft/libft.a
 DEP		=	$(SRCS:srcs/%.c=objects/%.d)
 OBJS	=	$(SRCS:srcs/%.c=objects/%.o)
 SRCS	=	$(addprefix srcs/, $(SRC))
-SRC		=	main.c
+SRC		=	main.c \
+			utils.c
 
 all:	$(NAME)
 

@@ -1,42 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/23 09:44:58 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/07/26 17:06:27 by jule-mer         ###   ########.fr       */
+/*   Created: 2022/07/26 17:02:23 by jule-mer          #+#    #+#             */
+/*   Updated: 2022/07/26 17:05:24 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ft_prompt(void)
+int	ft_strcmp(char *s1, char *s2)
 {
-	char	*str;
-	t_arg	*args;
+	int	i;
 
-	args = NULL;
-	while (1)
-	{
-		str = readline("Minishell> ");
-		if (ft_strcmp(str, "") && ft_onlyspace(str))
-		{
-			printf("you say \"%s\"\n", str);
-			add_history(str);
-		}
-		else
-			printf("you say nothing\n");
-	}
-	rl_clear_history();
+	if (!s1 || !s2)
+		return (0);
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }
 
-int	main(int ac, char **av, char **envp)
+int	ft_onlyspace(char *str)
 {
-	(void)ac;
-	(void)av;
-	(void)envp;
-	ft_prompt();
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] == ' ')
+		i++;
+	if (str[i])
+		return (1);
 	return (0);
 }
