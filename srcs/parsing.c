@@ -3,21 +3,69 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 20:29:45 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/07/27 12:34:17 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/07/27 18:46:20 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-/*
-void	ft_add_args(t_list **collector, t_arg **args, char *str, int *i)
+
+void	ft_fill_arg(t_arg *arg, char *str, int *receive, t_list **collector)
+{
+	int	pos;
+	int	len;
+	int	i;
+
+	pos = *receive;
+	if (ft_is_sep(str[pos], "<>|\'\""))
+	{
+		pos++;
+		arg->str = gc_alloc_char(collector, 1);
+		arg->str = ft_the_god_sep(str[pos]);
+	}
+	else
+	{
+		len = pos;
+		while (str[len] && !ft_is_sep(str[pos], " <>|\'\""))
+			len++;
+		len++;
+		arg->str = gc_alloc_char(collector, len - pos);
+		i = 0;
+		while (pos < len)
+			arg->str[i++] = str[pos++];
+		arg->str[i] = '\0';
+	}
+	*receive = pos;
+	(void)arg;
+}
+
+void	ft_init_arg(t_arg **new)
+{
+	(*new)->is_action_tokken = 0;
+	(*new)->is_pipe = 0;
+	(*new)->is_outfile = 0;
+	(*new)->str = NULL;
+	(*new)->next = NULL;
+}
+
+t_arg	*gc_create_slot(t_list **collector)
 {
 	t_arg	*new;
+	t_list	*col;
 
-	new = ft_gc_
-}*/
+	new = malloc(sizeof(t_arg));
+	col = ft_lstnew(new);
+	if (!new || !col)
+	{
+		ft_putstr_fd("Error in slot creation", 2);
+		gc_dell(*collector);
+	}
+	ft_init_arg(&new);
+	ft_lstadd_back(collector, col);
+	return (new);
+}
 
 int	ft_number_of_slot(char *str)
 {
@@ -30,7 +78,7 @@ int	ft_number_of_slot(char *str)
 	{
 		while (str[i] && str[i] == ' ')
 			i++;
-		if (str[i] == '|')
+		if (str[i] && ft_is_sep(str[i], "<>|\'\""))
 		{
 			res++;
 			i++;
@@ -40,27 +88,30 @@ int	ft_number_of_slot(char *str)
 			i++;
 			res++;
 		}
-		while (str[i] && str[i] != ' ' && str[i] != '|')
+		while (str[i] && !ft_is_sep(str[i], " <>|\'\""))
 			i++;
 	}
-	printf("%d\n", res);
 	return (res);
 }
 
-t_arg	*ft_parse(t_list **collector, t_arg **args, char *str)
+t_arg	*ft_parse(t_arg **args, char *str, t_list **collector)
 {
-	int		i;
-	int		pos;
-	int		slots;
+	int	i;
+	int	slots;
+	int	pos;
 
-	i = -1;
-	pos = 0;
 	slots = ft_number_of_slot(str);
+	i = -1;
 	while (++i < slots)
+		ft_arg_add_back(args, gc_create_slot(collector));
+	pos = 0;
+	while (str[pos] && str[pos] == ' ')
+		pos++;
+	while ((*args))
 	{
-		//ft_add_arg(collector, args, str, &i);
+		ft_fill_arg(*args, str, &pos, collector);
+		*args = (*args)->next;
 	}
-	(void)collector;
-	(void)args;
+	ft_fill_arg(*args, str, &pos, collector);
 	return (NULL);
 }
