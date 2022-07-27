@@ -6,7 +6,7 @@
 #    By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/01 15:32:05 by jule-mer          #+#    #+#              #
-#    Updated: 2022/07/19 23:40:46 by jule-mer         ###   ########.fr        #
+#    Updated: 2022/07/26 19:46:07 by jule-mer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,19 +31,22 @@ RM		= rm -f
 CFLAGS = -Wall -Wextra -Werror
 
 .c.o:
-		${CC} ${CFLAGS} -g -c $< -o ${<:.c=.o}
+	@printf "\033[0;33mGeneration of libft objects... %-33.33s\r" $@
+	@${CC} ${CFLAGS} -g -c $< -o ${<:.c=.o}
 
 $(NAME): ${OBJS}
-		ar rcs ${NAME} ${OBJS}
+	@echo "\n\n\033[0;32mCompilation of libft"
+	@ar rcs ${NAME} ${OBJS}
+	@echo "\033[0m"
 
 all:	${NAME}
 
 clean:
-		${RM} ${OBJS} ${OBJSBONUS}
+	@${RM} ${OBJS} ${OBJSBONUS}
 
 fclean:	clean
-		${RM} ${NAME}
+	@${RM} ${NAME}
 
-re:		fclean all
+re:	fclean all
 
 .PHONY : all clean fclean re
