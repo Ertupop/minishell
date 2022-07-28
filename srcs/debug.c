@@ -6,7 +6,7 @@
 /*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:21:52 by firawar           #+#    #+#             */
-/*   Updated: 2022/07/28 13:25:18 by firawar          ###   ########.fr       */
+/*   Updated: 2022/07/28 14:29:33 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,4 +34,15 @@ void	ft_debug(t_arg **args)
 		tmp = tmp->next;
 		i++;
 	}
+	printf("\n");
+	tmp = *args;
+	while (tmp)
+	{
+		if (tmp->str)
+			printf("%s ", tmp->str);
+		else
+			printf("(nul) ");
+		tmp = tmp->next;
+	}
+	printf("\n\n");
 }
