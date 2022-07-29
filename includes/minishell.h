@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/07/27 18:49:06 by firawar          ###   ########.fr       */
+/*   Updated: 2022/07/29 07:17:26 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "libft.h"
 # include <stdio.h>
 # include <stdlib.h>
+# include <stdarg.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
@@ -55,5 +56,7 @@ int		ft_is_sep(char c, char *sep);
 t_arg	*ft_arg_last(t_arg *list);
 void	ft_arg_add_back(t_arg **args, t_arg *new);
 int		ft_strcmp(const char *s1, const char *s2);
+
+//builtins
 
 #endif
