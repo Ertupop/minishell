@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   parse_utils_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 17:02:23 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/07/27 18:48:52 by firawar          ###   ########.fr       */
+/*   Updated: 2022/07/28 16:21:07 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-char	*ft_the_god_sep(char c)
+int	ft_the_good_tokken(char c)
 {
 	if (c == '<')
-		return ("<");
+		return (ENTRY);
 	else if (c == '>')
-		return (">");
+		return (EXIT);
 	else if (c == '|')
-		return ("|");
+		return (PIPE);
 	else if (c == '\'')
-		return ("\'");
-	return ("\"");
+		return (S_QUOTE);
+	return (D_QUOTE);
 }
 
 int	ft_is_sep(char c, char *sep)
@@ -30,7 +30,7 @@ int	ft_is_sep(char c, char *sep)
 	int		i;
 
 	i = -1;
-	while (sep[i])
+	while (sep[++i])
 	{
 		if (sep[i] == c)
 			return (1);

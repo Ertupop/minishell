@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: firawar <firawar@student.42.fr>            +#+  +:+       +#+         #
+#    By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 09:30:42 by jule-mer          #+#    #+#              #
-#    Updated: 2022/07/27 14:25:15 by firawar          ###   ########.fr        #
+#    Updated: 2022/07/29 17:23:47 by ertupop          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,10 @@ RM		=	rm -rf
 DEP		=	$(SRCS:srcs/%.c=objects/%.d)
 OBJS	=	$(SRCS:srcs/%.c=objects/%.o)
 SRCS	=	$(addprefix srcs/, $(SRC))
-SRC		=	main.c \
-			parsing.c \
-			utils.c
+SRC		=	check_str.c \
+			main.c \
+			parsing.c parse_utils.c parse_utils_2.c \
+			debug.c builtins.c
 
 all:	$(NAME)
 
