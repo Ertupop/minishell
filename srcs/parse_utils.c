@@ -6,7 +6,7 @@
 /*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:19:20 by firawar           #+#    #+#             */
-/*   Updated: 2022/07/29 08:39:00 by firawar          ###   ########.fr       */
+/*   Updated: 2022/07/29 10:35:22 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ void	ft_fill_arg(t_arg *arg, char *str, int *receive, t_list **collector)
 
 void	ft_init_arg(t_arg **new)
 {
+	(*new)->is_command = 0;
 	(*new)->is_action_tokken = 0;
 	(*new)->is_argument = 0;
 	(*new)->is_option = 0;
