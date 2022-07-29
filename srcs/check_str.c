@@ -6,7 +6,7 @@
 /*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 19:23:36 by firawar           #+#    #+#             */
-/*   Updated: 2022/07/28 19:54:13 by firawar          ###   ########.fr       */
+/*   Updated: 2022/07/29 12:28:26 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ int	ft_check_str(char *str)
 		}
 		if (ft_third(str, i))
 			return (1);
+	}
+	if (ft_is_sep(str[i - 1], "<>|\\"))
+	{
+		ft_putstr_fd("minishell: syntax error : finish with bad token\n", 2);
+		return (1);
 	}
 	return (0);
 }

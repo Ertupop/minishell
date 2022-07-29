@@ -6,7 +6,7 @@
 /*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:19:20 by firawar           #+#    #+#             */
-/*   Updated: 2022/07/29 10:35:22 by firawar          ###   ########.fr       */
+/*   Updated: 2022/07/29 11:14:21 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_fill_arg(t_arg *arg, char *str, int *receive, t_list **collector)
 	int	i;
 
 	pos = *receive;
-	if (ft_is_sep(str[pos], "<>|\'\""))
+	if (ft_is_sep(str[pos], "<>|"))
 	{
 		arg->is_action_tokken = ft_the_good_tokken(str[pos]);
 		pos++;
@@ -67,30 +67,4 @@ t_arg	*gc_create_slot(t_list **collector)
 	ft_init_arg(&new);
 	ft_lstadd_back(collector, col);
 	return (new);
-}
-
-int	ft_number_of_slot(char *str, int i, int res)
-{
-	i = 0;
-	res = 0;
-	while (str[i])
-	{
-		while (str[i] && str[i] == ' ')
-			i++;
-		while (str[i] && ft_is_sep(str[i], "<>|\'\""))
-		{
-			if (str[i + 1] && str[i + 1] == str[i])
-				i++;
-			res++;
-			i++;
-		}
-		if (str[i] && str[i] != ' ')
-		{
-			i++;
-			res++;
-		}
-		while (str[i] && str[i] != ' ' && !ft_is_sep(str[i], "<>|\'\""))
-			i++;
-	}
-	return (res);
 }
