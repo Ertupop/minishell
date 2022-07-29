@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/07/29 07:17:26 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/07/29 09:22:27 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include "libft.h"
 # include <stdio.h>
 # include <stdlib.h>
-# include <stdarg.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 
