@@ -6,7 +6,7 @@
 /*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 15:19:20 by firawar           #+#    #+#             */
-/*   Updated: 2022/07/28 19:31:55 by firawar          ###   ########.fr       */
+/*   Updated: 2022/07/29 08:39:00 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,19 @@ int	ft_number_of_slot(char *str, int i, int res)
 	{
 		while (str[i] && str[i] == ' ')
 			i++;
-		if (str[i] && str[i] != ' ')
+		while (str[i] && ft_is_sep(str[i], "<>|\'\""))
 		{
+			if (str[i + 1] && str[i + 1] == str[i])
+				i++;
 			res++;
 			i++;
-			if (str[i] && ft_is_sep(str[i], "<>|\'\""))
-			{
-				i++;
-				res++;
-				if (str[i] && !ft_is_sep(str[i], " <>|\"\""))
-				{
-					i++;
-					res++;
-				}
-			}
 		}
-		while (str[i] && str[i] != ' ')
+		if (str[i] && str[i] != ' ')
+		{
+			i++;
+			res++;
+		}
+		while (str[i] && str[i] != ' ' && !ft_is_sep(str[i], "<>|\'\""))
 			i++;
 	}
 	return (res);

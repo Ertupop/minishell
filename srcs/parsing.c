@@ -6,7 +6,7 @@
 /*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 20:29:45 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/07/28 19:29:46 by firawar          ###   ########.fr       */
+/*   Updated: 2022/07/29 08:42:34 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	ft_create_parse(t_arg **args, char *str, t_list **collector)
 	i = -1;
 	slots = 0;
 	slots = ft_number_of_slot(str, i, slots);
+	printf("%d\n", slots);
 	while (++i < slots)
 	{
 		new = gc_create_slot(collector);

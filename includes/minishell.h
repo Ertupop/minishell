@@ -6,7 +6,7 @@
 /*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/07/28 19:30:15 by firawar          ###   ########.fr       */
+/*   Updated: 2022/07/29 10:32:21 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 //DEBUG
 # define ON 1
 # define OFF 0
-# define DEBUG OFF
+# define DEBUG ON
 
 # define ENTRY 1
 # define EXIT 2
@@ -30,11 +30,10 @@
 # define APPEND 4
 # define PIPE 5
 # define VAR_ENV 6
-# define S_QUOTE 7
-# define D_QUOTE 8
 
 typedef struct s_arg
 {
+	int				is_command;
 	int				is_action_tokken;
 	int				is_argument;
 	int				is_option;
@@ -45,6 +44,7 @@ typedef struct s_arg
 }	t_arg;
 
 //check_str.c
+int		ft_third(char *str, int i);
 int		ft_return_str(int a, int b);
 int		ft_quote(char *str, int i);
 int		ft_check_str(char *str);
@@ -74,5 +74,9 @@ int		ft_strcmp(const char *s1, const char *s2);
 
 //debug.c
 void	ft_debug(t_arg **args);
+
+//si < en debut ou pipe <, un argument puis commande
+//echo -n-n affiche -n-n
+//echo "bon" "jour" == bon jour
 
 #endif
