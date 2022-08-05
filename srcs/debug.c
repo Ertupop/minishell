@@ -6,7 +6,7 @@
 /*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/28 13:21:52 by firawar           #+#    #+#             */
-/*   Updated: 2022/07/28 14:29:33 by firawar          ###   ########.fr       */
+/*   Updated: 2022/08/05 12:06:42 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,29 +19,21 @@ void	ft_debug(t_arg **args)
 
 	i = 0;
 	tmp = *args;
-	while (tmp)
+	while (tmp && ++i)
 	{
-		printf("\nSlot %d :\n", i);
-		printf("\tis_action_tokken = %d\n\tis_argument = %d\n\tis_option = %d\n\tis_outfile = %d\n", tmp->is_action_tokken, tmp->is_argument, tmp->is_option, tmp->is_outfile);
-		if (tmp->str)
-			printf("\tstr = %s\n", tmp->str);
-		else
-			printf("\tstr = (nul)\n");
-		if (tmp->option)
-			printf("\toption = %s\n\n", tmp->option);
-		else
-			printf("\toption = (nul)\n");
+		printf("\nSlot %d :\n\t", i);
+		printf("is command : %d ", tmp->is_command);
+		printf("is action : %d ", tmp->is_action_tokken);
+		printf("is argument : %d ", tmp->is_argument);
+		printf("is file : %d ", tmp->is_file);
+		printf("str : \"%s\"", tmp->str);
 		tmp = tmp->next;
-		i++;
 	}
-	printf("\n");
 	tmp = *args;
+	printf("\n");
 	while (tmp)
 	{
-		if (tmp->str)
-			printf("%s ", tmp->str);
-		else
-			printf("(nul) ");
+		printf("%s ", tmp->str);
 		tmp = tmp->next;
 	}
 	printf("\n\n");

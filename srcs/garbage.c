@@ -1,52 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*   garbage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/26 17:02:23 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/08/05 11:55:37 by firawar          ###   ########.fr       */
+/*   Created: 2022/08/04 09:52:09 by firawar           #+#    #+#             */
+/*   Updated: 2022/08/05 08:46:28 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_is_sep(char c, char *sep)
+t_arg	*gc_create_slot(t_list **collector)
 {
-	int		i;
+	t_arg	*new;
+	t_list	*col;
 
-	i = -1;
-	while (sep[++i])
+	new = malloc(sizeof(t_arg));
+	col = ft_lstnew(new);
+	if (!new || !col)
 	{
-		if (sep[i] == c)
-			return (1);
+		ft_putstr_fd("Error in slot creation", 2);
+		gc_dell(*collector);
+		exit (1);
 	}
-	return (0);
-}
-
-t_arg	*ft_arg_last(t_arg *list)
-{
-	t_arg	*tmp;
-
-	tmp = list;
-	while (list)
-	{
-		tmp = list;
-		list = list->next;
-	}
-	return (tmp);
-}
-
-void	ft_arg_add_back(t_arg **args, t_arg *new)
-{
-	t_arg	*tmp;
-
-	if (!*args)
-	{
-		*args = new;
-		return ;
-	}
-	tmp = ft_arg_last(*args);
-	tmp->next = new;
+	ft_lstadd_back(collector, col);
+	return (new);
 }

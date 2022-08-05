@@ -6,28 +6,11 @@
 /*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:44:58 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/07/28 19:21:15 by firawar          ###   ########.fr       */
+/*   Updated: 2022/08/05 13:11:16 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	ft_history(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] == ' ')
-		i++;
-	if (str[i] && str[i] == '|')
-	{
-		ft_putstr_fd("Starting by a pipe\n", 2);
-		return (1);
-	}
-	if (str[i])
-		return (0);
-	return (1);
-}
 
 void	ft_prompt(void)
 {
@@ -44,11 +27,8 @@ void	ft_prompt(void)
 		str = readline("minishell> ");
 		if (!ft_strcmp(str, "exit"))
 			break ;
-		if (!ft_history(str))
-		{
-			add_history(str);
-			i = ft_parse(&args, str, &collector);
-		}
+		add_history(str);
+		i = ft_parse(&args, str, &collector);
 		if (!i)
 		{
 		}
