@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   slots.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 11:14:02 by firawar           #+#    #+#             */
-/*   Updated: 2022/07/29 13:28:31 by firawar          ###   ########.fr       */
+/*   Updated: 2022/08/08 10:27:25 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int	ft_change_quote(char c, int *s_quote, int *d_quote, int type)
 		|| ((c == '\'' && *d_quote == 1) || (c == '\"' && *s_quote == 1)))
 		return (0);
 	if (type == 0)
+		{}
 	return (0);
 }
 

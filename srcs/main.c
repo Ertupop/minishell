@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:44:58 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/07/29 11:04:14 by firawar          ###   ########.fr       */
+/*   Updated: 2022/08/08 12:52:16 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,12 @@ int	ft_history(char *str)
 {
 	int	i;
 
+	if (!str)
+		return (0);
 	i = 0;
 	while (str[i] && str[i] == ' ')
 		i++;
-	if (str[i] && str[i] == '|')
-	{
-		ft_putstr_fd("Starting by a pipe\n", 2);
-		return (1);
-	}
-	if (str[i])
+	if (!str[i])
 		return (0);
 	return (1);
 }
@@ -34,23 +31,18 @@ void	ft_prompt(void)
 	t_list	*collector;
 	t_arg	*args;
 	char	*str;
-	int		i;
 
 	while (1)
 	{
-		i = 0;
 		args = NULL;
 		collector = NULL;
-		str = readline("minishell> ");
+		str = readline("\033[0;36mminishell \033[0;31m➜\033[0m ");
 		if (!ft_strcmp(str, "exit"))
 			break ;
-		if (!ft_history(str))
+		if (ft_history(str))
 		{
 			add_history(str);
-			i = ft_parse(&args, str, &collector);
-		}
-		if (!i)
-		{
+			ft_parse(&args, str, &collector);
 		}
 		if (DEBUG)
 			ft_debug(&args);

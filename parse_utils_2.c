@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 17:02:23 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/07/29 10:45:41 by firawar          ###   ########.fr       */
+/*   Updated: 2022/08/08 10:28:20 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,19 +58,4 @@ void	ft_arg_add_back(t_arg **args, t_arg *new)
 	}
 	tmp = ft_arg_last(*args);
 	tmp->next = new;
-}
-
-int	ft_strcmp(const char *s1, const char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	if (!s2[i])
-	{
-		if (s1[i] == '\0' || s1[i] == ' ')
-			return (0);
-	}
-	return (1);
 }

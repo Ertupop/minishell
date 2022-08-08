@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 03:53:11 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/07/26 16:44:27 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/08/01 10:59:59 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int	*gc_alloc_int(t_list **collector, int size)
 	int		*str;
 	t_list	*new;
 
-	str = malloc(sizeof(str) * size + 1);
+	str = malloc(sizeof(int) * size + 1);
 	if (!str)
 	{
 		gc_dell(*collector);
@@ -60,7 +60,7 @@ char	*gc_alloc_char(t_list **collector, int size)
 	char	*str;
 	t_list	*new;
 
-	str = malloc(sizeof(str) * size + 1);
+	str = malloc(sizeof(char) * size + 1);
 	if (!str)
 	{
 		gc_dell(*collector);
