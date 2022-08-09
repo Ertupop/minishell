@@ -6,11 +6,11 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 17:02:23 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/08/08 10:11:49 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/08/09 08:49:03 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	ft_is_sep(char c, char *sep)
 {

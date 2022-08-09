@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:44:58 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/08/08 12:52:16 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:25:30 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,19 @@ void	ft_prompt(void)
 		str = readline("\033[0;36mminishell \033[0;31m➜\033[0m ");
 		if (!ft_strcmp(str, "exit"))
 			break ;
+
+		//verifie si il peut ajouter a l'historique, si oui lance la suite
 		if (ft_history(str))
 		{
 			add_history(str);
-			ft_parse(&args, str, &collector);
+			if (!ft_parse(&args, str, &collector))
+				ft_fill_args(&args, str, &collector);
 		}
+
+		//DEBUG
 		if (DEBUG)
 			ft_debug(&args);
+
 		gc_dell(collector);
 	}
 	gc_dell(collector);

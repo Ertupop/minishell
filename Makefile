@@ -6,44 +6,51 @@
 #    By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 09:30:42 by jule-mer          #+#    #+#              #
-#    Updated: 2022/08/08 10:29:04 by jule-mer         ###   ########.fr        #
+#    Updated: 2022/08/09 12:20:06 by jule-mer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	minishell
+LIBFT	=	libft/libft.a
 
 CC		=	cc
 CFLAGS	=	-Wall -Wextra -Werror -g -MMD
+
+INC		=	-I./includes -I./libft -MMD
+
+LIB		=	-L./libft -lft -lreadline
 
 RM		=	rm -rf
 
 DEP		=	$(SRCS:srcs/%.c=objects/%.d)
 OBJS	=	$(SRCS:srcs/%.c=objects/%.o)
 
-SRCS	=	$(addprefix srcs/, \
-			main.c \
-			debug.c \
-			errors.c \
-			garbage.c \
+SRCS	=	$(addprefix srcs/, main.c)
+SRCS	+=	$(addprefix srcs/errors/, errors.c)
+SRCS	+=	$(addprefix srcs/garbage_collector/, garbage.c)
+SRCS	+=	$(addprefix srcs/parsing/, \
 			check_str.c \
+			fill_args.c \
 			init.c \
-			parse_utils.c parsing.c \
-			slots.c \
-			utils.c)
+			parse_utils.c \
+			parsing.c)
+SRCS	+=	$(addprefix srcs/utils/,utils.c)
+SRCS	+=	$(addprefix srcs/debug/, debug.c)
 
 all:	$(NAME)
 
 objects/%.o:	srcs/%.c
 	@printf "\033[0;33mGenerating minishell objects... %-33.33s\r" $@
-	@mkdir -p objects
-	@$(CC) $(CFLAGS) -I includes -I libft -c $< -o $@
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 $(NAME):	$(OBJS)
 	@echo "\n"
 	@make -C libft
 	@echo "\033[0;32m\nCompilation of minishell"
-	@$(CC) $(OBJS) -g -o $(NAME) -Llibft -lft -lreadline
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LIB)
 	@echo "\nREADY !\033[0m\n"
+	@$(RM) null.d
 
 clean:
 	@echo "\033[0;31mCleaning binaries..."
@@ -51,12 +58,9 @@ clean:
 	@$(RM) $(OBJS) $(DEP) objects
 	@echo "\nBINARIES ARE REMOVED\033[0m\n"
 
-fclean:
-	@echo "\033[0;31mCleaning binaries..."
-	@make fclean -C libft
-	@$(RM) $(OBJS) $(DEP) objects
-	@echo "\nDeleting executable..."
-	@rm $(NAME)
+fclean:	clean
+	@echo "\033[0;31m\nDeleting executable..."
+	@$(RM) $(NAME)
 	@echo "\nALL IS DELETED\033[0m\n"
 
 re:	fclean all

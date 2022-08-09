@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   garbage.c                                          :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/04 09:52:09 by firawar           #+#    #+#             */
-/*   Updated: 2022/08/08 10:11:41 by jule-mer         ###   ########.fr       */
+/*   Created: 2022/08/04 13:30:33 by firawar           #+#    #+#             */
+/*   Updated: 2022/08/09 08:51:09 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
-t_arg	*gc_create_slot(t_list **collector)
+int	ft_strcmp(char *s1, char *s2)
 {
-	t_arg	*new;
-	t_list	*col;
+	int	i;
 
-	new = malloc(sizeof(t_arg));
-	col = ft_lstnew(new);
-	if (!new || !col)
-	{
-		ft_putstr_fd("Error in slot creation", 2);
-		gc_dell(*collector);
-		exit (1);
-	}
-	ft_lstadd_back(collector, col);
-	return (new);
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
 }

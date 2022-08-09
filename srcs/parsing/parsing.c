@@ -6,11 +6,11 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 20:29:45 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/08/08 12:50:56 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:14:10 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	ft_parse(t_arg **args, char *str, t_list **collector)
 {
@@ -19,11 +19,14 @@ int	ft_parse(t_arg **args, char *str, t_list **collector)
 	char	c;
 	t_arg	*tmp;
 
+	//verifie si chaine semble conforme
 	if (ft_check(str))
 		return (1);
+
 	i = 0;
 	while (str[i])
 	{
+
 		//passe les espaces
 		while (str[i] && str[i] == ' ')
 			i++;
@@ -38,6 +41,7 @@ int	ft_parse(t_arg **args, char *str, t_list **collector)
 			tmp = gc_create_slot(collector);
 			ft_init_quote(collector, &tmp, str, i);
 			ft_arg_add_back(args, tmp);
+			j++;
 		}
 
 		//gere si sep
@@ -54,7 +58,7 @@ int	ft_parse(t_arg **args, char *str, t_list **collector)
 		//gere si str
 		else
 		{
-			while (str[j] && !ft_is_sep(str[j], " <>|"))
+			while (str[j] && !ft_is_sep(str[j], " \'\"<>|"))
 				j++;
 			if (j != i)
 			{
@@ -63,9 +67,9 @@ int	ft_parse(t_arg **args, char *str, t_list **collector)
 				ft_arg_add_back(args, tmp);
 			}
 		}
+		if (i == j)
+			j++;
 		i = j;
 	}
-	(void)args;
-	(void)collector;
 	return (0);
 }

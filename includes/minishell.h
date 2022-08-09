@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/08/08 13:01:02 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:30:55 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 //DEBUG
 # define ON 1
 # define OFF 0
-# define DEBUG OFF
+# define DETAILS 2
+# define DEBUG DETAILS
 
 # define ENTRY 1
 # define EXIT 2
@@ -41,21 +42,37 @@ typedef struct s_arg
 	struct s_arg	*next;
 }	t_arg;
 
-//check_str.c
-int		ft_action(char *str, int *j);
-int		ft_quote(char *str, int *j);
-int		ft_check(char *str);
-
 //main.c
 int		ft_history(char *str);
 void	ft_prompt(void);
 int		main(int ac, char **av, char **envp);
 
+/*----------------------------------------------------------------------------*/
+/*                                   ERRORS                                   */
+/*----------------------------------------------------------------------------*/
+//
 //errros.c
 int		ft_error(int i, char c);
 
+
+/*----------------------------------------------------------------------------*/
+/*                                   GARBAGE                                  */
+/*----------------------------------------------------------------------------*/
+//
 //garbage.c
 t_arg	*gc_create_slot(t_list **collector);
+
+/*----------------------------------------------------------------------------*/
+/*                                   PARSING                                  */
+/*----------------------------------------------------------------------------*/
+//
+//check_str.c
+int		ft_check(char *str);
+int		ft_quote(char *str, int *j);
+int		ft_action(char *str, int *j);
+
+//fill_args.c
+void	ft_fill_args(t_arg **args, char *str, t_list **collector);
 
 //init.c
 void	ft_end_init(t_arg **new);
@@ -71,13 +88,21 @@ void	ft_arg_add_back(t_arg **args, t_arg *new);
 //parsing.c
 int		ft_parse(t_arg **args, char *str, t_list **collector);
 
+/*----------------------------------------------------------------------------*/
+/*                                    UTILS                                   */
+/*----------------------------------------------------------------------------*/
+//
 //utils.c
 int		ft_strcmp(char *s1, char *s2);
 
+/*----------------------------------------------------------------------------*/
+/*                                    DEBUG                                   */
+/*----------------------------------------------------------------------------*/
+//
 //debug.c
 void	ft_debug(t_arg **args);
 
-//si < en debut ou pipe <, un argument puis commande
+//si < en debut , un argument puis commande
 //echo -n-n affiche -n-n
 //echo "bon" "jour" == bon jour
 

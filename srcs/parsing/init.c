@@ -6,11 +6,11 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:55:16 by firawar           #+#    #+#             */
-/*   Updated: 2022/08/08 11:44:14 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/08/09 12:32:20 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	ft_end_init(t_arg **new)
 {
@@ -21,19 +21,19 @@ void	ft_end_init(t_arg **new)
 	(*new)->next = NULL;
 }
 
-void	ft_init_quote(t_list **collector, t_arg **new, char *str, int i)
+void	ft_init_quote(t_list **collector, t_arg **new, char *str, int j)
 {
-	int	j;
+	int	i;
 	int	start;
 
-	j = i;
-	while (str[j] && !ft_is_sep(str[j], " <>|"))
-		j++;
-	(*new)->str = gc_alloc_char(collector, j - i);
-	i--;
+	i = j;
+	i++;
+	while (str[i] && str[i] != str[j])
+		i++;
+	(*new)->str = gc_alloc_char(collector, i - j);
 	start = -1;
-	while (++i < j)
-		(*new)->str[++start] = str[i];
+	while (++j < i)
+		(*new)->str[++start] = str[j];
 	(*new)->str[++start] = '\0';
 	ft_end_init(new);
 }
