@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/07/29 17:22:49 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/08/12 09:39:32 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # define MINISHELL_H
 
 # include "libft.h"
-# include "builtins.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
@@ -44,6 +43,14 @@ typedef struct s_arg
 	char			*option;
 	struct s_arg	*next;
 }	t_arg;
+
+typedef struct s_env
+{
+	char			*str;
+	struct s_env	*next;
+	int				ui;
+}	t_env;
+
 
 //check_str.c
 int		ft_third(char *str, int i);
@@ -77,8 +84,19 @@ int		ft_strcmp(const char *s1, const char *s2);
 //debug.c
 void	ft_debug(t_arg **args);
 
+void	ft_echo(t_arg *lst);
 //si < en debut ou pipe <, un argument puis commande
 //echo -n-n affiche -n-n
 //echo "bon" "jour" == bon jour
 
+//cd
+char	*ft_find_env(t_env *env, char *find);
+
+//utils
+char	*gc_strdup(t_list **collector, const char *s1);
+t_env	*gc_alloc_env(t_list **collector);
+t_env	*ft_env(t_list **collector, char **envp);
+void	ft_lstadd_back_env(t_env **alst, t_env *new);
+t_env	*ft_lstlast_env(t_env *lst);
+int	ft_pwd(t_env *env);
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 17:02:23 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/07/28 16:21:07 by firawar          ###   ########.fr       */
+/*   Updated: 2022/08/05 06:59:30 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,7 @@ int	ft_the_good_tokken(char c)
 		return (ENTRY);
 	else if (c == '>')
 		return (EXIT);
-	else if (c == '|')
-		return (PIPE);
-	else if (c == '\'')
-		return (S_QUOTE);
-	return (D_QUOTE);
+	return (PIPE);
 }
 
 int	ft_is_sep(char c, char *sep)

@@ -6,7 +6,7 @@
 #    By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 09:30:42 by jule-mer          #+#    #+#              #
-#    Updated: 2022/07/29 17:23:47 by ertupop          ###   ########.fr        #
+#    Updated: 2022/08/05 08:26:24 by ertupop          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS	=	$(addprefix srcs/, $(SRC))
 SRC		=	check_str.c \
 			main.c \
 			parsing.c parse_utils.c parse_utils_2.c \
-			debug.c builtins.c
+			debug.c echo.c utils.c cd.c
 
 all:	$(NAME)
 
