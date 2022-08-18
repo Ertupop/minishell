@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/08/12 09:39:32 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/08/17 11:49:30 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,9 @@ t_env	*ft_env(t_list **collector, char **envp);
 void	ft_lstadd_back_env(t_env **alst, t_env *new);
 t_env	*ft_lstlast_env(t_env *lst);
 int	ft_pwd(t_env *env);
+
+//export
+int	ft_export(char **tab, t_env *env, t_list *garbage);
+int	ft_size_tab(char **tab);
+int	ft_print_export(t_env	*env);
 #endif
