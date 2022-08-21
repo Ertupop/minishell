@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/08 09:06:30 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/08/09 12:07:18 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/08/16 21:50:48 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,5 @@ int	ft_error(int i, char c)
 		ft_putstr_fd("minishell: syntax errornear unexpected token `>'\n", 2);
 	else if (i == 1 && c == '|')
 		ft_putstr_fd("minishell: syntax errornear unexpected token `|'\n", 2);
-
 	return (1);
 }
