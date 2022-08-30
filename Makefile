@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+         #
+#    By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 09:30:42 by jule-mer          #+#    #+#              #
-#    Updated: 2022/08/08 10:29:04 by jule-mer         ###   ########.fr        #
+#    Updated: 2022/08/17 10:51:25 by ertupop          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,14 +22,8 @@ OBJS	=	$(SRCS:srcs/%.c=objects/%.o)
 
 SRCS	=	$(addprefix srcs/, \
 			main.c \
-			debug.c \
-			errors.c \
-			garbage.c \
-			check_str.c \
-			init.c \
-			parse_utils.c parsing.c \
-			slots.c \
-			utils.c)
+			parsing.c parse_utils.c parse_utils_2.c \
+			debug.c echo.c utils.c cd.c export.c
 
 all:	$(NAME)
 
