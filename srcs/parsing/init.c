@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/05 11:55:16 by firawar           #+#    #+#             */
-/*   Updated: 2022/08/14 20:06:08 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:25:11 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	ft_end_init(t_arg **new)
 {
+	(*new)->is_str = 0;
 	(*new)->is_command = 0;
 	(*new)->is_action_tokken = 0;
 	(*new)->is_argument = 0;
 	(*new)->is_file = 0;
+	(*new)->use = 0;
 	(*new)->next = NULL;
 }
 
@@ -85,4 +87,5 @@ void	ft_init_sep(t_list **collector, t_arg **new, char *str, int i)
 		(*new)->str[++start] = str[i];
 	(*new)->str[++start] = '\0';
 	ft_end_init(new);
+	(*new)->is_action_tokken = 1;
 }

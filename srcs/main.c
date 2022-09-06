@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:44:58 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/08/16 21:46:10 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/09/06 12:22:31 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_prompt(void)
 {
 	t_list	*collector;
 	t_arg	*args;
+	t_use	*use;
 	t_parse	parse;
 	char	*str;
 
@@ -46,7 +47,7 @@ void	ft_prompt(void)
 		{
 			add_history(str);
 			if (!ft_parse(&args, str, &collector, parse))
-				ft_fill_args(&args, str, &collector);
+				ft_fill_args(&use, &args, &collector);
 		}
 
 		//DEBUG

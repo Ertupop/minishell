@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 20:29:45 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/08/16 22:03:03 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/09/06 17:03:57 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,7 @@
 void	ft_parse_str(t_list **collector, t_arg **new, char *str, t_parse *parse)
 {
 	*new = gc_create_slot(collector);
-	(*new)->str = malloc(sizeof(char) * parse->j
-			- parse->i - parse->quote + 1);
+	(*new)->str = gc_alloc_char(collector, parse->j - parse->i - parse->quote);
 	parse->quote = -1;
 	while (parse->i < parse->j)
 	{
@@ -33,6 +32,7 @@ void	ft_parse_str(t_list **collector, t_arg **new, char *str, t_parse *parse)
 	}
 	(*new)->str[++parse->quote] = '\0';
 	ft_end_init(new);
+	(*new)->is_str = 1;
 }
 
 void	ft_skip_char(char *str, t_parse *parse)

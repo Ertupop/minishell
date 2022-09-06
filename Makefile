@@ -6,7 +6,7 @@
 #    By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 09:30:42 by jule-mer          #+#    #+#              #
-#    Updated: 2022/08/09 12:20:06 by jule-mer         ###   ########.fr        #
+#    Updated: 2022/09/06 12:35:57 by jule-mer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,4 +68,3 @@ re:	fclean all
 -include $(DEP)
 
 .PHONY:	all clean fclean re
-
