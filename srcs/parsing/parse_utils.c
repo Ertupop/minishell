@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 17:02:23 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/08/16 20:40:24 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/09/12 20:40:46 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,32 @@ int	ft_is_sep(char c, char *sep)
 			return (1);
 	}
 	return (0);
+}
+
+t_use	*ft_use_last(t_use *list)
+{
+	t_use	*tmp;
+
+	tmp = list;
+	while (list)
+	{
+		tmp = list;
+		list = list->next;
+	}
+	return (tmp);
+}
+
+void	ft_use_add_back(t_use **use, t_use *new)
+{
+	t_use	*tmp;
+
+	if (!*use)
+	{
+		*use = new;
+		return ;
+	}
+	tmp = ft_use_last(*use);
+	tmp->next = new;
 }
 
 t_arg	*ft_arg_last(t_arg *list)

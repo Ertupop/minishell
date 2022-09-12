@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/09/06 17:27:04 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/09/12 20:59:54 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define ON 1
 # define OFF 0
 # define DETAILS 2
-# define DEBUG DETAILS
+# define DEBUG OFF
 
 /*----------------------------------------------------------------------------*/
 /*                                 STRUCTURES                                 */
@@ -88,6 +88,7 @@ int		ft_error(int i, char c);
 /*----------------------------------------------------------------------------*/
 //
 //garbage.c 1/5
+t_use	*gc_create_use(t_list **collector);
 t_arg	*gc_create_slot(t_list **collector);
 
 /*----------------------------------------------------------------------------*/
@@ -101,7 +102,7 @@ int		ft_quote(char *str, int *j);
 int		ft_check(char *str);
 
 //fill_args.c 3/5
-void	ft_use(t_use **use, t_arg **args);
+void	ft_use(t_use **use, t_arg **args, t_list **collector);
 void	ft_args_type(t_arg **args);
 void	ft_fill_args(t_use **use, t_arg **args, t_list **collector);
 
@@ -113,6 +114,8 @@ void	ft_init_sep(t_list **collector, t_arg **new, char *str, int i);
 
 //parse_utils.c 3/5
 int		ft_is_sep(char c, char *sep);
+t_use	*ft_use_last(t_use *list);
+void	ft_use_add_back(t_use **use, t_use *new);
 t_arg	*ft_arg_last(t_arg *list);
 void	ft_arg_add_back(t_arg **args, t_arg *new);
 
