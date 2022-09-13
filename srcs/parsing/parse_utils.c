@@ -6,7 +6,7 @@
 /*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/26 17:02:23 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/09/12 20:40:46 by firawar          ###   ########.fr       */
+/*   Updated: 2022/09/13 10:50:50 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,23 @@ int	ft_is_sep(char c, char *sep)
 			return (1);
 	}
 	return (0);
+}
+
+char	**gc_alloc_char_r(t_list **collector, int size)
+{
+	char	**str;
+	t_list	*new;
+
+	str = malloc(sizeof(char *) * (size + 1));
+	if (!str)
+	{
+		gc_dell(*collector);
+		exit(1);
+	}
+	str[size] = NULL;
+	new = ft_lstnew(str);
+	ft_lstadd_back(collector, new);
+	return (str);
 }
 
 t_use	*ft_use_last(t_use *list)

@@ -6,7 +6,7 @@
 /*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/09/12 20:59:54 by firawar          ###   ########.fr       */
+/*   Updated: 2022/09/13 14:16:29 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define ON 1
 # define OFF 0
 # define DETAILS 2
-# define DEBUG OFF
+# define DEBUG ON
 
 /*----------------------------------------------------------------------------*/
 /*                                 STRUCTURES                                 */
@@ -44,6 +44,7 @@ typedef struct s_use
 	enum s_tokken		tokken;
 	char				**tab;
 	char				*action;
+	int					fd;
 	struct s_use		*next;
 }	t_use;
 
@@ -112,14 +113,15 @@ int		ft_init_quote_2(int i, char *str);
 void	ft_init_quote(t_list **collector, t_arg **new, char *str, int i);
 void	ft_init_sep(t_list **collector, t_arg **new, char *str, int i);
 
-//parse_utils.c 3/5
+//parse_utils.c OVER
+char	**gc_alloc_char_r(t_list **collector, int size);
 int		ft_is_sep(char c, char *sep);
 t_use	*ft_use_last(t_use *list);
 void	ft_use_add_back(t_use **use, t_use *new);
 t_arg	*ft_arg_last(t_arg *list);
 void	ft_arg_add_back(t_arg **args, t_arg *new);
 
-//parsing.c 1/5
+//parsing.c FULL
 void	ft_parse_str(t_list **collector, t_arg **new, char *str,
 			t_parse *parse);
 void	ft_skip_char(char *str, t_parse *parse);
