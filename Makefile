@@ -6,7 +6,7 @@
 #    By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 09:30:42 by jule-mer          #+#    #+#              #
-#    Updated: 2022/08/17 10:51:25 by ertupop          ###   ########.fr        #
+#    Updated: 2022/09/16 14:39:00 by ertupop          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,7 @@ DEP		=	$(SRCS:srcs/%.c=objects/%.d)
 OBJS	=	$(SRCS:srcs/%.c=objects/%.o)
 
 SRCS	=	$(addprefix srcs/, \
-			main.c \
-			parsing.c parse_utils.c parse_utils_2.c \
-			debug.c echo.c utils.c cd.c export.c
+			utils.c cd.c export.c)
 
 all:	$(NAME)
 

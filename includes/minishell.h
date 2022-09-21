@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/08/17 11:49:30 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/09/21 13:58:28 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int		ft_check(char *str);
 //main.c
 int		ft_history(char *str);
 void	ft_prompt(void);
-int		main(int ac, char **av, char **envp);
+//int		main(int ac, char **av, char **envp);
 
 //errros.c
 int		ft_error(int i, char c);
@@ -86,24 +86,43 @@ int		ft_strcmp(char *s1, char *s2);
 //debug.c
 void	ft_debug(t_arg **args);
 
-void	ft_echo(t_arg *lst);
 //si < en debut ou pipe <, un argument puis commande
-//echo -n-n affiche -n-n
-//echo "bon" "jour" == bon jour
+
+
+///////////////////////////////////////////////////////////////////////////////
+///                                                                         ///
+///                                                                         ///
+///                                 Bultins                                 ///
+///                                                                         ///
+///                                                                         ///
+///////////////////////////////////////////////////////////////////////////////
 
 //cd
 char	*ft_find_env(t_env *env, char *find);
-
+int		ft_pwd(t_env *env);
+void	ft_echo(t_arg *lst);
 //utils
 char	*gc_strdup(t_list **collector, const char *s1);
 t_env	*gc_alloc_env(t_list **collector);
 t_env	*ft_env(t_list **collector, char **envp);
 void	ft_lstadd_back_env(t_env **alst, t_env *new);
 t_env	*ft_lstlast_env(t_env *lst);
-int	ft_pwd(t_env *env);
+int		ft_env_size(t_env *env);
+t_env	*ft_get_env_pos(t_env env, char *find);
 
 //export
-int	ft_export(char **tab, t_env *env, t_list *garbage);
-int	ft_size_tab(char **tab);
-int	ft_print_export(t_env	*env);
+int		ft_export(char **tab, t_env *env, t_list *garbage);
+int		ft_size_tab(char **tab);
+int		ft_print_export(t_env	*env);
+char	**ft_make_tab(t_env *env);
+void	ft_free_make_tab(char **tab);
+void	ft_sort_env(char **envi);
+int		ft_check_export(char *str);
+
+//utils2
+//int	ft_strcmp(const char *s1, const char *s2);
 #endif
+
+
+//echo -n-n affiche -n-n
+//echo "bon" "jour" == bon jour

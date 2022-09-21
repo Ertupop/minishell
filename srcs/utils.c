@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/02 19:57:23 by ertupop           #+#    #+#             */
-/*   Updated: 2022/08/05 07:41:24 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/09/21 13:58:25 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,38 @@ t_env	*ft_lstlast_env(t_env *lst)
 		lst = lst->next;
 	}
 	return (tmp);
+}
+
+int	ft_env_size(t_env *env)
+{
+	int		i;
+	t_env	*tmp;
+
+	i = 0;
+	tmp = env;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
+
+t_env	*ft_get_env_pos(t_env env, char *find)
+{
+	int		i2;
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp->next)
+	{
+		i2 = 0;
+		while (tmp->str[i2] && tmp->str[i2] == find[i2] && find[i2])
+			i2++;
+		if (find[i2] == '\0' && tmp->str == '=' || tmp->str == '+')
+			return (tmp);
+		else
+			tmp = tmp->next;
+	}
+	return (NULL);
 }

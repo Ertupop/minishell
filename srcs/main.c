@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:44:58 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/08/05 09:41:13 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/09/16 13:34:48 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_prompt(void)
 	gc_dell(collector);
 	rl_clear_history();
 }
-
+/*
 int	main(int ac, char **av, char **envp)
 {
 	t_env	*env;
@@ -74,5 +74,5 @@ int	main(int ac, char **av, char **envp)
 	ft_pwd(env);
 	gc_dell(garbage);
 	return (0);
-}
+}*/
 
