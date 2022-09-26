@@ -6,7 +6,7 @@
 /*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/09/13 14:16:29 by firawar          ###   ########.fr       */
+/*   Updated: 2022/09/13 18:23:33 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define ON 1
 # define OFF 0
 # define DETAILS 2
-# define DEBUG ON
+# define DEBUG DETAILS
 
 /*----------------------------------------------------------------------------*/
 /*                                 STRUCTURES                                 */

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: firawar <firawar@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:44:58 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/09/06 12:22:31 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/09/13 18:25:07 by firawar          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ void	ft_prompt(void)
 
 	while (1)
 	{
+		use = NULL;
 		args = NULL;
 		collector = NULL;
 		str = readline("\033[0;36mminishell \033[0;31m➜\033[0m ");
