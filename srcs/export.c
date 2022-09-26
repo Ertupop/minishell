@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 06:36:35 by ertupop           #+#    #+#             */
-/*   Updated: 2022/09/21 14:01:08 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/09/26 14:45:29 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_export(char **tab, t_env *env, t_list *garbage)
 	int	i;
 	t_env	*tmp;
 
-	i = 0;
+	i = 1;
 	if (ft_size_tab(tab) == 1)
 	{
 		ft_print_export(env);
@@ -36,7 +36,7 @@ int	ft_export(char **tab, t_env *env, t_list *garbage)
 					{}
 					else
 					{
-						gc
+						gc_
 						tmp->str = ft_strdup(tab[i]);
 					}
 				}
@@ -85,6 +85,7 @@ char	**ft_make_tab(t_env *env)
 	size = ft_env_size(env);
 	tab = malloc(sizeof(char *) * (size + 1));
 	if (tab == NULL)
+
 		return (NULL);
 	tab[size] = NULL;
 	size = 0;
