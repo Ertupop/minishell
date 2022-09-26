@@ -6,13 +6,13 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 12:22:45 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/09/26 12:47:05 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/09/26 14:46:41 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_use(t_use **use, t_arg **args, t_list **collector)
+/*void	ft_use(t_use **use, t_arg **args, t_list **collector)
 {
 	t_arg	*tmp;
 	t_arg	*last;
@@ -45,6 +45,17 @@ void	ft_use(t_use **use, t_arg **args, t_list **collector)
 			}
 		}
 	}
+}*/
+
+int	ft_next_is_file(t_arg	*tmp)
+{
+	if (tmp->next)
+		if (tmp->next->next)
+			if (tmp->next->next->if_file)
+				if (tmp->next->next->next)
+					if (tmp->)
+				return (1);
+	return (0);
 }
 
 void	ft_sort(t_arg **args, t_list **collector)
@@ -57,6 +68,15 @@ void	ft_sort(t_arg **args, t_list **collector)
 	last = NULL;
 	tmp = *args;
 	while (tmp)
+	{
+		if (tmp->next == NULL)
+			break ;
+		last = tmp;
+		if (ft_next_is_file(tmp)
+		{
+		}
+	}
+	/*while (tmp)
 	{
 		if ((tmp->is_command || tmp->is_argument) && tmp->next
 			&& tmp->next->is_action_tokken && tmp->next->next->is_file)
@@ -89,7 +109,7 @@ void	ft_sort(t_arg **args, t_list **collector)
 		}
 		last = tmp;
 		tmp = tmp->next;
-	}
+	}*/
 }
 
 void	ft_args_type(t_arg **args)
@@ -125,6 +145,6 @@ void	ft_fill_args(t_use **use, t_arg **args, t_list **collector)
 {
 	ft_args_type(args);
 	ft_sort(args, collector);
-	ft_use(use, args, collector);
-	(void)collector;
+	//ft_use(use, args, collector);
+	(void)use;
 }
