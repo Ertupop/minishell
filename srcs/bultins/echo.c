@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtins.c                                         :+:      :+:    :+:   */
+/*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 06:27:10 by ertupop           #+#    #+#             */
-/*   Updated: 2022/08/01 06:47:13 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/09/26 15:05:01 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <../includes/minishell.h>
 
 //faire echo avec option -n
-
+/*
 void	ft_echo(t_arg *lst)
 {
 	int		i;
@@ -69,3 +69,4 @@ void	ft_echo(t_arg *lst)
 		write(1, "\n", 1);
 	}
 }
+*/
