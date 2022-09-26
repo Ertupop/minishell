@@ -5,12 +5,22 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/02 19:57:23 by ertupop           #+#    #+#             */
-/*   Updated: 2022/09/26 14:46:18 by ertupop          ###   ########.fr       */
+/*   Created: 2022/08/04 13:30:33 by firawar           #+#    #+#             */
+/*   Updated: 2022/09/26 15:18:30 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
+
+	i = 0;
+	while (s1[i] && s2[i] && s1[i] == s2[i])
+		i++;
+	return (s1[i] - s2[i]);
+}
 
 char	*gc_strdup(t_list **collector, const char *s1)
 {
@@ -103,7 +113,7 @@ int	ft_env_size(t_env *env)
 	return (i);
 }
 
-t_env	*ft_get_env_pos(t_env env, char *find)
+t_env	*ft_get_env_pos(t_env *env, char *find)
 {
 	int		i2;
 	t_env	*tmp;
@@ -114,7 +124,7 @@ t_env	*ft_get_env_pos(t_env env, char *find)
 		i2 = 0;
 		while (tmp->str[i2] && tmp->str[i2] == find[i2] && find[i2])
 			i2++;
-		if (find[i2] == '\0' && tmp->str == '=' || tmp->str == '+')
+		if (find[i2] == '\0' && (tmp->str[i2] == '=' || tmp->str[i2] == '+'))
 			return (tmp);
 		else
 			tmp = tmp->next;
