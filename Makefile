@@ -6,7 +6,7 @@
 #    By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 09:30:42 by jule-mer          #+#    #+#              #
-#    Updated: 2022/09/26 15:20:52 by ertupop          ###   ########.fr        #
+#    Updated: 2022/11/07 13:18:59 by ertupop          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,21 +25,22 @@ RM		=	rm -rf
 DEP		=	$(SRCS:srcs/%.c=objects/%.d)
 OBJS	=	$(SRCS:srcs/%.c=objects/%.o)
 
-SRCS	=	$(addprefix srcs/, main.c)
-SRCS	+=	$(addprefix srcs/errors/, errors.c)
-SRCS	+=	$(addprefix srcs/garbage_collector/, garbage.c)
-SRCS	+=	$(addprefix srcs/parsing/, \
+#SRCS	=	$(addprefix srcs/, main.c)
+#SRCS	+=	$(addprefix srcs/errors/, errors.c)
+#SRCS	+=	$(addprefix srcs/garbage_collector/, garbage.c)
+#SRCS	+=	$(addprefix srcs/parsing/, \
 			check_str.c \
 			fill_args.c \
 			init.c \
 			parse_utils.c \
 			parsing.c)
-SRCS	+=	$(addprefix srcs/utils/, utils.c)
-SRCS	+= $(addprefix srcs/bultins/, \
+#SRCS	+=	$(addprefix srcs/utils/, utils.c)
+#SRCS	+= $(addprefix srcs/bultins/, \
 			cd.c \
-			echo.c export.c \
-			unset.c)
-SRCS	+=	$(addprefix srcs/debug/, debug.c)
+			echo.c export.c\
+			unset.c \ pwd.C)
+SRCS	+= $(addprefix srcs/bultins/, pwd.c)
+#SRCS	+=	$(addprefix srcs/debug/, debug.c)
 
 all:	$(NAME)
 

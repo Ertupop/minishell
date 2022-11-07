@@ -6,24 +6,20 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 10:28:57 by ertupop           #+#    #+#             */
-/*   Updated: 2022/11/07 11:45:36 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/07 13:25:19 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <
+#include "../../includes/minishell.h"
 
 int	ft_pwd(void)
 {
 	char	*str;
 
-	str = getcwd(str, NULL);
-	ft_putstr_fd(str, 1)
+	str = NULL;
+	str = getcwd(str, 0);
+	ft_putstr_fd(str, 1);
+	write(1, "\n", 1);
+	free(str);
 	return (0);
-
-}
-
-int main(void)
-{
-	ft_pwd();
-	return(0);
 }

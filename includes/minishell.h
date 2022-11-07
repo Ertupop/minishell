@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/09/26 15:52:37 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/07 12:06:26 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft.h"
+# include "../libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
@@ -153,7 +153,7 @@ void	ft_echo(t_arg *lst);
 
 //cd
 char	*ft_find_env(t_env *env, char *find);
-int		ft_pwd(t_env *env);
+int		ft_pwd(void);
 void	ft_echo(t_arg *lst);
 //utils
 char	*gc_strdup(t_list **collector, const char *s1);
