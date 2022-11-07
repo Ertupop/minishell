@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:15:16 by ertupop           #+#    #+#             */
-/*   Updated: 2022/08/31 12:03:12 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/09/26 15:22:56 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
+/*
 int	ft_unset(t_env env, char **str)
 {
 	int		i;
@@ -31,3 +31,4 @@ int	ft_unset(t_env env, char **str)
 	}
 
 }
+*/

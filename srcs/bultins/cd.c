@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 06:50:00 by ertupop           #+#    #+#             */
-/*   Updated: 2022/09/28 10:28:51 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/09/21 13:48:52 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,17 @@
 	}
 
 }*/
+
+int	ft_pwd(t_env *env)
+{
+	char	*str;
+
+	str = ft_find_env(env, "PWD");
+	str += 4;
+	ft_printf("%s\n", str);
+	return (0);
+
+}
 
 char	*ft_find_env(t_env *env, char *find)
 {

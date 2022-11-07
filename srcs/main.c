@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:44:58 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/09/26 15:14:02 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/10/22 14:07:01 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	ft_prompt(void)
 		use = NULL;
 		args = NULL;
 		collector = NULL;
-		str = readline("\033[0;36mminishell \033[0;31m➜\033[0m ");
+		str = readline("\033[0;36mminishell \033[0;31m➜ \033[0m ");
 		if (!ft_strcmp(str, "exit"))
 			break ;
 
@@ -60,7 +60,7 @@ void	ft_prompt(void)
 	gc_dell(collector);
 	rl_clear_history();
 }
-/*
+
 int	main(int ac, char **av, char **envp)
 {
 	t_list	*garbage;
@@ -72,5 +72,5 @@ int	main(int ac, char **av, char **envp)
 	ft_prompt();
 	gc_dell(garbage);
 	return (0);
-}*/
+}
 

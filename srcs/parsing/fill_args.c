@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/09 12:22:45 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/09/26 15:10:27 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/10/23 13:44:46 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,71 +47,6 @@
 	}
 }*/
 
-int	ft_next_is_file(t_arg	*tmp)
-{
-	if (tmp->next)
-		if (tmp->next->next)
-			if (tmp->next->next->is_file)
-				if (tmp->next->next->next)
-				return (1);
-	return (0);
-}
-
-void	ft_sort(t_arg **args, t_list **collector)
-{
-	//t_arg	*last;
-	t_arg	*tmp;
-	//t_arg	*del;
-	//int		fd;
-
-	//last = NULL;
-	tmp = *args;
-	while (tmp)
-	{
-		if (tmp->next == NULL)
-			break ;
-		//last = tmp;
-		if (ft_next_is_file(tmp))
-		{
-		}
-	}
-	(void)collector;
-	/*while (tmp)
-	{
-		if ((tmp->is_command || tmp->is_argument) && tmp->next
-			&& tmp->next->is_action_tokken && tmp->next->next->is_file)
-			last = tmp;
-		else if (tmp->is_action_tokken && tmp->next->next && tmp->next->is_file
-			&& tmp->next->next->next && tmp->next->next->is_action_tokken
-			&& tmp->next->next->next->is_file)
-		{
-			fd = open(tmp->next->str, O_CREAT | O_RDWR, 00644);
-			close(fd);
-			del = tmp;
-			last->next = tmp->next->next;
-			del->next->next = NULL;
-			gc_dell_one(*collector, &del->next);
-			del->next = NULL;
-			gc_dell_one(*collector, &del);
-			tmp = last;
-			last = tmp->next;
-		}
-		while (tmp->is_action_tokken && tmp->next->next && tmp->next->is_file
-			&& tmp->next->next->is_argument)
-		{
-			if (tmp->next->next->is_action_tokken)
-				break ;
-			last->next = tmp->next->next;
-			tmp->next->next = last->next->next;
-			last->next->next = tmp;
-			last = last->next;
-			printf("tmp = %s et last = %s\n", tmp->str, last->str);
-		}
-		last = tmp;
-		tmp = tmp->next;
-	}*/
-}
-
 void	ft_args_type(t_arg **args)
 {
 	t_arg	*tmp;
@@ -141,11 +76,62 @@ void	ft_args_type(t_arg **args)
 	}
 }
 
+void	ft_del_files(t_arg **args, t_list **collector)
+{
+	t_arg	*tmp;
+	t_arg	*del;
+	t_arg	*add;
+	int		fd;
+
+	tmp = *args;
+	while (tmp && tmp->next && tmp->next->next)
+	{
+		while (tmp->next && !tmp->next->is_file)
+		{
+			add = tmp;
+			tmp = tmp->next;
+		}
+		if (tmp->next && tmp->next->is_file && tmp->next->next
+			&& tmp->next->next->next && tmp->next->next->next->is_file)
+		{
+			del = tmp;
+			tmp = tmp->next->next;
+			add->next = tmp;
+			fd = open(del->next->str, O_CREAT | O_RDWR, 00644);
+			close(fd);
+			del->next->next = NULL;
+			gc_dell_one(*collector, &del->next);
+			del->next = NULL;
+			gc_dell_one(*collector, &del);
+			del = NULL;
+		}
+		else
+			tmp = tmp->next;
+	}
+}
+
+void	ft_sort(t_arg **args)
+{
+	t_arg	*tmp;
+	t_arg	*file;
+
+	tmp = *args;
+	while (tmp && tmp->next && tmp->next->next)
+	{
+		if (tmp->next->is_file)
+		{
+			file = tmp;
+			tmp = tmp->next->next;
+			while (tmp && tmp->next && !tmp->next)
+		}
+	}
+}
+
 void	ft_fill_args(t_use **use, t_arg **args, t_list **collector)
 {
 	ft_args_type(args);
-	//ft_sort(args, collector);
+	ft_del_files(args, collector);
+	ft_sort(args);
 	//ft_use(use, args, collector);
-	(void)collector;
 	(void)use;
 }

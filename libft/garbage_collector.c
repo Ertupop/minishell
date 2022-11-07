@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 03:53:11 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/09/26 16:33:17 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/09/06 17:03:19 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ int	gc_dell_one(t_list *collector, void *addr)
 	}
 	if (!tmp)
 		return (1);
-	next = tmp->next;
 	ft_lstdelone(tmp, free);
+	next = tmp->next;
 	if (prev)
 		prev->next = next;
 	return (0);

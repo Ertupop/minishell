@@ -1,6 +1,0 @@
-tant que tmp
-	si tmp est le dernier, break ==> OK
-	sinon, last vaut tmp;
-
-	si tmp est une commande ou un argument ET que tmp next next existe et que c'est un file
-		tmp next vaut
