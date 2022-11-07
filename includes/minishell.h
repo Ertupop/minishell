@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/09/26 15:17:16 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/09/26 15:52:37 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ int		ft_parse(t_arg **args, char *str, t_list **collector, t_parse parse);
 //
 //utils.c 1/5
 int		ft_strcmp(char *s1, char *s2);
+char	*ft_strstr(char	*str, char	*to_find);
 
 /*----------------------------------------------------------------------------*/
 /*                                   BULTINS                                  */

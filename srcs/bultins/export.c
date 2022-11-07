@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 06:36:35 by ertupop           #+#    #+#             */
-/*   Updated: 2022/09/26 14:45:29 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/10/04 23:54:46 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,10 @@ int	ft_export(char **tab, t_env *env, t_list *garbage)
 				if (ft_find_env(env, tab[i]) != NULL)
 				{
 					tmp = ft_get_env_pos(env, tab[i]);
-					if (+=)
-					{}
+					if (ft_strnstr(tab[i], "+=") != NULL)
+					{
+
+					}
 					else
 					{
 						gc_
@@ -132,7 +134,7 @@ void	ft_sort_env(char **envi)
 			if (strcmp(tmp, envi[i]) > 0)
 			{
 				free(envi[i2]);
-				envi[i2] = strdup(envi[i]);
+				envi[i2] = ft_strdup(envi[i]);
 				free(envi[i]);
 				envi[i] = strdup(tmp);
 				free(tmp);

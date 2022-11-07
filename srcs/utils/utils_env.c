@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   utils_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 15:37:06 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/10/04 23:58:03 by ertupop          ###   ########.fr       */
+/*   Created: 2022/09/26 16:09:27 by ertupop           #+#    #+#             */
+/*   Updated: 2022/09/26 17:07:09 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/minishell.h"
 
-char	*ft_strdup(const char *s1)
+void	gc_del_str(t_list *coll, void *addr)
 {
-	char	*str;
-	int		i;
+	t_list	*tmp;
+	t_list	*prev;
+	t_list	*next;
 
-	i = 0;
-	while (s1[i])
-		i++;
-	str = malloc(sizeof(char) * (i + 1));
-	if (!str)
-		return (NULL);
-	i = -1;
-	while (s1[++i])
-		str[i] = s1[i];
-	str[i] = '\0';
-	return (str);
+	tmp = coll;
+	pev = NULL
+	while( tmp->next && tmp->content != addr)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+	}
 }
-
-

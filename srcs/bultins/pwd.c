@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/24 15:37:06 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/10/04 23:58:03 by ertupop          ###   ########.fr       */
+/*   Created: 2022/09/28 10:28:57 by ertupop           #+#    #+#             */
+/*   Updated: 2022/11/07 11:45:36 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include <
 
-char	*ft_strdup(const char *s1)
+int	ft_pwd(void)
 {
 	char	*str;
-	int		i;
 
-	i = 0;
-	while (s1[i])
-		i++;
-	str = malloc(sizeof(char) * (i + 1));
-	if (!str)
-		return (NULL);
-	i = -1;
-	while (s1[++i])
-		str[i] = s1[i];
-	str[i] = '\0';
-	return (str);
+	str = getcwd(str, NULL);
+	ft_putstr_fd(str, 1)
+	return (0);
+
 }
 
-
+int main(void)
+{
+	ft_pwd();
+	return(0);
+}
