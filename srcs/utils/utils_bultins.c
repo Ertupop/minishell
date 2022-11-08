@@ -1,34 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   utils_bultins.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/30 14:15:16 by ertupop           #+#    #+#             */
-/*   Updated: 2022/11/08 07:20:21 by ertupop          ###   ########.fr       */
+/*   Created: 2022/11/08 07:28:09 by ertupop           #+#    #+#             */
+/*   Updated: 2022/11/08 07:28:34 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-/*
-int	ft_unset(t_env env, char **str)
+#include "../../includes/minishell.h"
+
+char	*ft_find_env(t_env *env, char *find)
 {
-	int		i;
-	char	*strr;
+	int		i2;
+	t_env	*tmp;
 
-	i = 1;
-	while (str[i])
+	tmp = env;
+	while (tmp->next)
 	{
-		strr = ft_find_env(env, str[i]);
-		if (strr == NULL)
-			return (0);
+		i2 = 0;
+		while (tmp->str[i2] && tmp->str[i2] == find[i2] && find[i2])
+			i2++;
+		if (find[i2] == '\0')
+			return (tmp->str);
 		else
-		{
-
-		}
-		i++;
+			tmp = tmp->next;
 	}
-
+	return (NULL);
 }
-*/

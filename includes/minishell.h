@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/11/07 12:06:26 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/08 07:54:39 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,16 +145,8 @@ int		ft_parse(t_arg **args, char *str, t_list **collector, t_parse parse);
 //utils.c 1/5
 int		ft_strcmp(char *s1, char *s2);
 char	*ft_strstr(char	*str, char	*to_find);
-
-/*----------------------------------------------------------------------------*/
-/*                                   BULTINS                                  */
-/*----------------------------------------------------------------------------*/
-void	ft_echo(t_arg *lst);
-
-//cd
+//utils_bultins
 char	*ft_find_env(t_env *env, char *find);
-int		ft_pwd(void);
-void	ft_echo(t_arg *lst);
 //utils
 char	*gc_strdup(t_list **collector, const char *s1);
 t_env	*gc_alloc_env(t_list **collector);
@@ -164,6 +156,16 @@ t_env	*ft_lstlast_env(t_env *lst);
 int		ft_env_size(t_env *env);
 t_env	*ft_get_env_pos(t_env *env, char *find);
 
+/*----------------------------------------------------------------------------*/
+/*                                   BULTINS                                  */
+/*----------------------------------------------------------------------------*/
+
+//pwd
+int		ft_pwd(void);
+//echo
+void	ft_echo(char **tab);
+void	ft_echo2(char **tab, int i, int n);
+
 //export
 int		ft_export(char **tab, t_env *env, t_list *garbage);
 int		ft_size_tab(char **tab);
@@ -172,9 +174,9 @@ char	**ft_make_tab(t_env *env);
 void	ft_free_make_tab(char **tab);
 void	ft_sort_env(char **envi);
 int		ft_check_export(char *str);
+//env
+void	ft_print_env(t_env *env);
 
-//utils2
-//int	ft_strcmp(const char *s1, const char *s2);
 
 /*----------------------------------------------------------------------------*/
 /*                                    DEBUG                                   */

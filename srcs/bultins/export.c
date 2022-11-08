@@ -6,13 +6,13 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 06:36:35 by ertupop           #+#    #+#             */
-/*   Updated: 2022/10/04 23:54:46 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/08 07:18:17 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_export(char **tab, t_env *env, t_list *garbage)
+/*int	ft_export(char **tab, t_env *env, t_list *garbage)
 {
 	int	i;
 	t_env	*tmp;
@@ -75,7 +75,7 @@ int	ft_print_export(t_env *env)
 	}
 	ft_free_make_tab(envi);
 	return (0);
-}
+}*/
 
 char	**ft_make_tab(t_env *env)
 {
@@ -117,7 +117,7 @@ void	ft_free_make_tab(char **tab)
 	}
 	free(tab);
 }
-
+/*
 void	ft_sort_env(char **envi)
 {
 	char	*tmp;
@@ -190,3 +190,4 @@ int	main(int ac, char **av)
 	}
 	return (0);
 }
+*/
