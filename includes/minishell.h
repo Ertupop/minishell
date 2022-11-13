@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/09/26 15:17:16 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/13 12:55:34 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # define ON 1
 # define OFF 0
 # define DETAILS 2
-# define DEBUG DETAILS
+# define DEBUG OFF
 
 /*----------------------------------------------------------------------------*/
 /*                                 STRUCTURES                                 */
@@ -32,7 +32,7 @@
 //
 typedef enum s_tokken
 {
-	COMMAND,
+	COMMAND = 1,
 	PIPE,
 	OUTFILE,
 	APPEND,
@@ -42,11 +42,10 @@ typedef enum s_tokken
 
 typedef struct s_use
 {
-	enum s_tokken		tokken;
-	char				**tab;
-	char				*action;
-	int					fd;
-	struct s_use		*next;
+	enum s_tokken	tokken;
+	char			**tab;
+	int				fd;
+	struct s_use	*next;
 }	t_use;
 
 typedef struct s_arg
