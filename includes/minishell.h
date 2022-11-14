@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/11/08 07:54:39 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/09 13:04:20 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,10 +143,11 @@ int		ft_parse(t_arg **args, char *str, t_list **collector, t_parse parse);
 /*----------------------------------------------------------------------------*/
 //
 //utils.c 1/5
-int		ft_strcmp(char *s1, char *s2);
+
 char	*ft_strstr(char	*str, char	*to_find);
 //utils_bultins
 char	*ft_find_env(t_env *env, char *find);
+int	ft_strcmp(const char *s1, const char *s2);
 //utils
 char	*gc_strdup(t_list **collector, const char *s1);
 t_env	*gc_alloc_env(t_list **collector);
@@ -176,7 +177,9 @@ void	ft_sort_env(char **envi);
 int		ft_check_export(char *str);
 //env
 void	ft_print_env(t_env *env);
-
+//unset
+void	ft_unset_remove(t_env	*tmp, t_env *env);
+int		ft_unset(t_env *env, char **tab);
 
 /*----------------------------------------------------------------------------*/
 /*                                    DEBUG                                   */
