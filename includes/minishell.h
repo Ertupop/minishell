@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/11/13 12:55:34 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/11/14 07:19:58 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include "libft.h"
+# include "../libft/libft.h"
 # include <stdio.h>
 # include <stdlib.h>
 # include <readline/readline.h>
@@ -149,10 +149,10 @@ int		ft_strcmp(char *s1, char *s2);
 /*----------------------------------------------------------------------------*/
 void	ft_echo(t_arg *lst);
 
-//cd
+char	*ft_strstr(char	*str, char	*to_find);
+//utils_bultins
 char	*ft_find_env(t_env *env, char *find);
-int		ft_pwd(t_env *env);
-void	ft_echo(t_arg *lst);
+int	ft_strcmp(const char *s1, const char *s2);
 //utils
 char	*gc_strdup(t_list **collector, const char *s1);
 t_env	*gc_alloc_env(t_list **collector);
@@ -162,6 +162,16 @@ t_env	*ft_lstlast_env(t_env *lst);
 int		ft_env_size(t_env *env);
 t_env	*ft_get_env_pos(t_env *env, char *find);
 
+/*----------------------------------------------------------------------------*/
+/*                                   BULTINS                                  */
+/*----------------------------------------------------------------------------*/
+
+//pwd
+int		ft_pwd(void);
+//echo
+void	ft_echo(char **tab);
+void	ft_echo2(char **tab, int i, int n);
+
 //export
 int		ft_export(char **tab, t_env *env, t_list *garbage);
 int		ft_size_tab(char **tab);
@@ -170,9 +180,11 @@ char	**ft_make_tab(t_env *env);
 void	ft_free_make_tab(char **tab);
 void	ft_sort_env(char **envi);
 int		ft_check_export(char *str);
-
-//utils2
-//int	ft_strcmp(const char *s1, const char *s2);
+//env
+void	ft_print_env(t_env *env);
+//unset
+void	ft_unset_remove(t_env	*tmp, t_env *env);
+int		ft_unset(t_env *env, char **tab);
 
 /*----------------------------------------------------------------------------*/
 /*                                    DEBUG                                   */

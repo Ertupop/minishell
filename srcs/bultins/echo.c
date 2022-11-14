@@ -3,70 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/29 06:27:10 by ertupop           #+#    #+#             */
-/*   Updated: 2022/09/26 15:05:01 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/11/09 13:00:16 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <../includes/minishell.h>
 
-//faire echo avec option -n
-/*
-void	ft_echo(t_arg *lst)
+void	ft_echo(char **tab)
 {
+	int		n;
 	int		i;
-	int		flag;
-	int		option;
-	t_arg	*tmp;
+	int		i2;
 
-	i = 0;
-	flag = 0;
-	option = 0;
-	tmp = lst;
-//	if (tmp->is_command != 1)
-	//	return ;
-	tmp = tmp->next;
-	while (tmp->is_option == 1)
+	i = 1;
+	n = 0;
+	while (tab[i])
 	{
-		if (flag == 1)
+		if (tab[i][0] == '-')
 		{
-			tmp->is_option = 0;
-			tmp->is_argument = 1;
+			i2 = 1;
+			while (tab[i][i2] == 'n')
+			{
+				i2++;
+			}
+			if (tab[i][i2] == '\0')
+				n = 1;
+			else
+				break ;
 		}
 		else
-		{
-			if (tmp->str[i] == '-')
-				i++;
-			while (tmp->str[i])
-			{
-				if (tmp->str[i] != 'n')
-				{
-					flag = 1;
-					tmp->is_option = 0;
-					tmp->is_argument = 1;
-					break ;
-				}
-				i++;
-			}
-		}
-		option = 1;
-		tmp = tmp->next;
+			break ;
+		i++;
 	}
-	tmp = lst;
-	while (tmp->is_argument != 1)
-		tmp = tmp->next;
-	while (tmp->is_argument == 1)
-	{
-		i = -1;
-		while (tmp->str[++i])
-			write(1, &tmp->str[i], 1);
-		tmp = tmp->next;
-	}
-	if (option == 0)
-	{
-		write(1, "\n", 1);
-	}
+	ft_echo2(tab, i, n);
 }
-*/
+
+void	ft_echo2(char **tab, int i, int n)
+{
+	while (tab[i])
+	{
+		ft_putstr_fd(tab[i], 1);
+		if (tab[i + 1] != NULL)
+			write(1, " ", 1);
+		i++;
+	}
+	if (n != 1)
+		write(1, "\n", 1);
+}

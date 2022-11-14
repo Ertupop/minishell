@@ -6,21 +6,11 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:30:33 by firawar           #+#    #+#             */
-/*   Updated: 2022/09/26 15:18:30 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/08 07:54:46 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	ft_strcmp(char *s1, char *s2)
-{
-	int	i;
-
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
-}
 
 char	*gc_strdup(t_list **collector, const char *s1)
 {

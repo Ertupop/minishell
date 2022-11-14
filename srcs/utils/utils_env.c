@@ -1,43 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   utils_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/01 06:50:00 by ertupop           #+#    #+#             */
-/*   Updated: 2022/11/14 07:19:17 by ertupop          ###   ########.fr       */
+/*   Created: 2022/09/26 16:09:27 by ertupop           #+#    #+#             */
+/*   Updated: 2022/11/08 08:24:23 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-/*
-void	ft_cd(char **tab, t_env *env)
+
+void	gc_del_str(t_list *coll, void *addr)
 {
-	int		argn;
-	t_arg	*tmp;
-	char	*path;
+	t_list	*tmp;
+	t_list	*prev;
+	t_list	*next;
 
-	tmp = args;
-	argn = 0;
-	if (tmp->is_command != 1)
-		return ;
-	tmp = tmp->next;
-	while (tmp->is_argument != 1)
+	tmp = coll;
+	prev = NULL;
+	while (tmp->next && tmp->content != addr)
 	{
+		prev = tmp;
 		tmp = tmp->next;
-		argn++;
+		next = tmp->next;
 	}
-	if (argn > 1)
+	if (tmp->content == addr)
 	{
-		ft_putstr_fd("cd : too many arguments\n", 2);
-		return ;
+		free(tmp->content);
+		free(tmp);
+		prev->next = next;
 	}
-	tmp = args->next;
-	if (argn == 0)
-	{
-		path = ft_find_env(env, "HOME=");
+}
 
-	}
-
-}*/
