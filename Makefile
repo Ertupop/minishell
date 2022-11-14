@@ -6,7 +6,7 @@
 #    By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 09:30:42 by jule-mer          #+#    #+#              #
-#    Updated: 2022/11/08 07:40:59 by ertupop          ###   ########.fr        #
+#    Updated: 2022/11/14 08:16:09 by ertupop          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ SRCS	+= $(addprefix srcs/bultins/, \
 			cd.c \
 			echo.c env.c export.c\
 			unset.c pwd.c)
-SRCS	+=	$(addprefix srcs/debug/, debug.c)
+#SRCS	+=	$(addprefix srcs/debug/, debug.c)
 
 all:	$(NAME)
 

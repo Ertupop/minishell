@@ -6,13 +6,13 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:15:16 by ertupop           #+#    #+#             */
-/*   Updated: 2022/11/14 07:22:40 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/14 08:22:49 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_unset(t_env *env, char **tab)
+int	ft_unset(t_list *collect, t_env *env, char **tab)
 {
 	int		i;
 	t_env	*tmp;
@@ -21,17 +21,18 @@ int	ft_unset(t_env *env, char **tab)
 	while (tab[i])
 	{
 		tmp = env;
-		while (tmp && ft_strcmp(tmp->str, tab[i]))
+		while (tmp && ft_strcmp(tmp->str, tab[i]) != 0)
 			tmp = tmp->next;
 		if (ft_strcmp(tmp->str, tab[i]) == 0)
-			ft_unset_remove(tmp, env);
+			ft_unset_remove(collect, tmp, env);
 		else if (ft_strcmp(tmp->str, tab[i]) != 0)
 			return (1);
+		i++;
 	}
 	return (0);
 }
 
-void	ft_unset_remove(t_env	*tmp, t_env *env)
+void	ft_unset_remove(t_list *collect, t_env	*tmp, t_env *env)
 {
 	t_env	*last;
 	t_env	*next;
@@ -40,8 +41,8 @@ void	ft_unset_remove(t_env	*tmp, t_env *env)
 	last = env;
 	while (!ft_strcmp(tmp->str, last->next->str))
 		last = last->next;
-	free(tmp->str);
-	free(tmp);
+	gc_dell_one(collect, &tmp->str);
+	gc_dell_one(collect, &tmp);
 	last->next = next;
 }
 
@@ -53,8 +54,8 @@ int	main(int ac, char **av, char **env)
 	(void) ac;
 	garbage = NULL;
 	envp = ft_env(&garbage, env);
-	ft_unset(envp, av);
+	ft_unset(garbage, envp, av);
 	gc_dell(garbage);
 	return (0);
 }
-*/
+
