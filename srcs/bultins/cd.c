@@ -6,38 +6,39 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 06:50:00 by ertupop           #+#    #+#             */
-/*   Updated: 2022/11/14 07:19:17 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/16 10:53:33 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 /*
-void	ft_cd(char **tab, t_env *env)
+int	ft_cd(char **tab, t_env *env, t_list *garbage)
 {
-	int		argn;
-	t_arg	*tmp;
-	char	*path;
+	if (ft_cd_count(tab) > 2)
+		return (1);
+	return (0);
+}
 
-	tmp = args;
-	argn = 0;
-	if (tmp->is_command != 1)
-		return ;
-	tmp = tmp->next;
-	while (tmp->is_argument != 1)
-	{
-		tmp = tmp->next;
-		argn++;
-	}
-	if (argn > 1)
-	{
-		ft_putstr_fd("cd : too many arguments\n", 2);
-		return ;
-	}
-	tmp = args->next;
-	if (argn == 0)
-	{
-		path = ft_find_env(env, "HOME=");
+int	ft_cd_count(char **tab)
+{
+	int	i;
 
-	}
+	i = 0;
+	while (tab[i])
+		i++;
+	if (i > 2)
+		ft_putstr_fd("too many arguments", 2);
+	return (i);
+}
 
-}*/
+int	main(int ac, char **av)
+{
+	t_list	*coucou;
+	t_env	*test;
+
+	coucou = NULL;
+	test = NULL;
+	ft_cd(av, test, coucou);
+	return (0);
+}
+*/

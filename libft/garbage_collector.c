@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_collector.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 03:53:11 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/09/06 17:03:19 by jule-mer         ###   ########.fr       */
+/*   Updated: 2022/11/18 06:26:13 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@ int	gc_dell_one(t_list *collector, void *addr)
 
 	prev = NULL;
 	tmp = collector;
-	while (tmp && tmp->content != addr)
+	while (tmp->next && tmp->content != addr)
 	{
 		prev = tmp;
 		tmp = tmp->next;
 	}
 	if (!tmp)
 		return (1);
-	ft_lstdelone(tmp, free);
 	next = tmp->next;
+	ft_lstdelone(tmp, free);
 	if (prev)
 		prev->next = next;
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/11/14 08:21:08 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/18 06:56:58 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,8 @@ void	ft_lstadd_back_env(t_env **alst, t_env *new);
 t_env	*ft_lstlast_env(t_env *lst);
 int		ft_env_size(t_env *env);
 t_env	*ft_get_env_pos(t_env *env, char *find);
+//utils env
+void	gc_del_str(t_list *coll, void *addr);
 
 /*----------------------------------------------------------------------------*/
 /*                                   BULTINS                                  */
@@ -163,7 +165,9 @@ int		ft_pwd(void);
 //echo
 void	ft_echo(char **tab);
 void	ft_echo2(char **tab, int i, int n);
-
+//cd
+int		ft_cd(char **tab, t_env *env, t_list *garbage);
+int		ft_cd_count(char **tab);
 //export
 int		ft_export(char **tab, t_env *env, t_list *garbage);
 int		ft_size_tab(char **tab);
@@ -177,6 +181,7 @@ void	ft_print_env(t_env *env);
 //unset
 void	ft_unset_remove(t_list *collect, t_env	*tmp, t_env *env);
 int		ft_unset(t_list *collect, t_env *env, char **tab);
+int		ft_unset_cmp(char *s1, char *s2);
 
 /*----------------------------------------------------------------------------*/
 /*                                    DEBUG                                   */
@@ -187,6 +192,3 @@ void	ft_debug(t_arg **args);
 
 #endif
 
-
-//echo -n-n affiche -n-n
-//echo "bon" "jour" == bon jour
