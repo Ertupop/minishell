@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:30:33 by firawar           #+#    #+#             */
-/*   Updated: 2022/11/08 07:54:46 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/22 11:32:30 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,12 @@ t_env	*ft_get_env_pos(t_env *env, char *find)
 	{
 		i2 = 0;
 		while (tmp->str[i2] && tmp->str[i2] == find[i2] && find[i2])
+		{
+			if (find[i2] == '\0' || tmp->str[i2] == '=' || tmp->str[i2] == '+')
+				return (tmp);
 			i2++;
-		if (find[i2] == '\0' && (tmp->str[i2] == '=' || tmp->str[i2] == '+'))
-			return (tmp);
-		else
-			tmp = tmp->next;
+		}
+		tmp = tmp->next;
 	}
 	return (NULL);
 }

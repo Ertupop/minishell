@@ -6,10 +6,9 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/11/18 06:56:58 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/21 10:33:18 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -154,7 +153,7 @@ t_env	*ft_lstlast_env(t_env *lst);
 int		ft_env_size(t_env *env);
 t_env	*ft_get_env_pos(t_env *env, char *find);
 //utils env
-void	gc_del_str(t_list *coll, void *addr);
+char	*gc_join_str(t_list **coll, const char *s1, const char *s2);
 
 /*----------------------------------------------------------------------------*/
 /*                                   BULTINS                                  */
@@ -170,11 +169,9 @@ int		ft_cd(char **tab, t_env *env, t_list *garbage);
 int		ft_cd_count(char **tab);
 //export
 int		ft_export(char **tab, t_env *env, t_list *garbage);
+void	ft_add_export(char *str, t_env *env, t_list *garbage);
+void	ft_join_export(char *str, t_env *tmp, t_list *garbage);
 int		ft_size_tab(char **tab);
-int		ft_print_export(t_env	*env);
-char	**ft_make_tab(t_env *env);
-void	ft_free_make_tab(char **tab);
-void	ft_sort_env(char **envi);
 int		ft_check_export(char *str);
 //env
 void	ft_print_env(t_env *env);
@@ -191,4 +188,3 @@ int		ft_unset_cmp(char *s1, char *s2);
 void	ft_debug(t_arg **args);
 
 #endif
-

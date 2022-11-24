@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 14:15:16 by ertupop           #+#    #+#             */
-/*   Updated: 2022/11/21 06:20:24 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/23 10:44:26 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	ft_unset_remove(t_list *collect, t_env	*tmp, t_env *env)
 		last = last->next;
 	gc_dell_one(collect, &tmp->str);
 	gc_dell_one(collect, &tmp);
+	(void) collect;
 	last->next = next;
 }
 

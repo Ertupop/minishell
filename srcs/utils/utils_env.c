@@ -6,31 +6,27 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 16:09:27 by ertupop           #+#    #+#             */
-/*   Updated: 2022/11/08 08:24:23 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/21 08:50:04 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	gc_del_str(t_list *coll, void *addr)
+char	*gc_join_str(t_list **coll, const char *s1, const char *s2)
 {
-	t_list	*tmp;
-	t_list	*prev;
-	t_list	*next;
+	char	*str;
+	int		i;
+	int		i2;
 
-	tmp = coll;
-	prev = NULL;
-	while (tmp->next && tmp->content != addr)
-	{
-		prev = tmp;
-		tmp = tmp->next;
-		next = tmp->next;
-	}
-	if (tmp->content == addr)
-	{
-		free(tmp->content);
-		free(tmp);
-		prev->next = next;
-	}
+	i = ft_strlen(s1) + ft_strlen(s2) + 1;
+	str = gc_alloc_char(coll, i);
+	i = -1;
+	while (s1[++i])
+		str[i] = s1[i];
+	i2 = -1;
+	while (s2[++i2])
+		str[i + i2] = s2[i2];
+	str[i + i2] = '\0';
+	return (str);
 }
 

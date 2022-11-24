@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/19 03:53:11 by jule-mer          #+#    #+#             */
-/*   Updated: 2022/11/18 06:26:13 by ertupop          ###   ########.fr       */
+/*   Updated: 2022/11/23 10:45:35 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	gc_dell_one(t_list *collector, void *addr)
 
 	prev = NULL;
 	tmp = collector;
-	while (tmp->next && tmp->content != addr)
+	while (tmp && tmp->content != addr)
 	{
 		prev = tmp;
 		tmp = tmp->next;
@@ -33,9 +33,9 @@ int	gc_dell_one(t_list *collector, void *addr)
 	if (!tmp)
 		return (1);
 	next = tmp->next;
-	ft_lstdelone(tmp, free);
 	if (prev)
 		prev->next = next;
+	ft_lstdelone(tmp, free);
 	return (0);
 }
 
