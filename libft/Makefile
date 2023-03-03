@@ -6,7 +6,7 @@
 #    By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/01 15:32:05 by jule-mer          #+#    #+#              #
-#    Updated: 2022/08/17 10:51:12 by ertupop          ###   ########.fr        #
+#    Updated: 2023/03/03 10:00:33 by ertupop          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,6 +24,13 @@ SRCS = ft_isdigit.c ft_memset.c ft_strjoin.c ft_strtrim.c ft_isprint.c \
 	   get_next_line.c get_next_line_utils.c ft_itoa_unsigned.c \
 	   ft_printf.c  ft_print_int.c  ft_void.c \
 	   garbage_collector.c
+SRCS += $(addprefix fprintf/, \
+		ft_printf.c \
+		ft_puthexa.c \
+		ft_putnbr.c \
+		ft_putstrandchar.c \
+		ft_putunsign.c \
+		ft_putvoid.c)
 
 OBJS = ${SRCS:.c=.o}
 CC		= gcc

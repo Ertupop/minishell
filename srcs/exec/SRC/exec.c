@@ -16,17 +16,9 @@ void	ft_exec(t_use **use, t_env *env, t_list *gc)
 {
 	t_pipex	pipex;
 	int		result;
-	// t_use *a;
 
-	// a = *use;
 	pipex.outfile = 1;
 	pipex.nbr_command = ft_init_fd(&pipex, *use);
-	// while (a)
-	// {
-	// 	printf("Tokken %d \n", a->tokken);
-	// 	a = a->next;
-	// }
-	// printf("coucou");
 	if (pipex.nbr_command == 0)
 		return ;
 	if (pipex.nbr_command == 1)
@@ -51,7 +43,6 @@ int	ft_exec_all(t_use *use, t_env *env, t_list *gc, t_pipex *pip)
 	while (pip->count_command < pip->nbr_command)
 	{
 		ft_exec_all2(pip, &outfile);
-		fprintf(stdout, "fd = %d\n", pip->infile);
 		while(tmp && tmp->tokken != COMMAND)
 			tmp = tmp->next;
 		pip->childs = fork();

@@ -36,7 +36,8 @@ int	ft_exec_pipe(t_use *tmp, t_env *env, t_list *gc, t_pipex *pip)
 void	ft_exec_pipe2(t_pipex *pip)
 {
 	dup2(pip->infile, 0);
-	close(pip->infile);
+	if (pip->infile != 0)
+		close(pip->infile);
 	if (pip->outfile != 1)
 	{
 		dup2(pip->outfile, 1);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:25:55 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/02/08 11:49:07 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/03 09:43:08 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,4 +117,13 @@ int		gc_dell_one(t_list *collector, void *addr);
 int		*gc_alloc_int(t_list **collector, int size);
 char	*gc_alloc_char(t_list **collector, int size);
 
+// ft_fprintf
+int		ft_fprintf(int std, const char *string, ...);
+int		ft_putchar_fd_print(int std, int c);
+int		ft_putstr_fd_print(int std, char *s);
+int		ft_putnbr_fd_print(int std, int c);
+int		ft_puthexa_fd_print(int std, unsigned int nbr, char *base);
+int		ft_putunsign_fd_print(int std, unsigned int nbr);
+int		ft_putvoid_fd_print(int std, unsigned long long n);
+void	ft_put_fd(int std, char c);
 #endif

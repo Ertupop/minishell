@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_one.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 07:37:59 by ertupop           #+#    #+#             */
-/*   Updated: 2023/02/09 09:13:11 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/03 12:22:27 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	ft_execve_one(t_env *env, t_pipex *pip, t_use *tmp, t_list *gc)
 		ft_close_fd(pip->infile, pip->outfile);
 		if (pip->command == NULL)
 		{
-			printf("\033[0;36mminishell \033[0;31m: \033[0m %s: command not found\n", tmp->tab[0]);
+			ft_fprintf(2, "\033[0;36mminishell \033[0;31m: \033[0m %s: command not found\n", tmp->tab[0]);
 			ft_free_envp(pip->env);
 			ft_free_pip(pip);
 			g_exit = 127;
@@ -111,8 +111,8 @@ int	ft_execve_one(t_env *env, t_pipex *pip, t_use *tmp, t_list *gc)
 		}
 	}
 	waitpid(pip->childs, &result, 0);
-	WIFEXITED(result);
-	WEXITSTATUS(result);
+	if (WIFEXITED(result);
+	if (WEXITSTATUS(result) == 0);
 	return (result);
 }
 
