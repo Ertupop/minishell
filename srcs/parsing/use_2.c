@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:06:13 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/02/15 17:54:48 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:13:27 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**ft_use_tab(t_bridge *bridge, t_list **collector, int len)
 		while (bridge->tokken == OUTFILE || bridge->tokken == INFILE
 			|| bridge->tokken == APPEND || bridge->tokken == LIMITER)
 			bridge = bridge->next;
-		tab[i] = ft_strdup(bridge->str);
+		tab[i] = ft_gc_strdup(bridge->str, collector);
 		bridge = bridge->next;
 	}
 	return (tab);

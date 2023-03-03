@@ -6,11 +6,29 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:30:33 by firawar           #+#    #+#             */
-/*   Updated: 2023/02/08 14:13:51 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:14:31 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+char	*ft_gc_strdup(const char *s1, t_list **collector)
+{
+	char	*str;
+	int		i;
+
+	i = 0;
+	while (s1[i])
+		i++;
+	str = gc_alloc_char(collector, i);
+	if (!str)
+		return (NULL);
+	i = -1;
+	while (s1[++i])
+		str[i] = s1[i];
+	str[i] = '\0';
+	return (str);
+}
 
 void	ft_free_envp(char **envp)
 {

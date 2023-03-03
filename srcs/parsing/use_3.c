@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:09:16 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/02/18 16:06:08 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:13:43 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,3 @@ void	ft_add_infile(t_use **use, t_list **collector, int infile)
 	new->fd = infile;
 	ft_lstadd_back_use(use, new);
 }
-

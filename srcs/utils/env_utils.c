@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/21 14:03:34 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/02/08 14:13:47 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:14:13 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,7 +94,7 @@ char	**ft_make_env_tab(t_env *env)
 	int		i;
 
 	len = ft_env_size(env);
-	envp = malloc(sizeof(char *) * (len + 1));
+	envp = malloc(sizeof(char *) * (len + 2));
 	if (envp == NULL)
 		return (NULL);
 	envp[len] = NULL;

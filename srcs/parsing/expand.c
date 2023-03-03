@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:29:12 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/02/22 10:21:01 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:10:05 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ void	ft_apply_expand(char *str, t_easy **easy, t_list **collector)
 	while (tmp && tmp->d_quote == 0 && tmp->c != '$' && tmp->c != ' ')
 	{
 		dell = tmp;
-		gc_dell_one(*collector, dell);
 		tmp = tmp->next;
+		gc_dell_one(*collector, dell);
 	}
 	while (expand->next)
 		expand = expand->next;

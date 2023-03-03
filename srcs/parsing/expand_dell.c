@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 15:02:57 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/01/29 11:55:03 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:12:41 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	ft_quote(int i, int j)
 
 void	ft_dell_dollar_2(t_easy **tmp, t_easy **tmp_2, t_list **col, int i)
 {
-	if ((*tmp)->dell == 1 || ((*tmp)->c == '$' && i > 0))
+	if (((*tmp)->dell == 1 || ((*tmp)->c == '$' && i > 0)))
 	{
 		(*tmp_2)->next = (*tmp)->next;
 		gc_dell_one(*col, *tmp);
@@ -59,6 +59,7 @@ void	ft_dell_dollar(t_easy **easy, t_list **collector)
 			s_quote *= -1;
 		else if (tmp->c == '\"')
 			d_quote *= -1;
-		ft_dell_dollar_2(&tmp, &tmp_2, collector, ft_quote(s_quote, d_quote));
+		if (s_quote != 1)
+			ft_dell_dollar_2(&tmp, &tmp_2, collector, ft_quote(s_quote, d_quote));
 	}
 }

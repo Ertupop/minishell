@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:35:20 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/01/29 11:51:50 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:13:07 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ int	ft_parse(t_use **use, t_parse *parse, t_list **collector, t_env **env)
 	ft_good_quote(&easy);
 	ft_expand(&easy, collector, env);
 	ft_skip_space(&easy, collector);
-	ft_init_parse(parse);
 	gc_dell_one(*collector, &parse->str);
 	ft_create_bridge(easy, use, collector);
 	while (easy)

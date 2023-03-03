@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 07:28:09 by ertupop           #+#    #+#             */
-/*   Updated: 2023/02/09 09:13:25 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:14:47 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_find_env(t_env *env, char *find)
 	t_env	*tmp;
 
 	tmp = env;
-	while (tmp->next)
+	while (tmp)
 	{
 		i2 = 0;
 		while (tmp->str[i2] && tmp->str[i2] == find[i2] && find[i2])

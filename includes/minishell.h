@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/02/18 16:26:51 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/03 14:15:46 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,6 +343,7 @@ void		ft_lstadd_back_easy(t_easy **alst, t_easy *new);
 char		*ft_find_env(t_env *env, char *find);
 
 //utils.c
+char		*ft_gc_strdup(const char *s1, t_list **collector);
 void		ft_free_envp(char **envp);
 char		*ft_strcat(char *s1, char *s2, t_list **collector);
 int			ft_strcmp(char *s1, char *s2);
