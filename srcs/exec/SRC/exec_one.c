@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 07:37:59 by ertupop           #+#    #+#             */
-/*   Updated: 2023/03/03 12:22:27 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/08 07:32:31 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_exec_one2(t_use **use, t_use **tmp, t_pipex **pip)
 	(*pip)->infile = 0;
 	while ((*tmp))
 	{
-		if ((*tmp)->tokken == OUTFILE)
+		if ((*tmp)->tokken == OUTFILE || (*tmp)->tokken == APPEND)
 			(*pip)->outfile = (*tmp)->fd;
 		if ((*tmp)->tokken == INFILE)
 			(*pip)->infile = (*tmp)->fd;
@@ -111,8 +111,8 @@ int	ft_execve_one(t_env *env, t_pipex *pip, t_use *tmp, t_list *gc)
 		}
 	}
 	waitpid(pip->childs, &result, 0);
-	if (WIFEXITED(result);
-	if (WEXITSTATUS(result) == 0);
+	WIFEXITED(result);
+	WEXITSTATUS(result);
 	return (result);
 }
 
