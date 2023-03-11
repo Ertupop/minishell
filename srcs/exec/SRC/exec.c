@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 08:11:43 by ertupop           #+#    #+#             */
-/*   Updated: 2023/02/22 11:24:34 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/08 13:04:34 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_exec_all(t_use *use, t_env *env, t_list *gc, t_pipex *pip)
 	while (pip->count_command < pip->nbr_command)
 	{
 		ft_exec_all2(pip, &outfile);
-		while(tmp && tmp->tokken != COMMAND)
+		while (tmp && tmp->tokken != COMMAND)
 			tmp = tmp->next;
 		pip->childs = fork();
 		if (pip->childs == 0)
@@ -68,7 +68,9 @@ void	ft_exec_all2(t_pipex *pip, t_use **outfile)
 		if ((*outfile)->tokken == OUTFILE || (*outfile)->tokken == APPEND)
 			pip->outfile = (*outfile)->fd;
 		if ((*outfile)->tokken == INFILE)
+		{
 			pip->infile = (*outfile)->fd;
+		}
 		*outfile = (*outfile)->next;
 	}
 }

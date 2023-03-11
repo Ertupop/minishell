@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/11 10:09:04 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/03/11 11:33:53 by jule-mer         ###   ########.fr       */
+/*   Created: 2023/02/01 08:13:24 by ertupop           #+#    #+#             */
+/*   Updated: 2023/03/11 11:43:44 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ void	ft_heredoc(int fd, const char *end)
 		str = readline(">");
 		if (str == NULL)
 		{
-			printf("minishell: warning: here-document at line ");
-			printf("5 by end-of-file (wanted `%s')", end);
+			ft_fprintf(2, "minishell: warning heredoc \
+			delimited by end of file (wanted `%s')", end);
 			exit(0);
 		}
 		if (strcmp(str, end) == 0)
