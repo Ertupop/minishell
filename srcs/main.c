@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:44:58 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/02/19 17:21:53 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/11 10:43:43 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,19 @@ void	ft_prompt(t_list **collector, t_env **env)
 		{
 			add_history(parse.str);
 			if (!ft_parse(&use, &parse, collector, env))
+			{
+				// t_use *tmp;
+				// tmp = use;
+				// while (tmp)
+				// {
+				// 	printf("\ntokken = %d", tmp->tokken);
+				// 	if (tmp->tokken == COMMAND)
+				// 		for (int i = 0; tmp->tab[i]; i++)
+				// 			printf(" %s ", tmp->tab[i]);
+				// 	tmp = tmp->next;
+				// }
 				ft_exec(&use, *env, *collector);
+			}
 		}
 	}
 	gc_dell(*collector);

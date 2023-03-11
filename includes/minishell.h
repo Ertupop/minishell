@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/03/03 14:15:46 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/11 11:39:53 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -299,6 +299,8 @@ void		ft_is_action(t_bridge **bridge);
 void		ft_tokkenisation(t_bridge **bridge);
 
 //use.c
+void		ft_add_heredoc(t_use **use, t_list **collector, int limiter,
+				t_bridge *bridge);
 void		ft_add_infile(t_use **use, t_list **collector, int infile);
 void		ft_add_outfile(t_use **use, t_list **collector, int outfile,
 				int append);
@@ -306,12 +308,11 @@ char		**ft_use_tab(t_bridge *bridge, t_list **collector, int len);
 int			ft_tab_size(t_bridge *bridge);
 int			ft_nbr_file(t_bridge *bridge, int *infile, int *outfile);
 int			ft_nbr_slots(t_bridge *bridge);
-void		ft_good_infile(t_bridge *bridge, int *infile);
+void		ft_good_infile(t_bridge *bridge, int *infile, int *limiter);
 void		ft_good_outfile(t_bridge *bridge, int *outfile, int *append);;
 void		ft_fill_use(t_list **collector, t_use **use,
 				t_bridge **bridge, int len);
 void		ft_use(t_use **use, t_bridge *bridge, t_list **collector);
-
 
 /*----------------------------------------------------------------------------*/
 /*                                    UTILS                                   */
@@ -347,5 +348,15 @@ char		*ft_gc_strdup(const char *s1, t_list **collector);
 void		ft_free_envp(char **envp);
 char		*ft_strcat(char *s1, char *s2, t_list **collector);
 int			ft_strcmp(char *s1, char *s2);
+
+/*----------------------------------------------------------------------------*/
+/*                                   heredoc                                  */
+/*----------------------------------------------------------------------------*/
+//heredoc.c
+int			ft_acces_heredoc(void);
+int			ft_heredoc_while(int i, char *str, char *number, char *heredoc);
+void		ft_acces_free(char *str, char *number, char *heredoc);
+void		ft_heredoc(int fd, const char *end);
+
 
 #endif

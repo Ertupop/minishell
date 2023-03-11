@@ -6,7 +6,7 @@
 #    By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 09:30:42 by jule-mer          #+#    #+#              #
-#    Updated: 2023/02/08 14:21:22 by jule-mer         ###   ########.fr        #
+#    Updated: 2023/03/11 11:39:58 by jule-mer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -73,6 +73,7 @@ SRCS	+=	$(addprefix srcs/utils/, \
 			utils.c)
 
 SRCS	+=	$(addprefix srcs/, \
+			heredoc.c \
 			main.c \
 			signal.c)
 

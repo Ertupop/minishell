@@ -6,13 +6,13 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 14:56:25 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/02/18 16:07:28 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/11 11:37:15 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_good_infile(t_bridge *bridge, int *infile)
+void	ft_good_infile(t_bridge *bridge, int *infile, int *limiter)
 {
 	int	fd;
 
@@ -25,9 +25,6 @@ void	ft_good_infile(t_bridge *bridge, int *infile)
 			if (fd)
 				close(fd);
 			*infile = 0;
-		}
-		if (bridge->tokken == INFILE)
-		{
 			fd = access(bridge->str, fd);
 			if (fd == -1)
 			{
@@ -36,10 +33,12 @@ void	ft_good_infile(t_bridge *bridge, int *infile)
 				ft_putstr_fd(":no such file or directory\n", 2);
 			}
 			else
-			{
-				fd = open(bridge->str, O_RDONLY, 00644);
-				*infile = fd;
-			}
+				*infile = open(bridge->str, O_RDONLY, 00644);
+		}
+		if (bridge->tokken == LIMITER)
+		{
+			bridge = bridge->next;
+			*limiter += 1;
 		}
 		bridge = bridge->next;
 	}
@@ -92,13 +91,15 @@ void	ft_fill_use(t_list **collector, t_use **use, t_bridge **bridge, int len)
 	int		infile;
 	int		append;
 	int		outfile;
+	int		limiter;
 
 	infile = 0;
 	outfile = 0;
 	append = 0;
+	limiter = 0;
 	new = gc_alloc_use(collector);
 	ft_good_outfile(*bridge, &outfile, &append);
-	ft_good_infile(*bridge, &infile);
+	ft_good_infile(*bridge, &infile, &limiter);
 	new->fd = 0;
 	if ((*bridge)->tokken == PIPE)
 		len = 1;
@@ -106,8 +107,9 @@ void	ft_fill_use(t_list **collector, t_use **use, t_bridge **bridge, int len)
 		len = ft_tab_size(*bridge);
 	new->tab = ft_use_tab(*bridge, collector, len);
 	ft_lstadd_back_use(use, new);
+	if (limiter > 0)
+		ft_add_heredoc(use, collector, limiter, *bridge);
 	ft_fill_use_2(bridge, &new);
-
 	if (outfile > 0 || append > 0)
 		ft_add_outfile(use, collector, outfile, append);
 	if (infile > 0)
