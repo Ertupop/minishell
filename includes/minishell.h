@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/02/18 16:26:51 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/11 11:09:41 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@
 # include <stdlib.h>
 # include <readline/readline.h>
 # include <readline/history.h>
-
 
 /*----------------------------------------------------------------------------*/
 /*                                 STRUCTURES                                 */
@@ -198,7 +197,6 @@ void		ft_free_pip(t_pipex *pip);
 //exec_pipe.c
 int			ft_exec_pipe(t_use *tmp, t_env *env, t_list *gc, t_pipex *pip);
 void		ft_exec_pipe2(t_pipex *pip);
-void		ft_exec_pipe3(t_pipex *pip);
 void		ft_exec_pipe4(t_pipex *pip);
 void		ft_exec_pipe4bis(t_pipex *pip);
 
