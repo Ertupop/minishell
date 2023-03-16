@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:44:58 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/03/11 10:43:43 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/03/16 09:11:26 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,16 +60,6 @@ void	ft_prompt(t_list **collector, t_env **env)
 			add_history(parse.str);
 			if (!ft_parse(&use, &parse, collector, env))
 			{
-				// t_use *tmp;
-				// tmp = use;
-				// while (tmp)
-				// {
-				// 	printf("\ntokken = %d", tmp->tokken);
-				// 	if (tmp->tokken == COMMAND)
-				// 		for (int i = 0; tmp->tab[i]; i++)
-				// 			printf(" %s ", tmp->tab[i]);
-				// 	tmp = tmp->next;
-				// }
 				ft_exec(&use, *env, *collector);
 			}
 		}
@@ -85,11 +75,6 @@ int	main(int ac, char **av, char **envp)
 
 	collector = NULL;
 	env = ft_env(&collector, envp);
-	// ft_print_env(env);
-	// ft_export(av, env, collector);
-	// ft_print_env(env);
-	// ft_exit(av, collector);
-	// printf("ici");
 	ft_prompt(&collector, &env);
 	(void)ac;
 	(void)av;

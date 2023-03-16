@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 11:31:37 by ertupop           #+#    #+#             */
-/*   Updated: 2023/03/11 11:09:39 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/16 08:21:03 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,7 @@ void	ft_exec_pipe4(t_pipex *pip)
 		}
 	}
 	else
-	{
 		ft_exec_pipe4bis(pip);
-	}
 }
 
 void	ft_exec_pipe4bis(t_pipex *pip)

@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 09:00:09 by ertupop           #+#    #+#             */
-/*   Updated: 2023/03/03 10:32:14 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/16 09:18:51 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	ft_exec_pipe5(t_pipex *pip, t_env *env, t_use *tmp, t_list *gc)
 	pip->command = ft_command(pip, tmp->tab[0]);
 	if (pip->command == NULL)
 	{
-		ft_fprintf(2, "\033[0;36mminishell \033[0;31m: \033[0m %s: command not found\n", tmp->tab[0]);
+		ft_fprintf(2, "\033[0;36mminishell \033[0;31m: \033[0m ");
+		ft_fprintf(2, "%s: command not found\n", tmp->tab[0]);
 		ft_free_envp(pip->env);
 		ft_free_pip(pip);
 		g_exit = 127;

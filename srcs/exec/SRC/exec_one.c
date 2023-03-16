@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 07:37:59 by ertupop           #+#    #+#             */
-/*   Updated: 2023/03/11 11:44:45 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/16 09:18:38 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,8 @@ int	ft_execve_one(t_env *env, t_pipex *pip, t_use *tmp, t_list *gc)
 		ft_close_fd(pip->infile, pip->outfile);
 		if (pip->command == NULL)
 		{
-			ft_fprintf(2, "\033[0;36mminishell \033[0;31m: \033[0m %s: command not found\n", tmp->tab[0]);
+			ft_fprintf(2, "\033[0;36mminishell \033[0;31m: \033");
+			ft_fprintf(2, "[0m %s: command not found\n", tmp->tab[0]);
 			ft_free_envp(pip->env);
 			ft_free_pip(pip);
 			g_exit = 127;
@@ -111,8 +112,14 @@ int	ft_execve_one(t_env *env, t_pipex *pip, t_use *tmp, t_list *gc)
 		}
 	}
 	waitpid(pip->childs, &result, 0);
-	// if (WIFEXITED(result);
-	// if (WEXITSTATUS(result) == 0);
+	if (WIFSIGNALED(result))
+	{
+		result = WTERMSIG(result) + 128;
+		if (WTERMSIG(result) == SIGQUIT)
+			write(STDERR_FILENO, "Quit (core dumped)\n", 19);
+		else if (WTERMSIG(result) == SIGSEGV)
+			write(STDERR_FILENO, "Segmentation fault (core dumped)\n", 33);
+	}
 	return (result);
 }
 

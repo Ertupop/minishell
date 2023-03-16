@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 16:59:39 by ertupop           #+#    #+#             */
-/*   Updated: 2023/03/03 09:42:29 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/16 09:08:31 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <stdarg.h>
-#include "../libft.h"
+# include "../libft.h"
 
 int		ft_fprintf(int std, const char *string, ...);
 int		ft_putchar_fd_print(int std, int c);

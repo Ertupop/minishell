@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/03/11 11:43:05 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/16 09:09:19 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,7 @@ int			main(int ac, char **av, char **envp);
 void		ft_sig_handler(int signum);
 void		ft_set_sa(t_sig *signal, void (*f)(int));
 void		ft_sig_handler_heredoc(int signum);
+void		ft_set_sa_heredoc(t_sig *signale, void (*f)(int), void *end);
 
 /*----------------------------------------------------------------------------*/
 /*                                   heredoc                                  */
@@ -355,6 +356,5 @@ int			ft_acces_heredoc(void);
 int			ft_heredoc_while(int i, char *str, char *number, char *heredoc);
 void		ft_acces_free(char *str, char *number, char *heredoc);
 void		ft_heredoc(int fd, const char *end);
-
 
 #endif

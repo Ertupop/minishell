@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 08:11:43 by ertupop           #+#    #+#             */
-/*   Updated: 2023/03/08 13:04:34 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/16 09:19:13 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,14 @@ int	ft_wait_lstchild(t_pipex *pip)
 			lastchilds = tmprtr;
 		pidw = waitpid(-1, &tmprtr, 0);
 		pip->count_command --;
+	}
+	if (WIFSIGNALED(lastchilds))
+	{
+		lastchilds = WTERMSIG(lastchilds) + 128;
+		if (WTERMSIG(lastchilds) == SIGQUIT)
+			write(STDERR_FILENO, "Quit (core dumped)\n", 19);
+		else if (WTERMSIG(lastchilds) == SIGSEGV)
+			write(STDERR_FILENO, "Segmentation fault (core dumped)\n", 33);
 	}
 	return (lastchilds);
 }

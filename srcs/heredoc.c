@@ -6,11 +6,9 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 08:13:24 by ertupop           #+#    #+#             */
-/*   Updated: 2023/03/11 11:43:44 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/16 09:10:59 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-
 
 #include "../includes/minishell.h"
 
@@ -73,9 +71,9 @@ void	ft_acces_free(char *str, char *number, char *heredoc)
 void	ft_heredoc(int fd, const char *end)
 {
 	char	*str;
-	// t_sig	signal;
+	t_sig	signal;
 
-	// sigaction(&signal, ft_sig_handler_heredoc);
+	ft_set_sa_heredoc(&signal, ft_sig_handler_heredoc, &end);
 	while (1)
 	{
 		str = readline(">");

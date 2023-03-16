@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:25:30 by rstrub            #+#    #+#             */
-/*   Updated: 2023/03/03 10:29:45 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/16 09:02:30 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_check(int std, char c, va_list args)
 
 	total = 0;
 	if (c == '%')
-		total +=  ft_putchar_fd_print(std, '%');
+		total += ft_putchar_fd_print(std, '%');
 	else if (c == 'c')
 		total += ft_putchar_fd_print(std, va_arg(args, int));
 	else if (c == 's')
@@ -32,9 +32,11 @@ int	ft_check(int std, char c, va_list args)
 	else if (c == 'u')
 		total += ft_putunsign_fd_print(std, va_arg(args, unsigned int));
 	else if (c == 'x')
-		total += ft_puthexa_fd_print(std, va_arg(args, unsigned int), "0123456789abcdef");
+		total += ft_puthexa_fd_print(std, va_arg(args, unsigned int),
+				"0123456789abcdef");
 	else if (c == 'X')
-		total += ft_puthexa_fd_print(std, va_arg(args, unsigned int), "0123456789ABCDEF");
+		total += ft_puthexa_fd_print(std, va_arg(args, unsigned int),
+				"0123456789ABCDEF");
 	else
 		total += ft_putchar_fd_print(std, c);
 	return (total);
