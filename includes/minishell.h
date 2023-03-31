@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/03/31 13:51:07 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/31 13:51:49 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,7 +212,7 @@ void		ft_exec(t_use **use, t_env *env, t_list *gc);
 int			ft_exec_all(t_use *use, t_env *env, t_list *gc, t_pipex *pip);
 void		ft_exec_all2(t_pipex *pip, t_use **outfile);
 int			ft_wait_lstchild(t_pipex *pip);
-int			ft_close_pipe(int count, int *pipe, int nbr_command, t_pipex pip);
+int			ft_close_pipe(int count, int *pipe, int nbr_command, t_pipex *pip);
 
 //exec2.c
 int			ft_create_pipe(int count, int *pipes);
