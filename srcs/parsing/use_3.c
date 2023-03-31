@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:09:16 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/03/20 12:09:23 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/31 13:53:03 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	ft_launch_heredoc(char *eof, t_list **collector, int fd)
 	char	*end;
 	int		result;
 
+	result = 0;
 	child = fork();
 	if (child == 0)
 	{
