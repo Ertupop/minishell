@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 08:11:43 by ertupop           #+#    #+#             */
-/*   Updated: 2023/03/16 09:19:13 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/31 11:50:54 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	ft_exec_all(t_use *use, t_env *env, t_list *gc, t_pipex *pip)
 		if (pip->childs == 0)
 			ft_exec_pipe(tmp, env, gc, pip);
 		tmp = tmp->next;
-		ft_close_pipe(pip->count_command, pip->pipe, pip->nbr_command);
+		ft_close_pipe(pip->count_command, pip->pipe, pip->nbr_command, pip);
 		pip->count_command ++;
 		if (outfile != NULL)
 			outfile = outfile->next;
@@ -67,7 +67,7 @@ void	ft_exec_all2(t_pipex *pip, t_use **outfile)
 	{
 		if ((*outfile)->tokken == OUTFILE || (*outfile)->tokken == APPEND)
 			pip->outfile = (*outfile)->fd;
-		if ((*outfile)->tokken == INFILE)
+		if ((*outfile)->tokken == INFILE || (*outfile)->tokken == LIMITER)
 		{
 			pip->infile = (*outfile)->fd;
 		}
@@ -101,12 +101,14 @@ int	ft_wait_lstchild(t_pipex *pip)
 	return (lastchilds);
 }
 
-int	ft_close_pipe(int count, int *pipe, int nbr_command)
+int	ft_close_pipe(int count, int *pipe, int nbr_command, t_pipex *pip)
 {
+	if (pip->outfile != 0)
+		close(pip->outfile);
+	if (pip->infile != 1)
+		close(pip->infile);
 	if (count == 0)
-	{
 		close(pipe[1]);
-	}
 	else if (count == nbr_command -1)
 	{
 		if (count % 2 == 0)

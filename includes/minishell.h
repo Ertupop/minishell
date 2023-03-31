@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/03/16 09:09:19 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/22 11:09:24 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,6 +200,7 @@ int			ft_exec_pipe(t_use *tmp, t_env *env, t_list *gc, t_pipex *pip);
 void		ft_exec_pipe2(t_pipex *pip);
 void		ft_exec_pipe4(t_pipex *pip);
 void		ft_exec_pipe4bis(t_pipex *pip);
+void    ft_exec_pipe3(t_pipex *pip);
 
 //exec_pipe2.c
 void		ft_exec_pipe5(t_pipex *pip, t_env *env, t_use *tmp, t_list *gc);

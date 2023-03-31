@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 08:13:24 by ertupop           #+#    #+#             */
-/*   Updated: 2023/03/16 09:10:59 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/22 11:19:42 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_heredoc(int fd, const char *end)
 		{
 			free(str);
 			close(fd);
-			return ;
+			exit(0);
 		}
 		ft_putendl_fd(str, fd);
 		free(str);

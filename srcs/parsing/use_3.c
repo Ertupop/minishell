@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:09:16 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/03/16 09:53:48 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/20 12:09:23 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,8 @@ int	ft_launch_heredoc(char *eof, t_list **collector, int fd)
 		else if (WTERMSIG(result) == SIGSEGV)
 			write(STDERR_FILENO, "Segmentation fault (core dumped)\n", 33);
 	}
-
+	return (result);
 }
-
 
 void	ft_add_heredoc(t_use **use, t_list **collector, int limiter,
 			t_bridge *bridge)
