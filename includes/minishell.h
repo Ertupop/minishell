@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/03/31 13:51:49 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/05/18 21:12:17 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_use
 	enum s_tokken	tokken;
 	char			**tab;
 	int				fd;
+	char			*eof;
 	struct s_use	*next;
 }	t_use;
 
@@ -97,9 +98,10 @@ typedef struct s_pipex
 	int		count_command;
 	char	**env;
 	pid_t	childs;
+	int		prev_pipes;
 	int		infile;
 	int		outfile;
-	int		*pipe;
+	int		pipe[2];
 	int		exit;
 }	t_pipex;
 

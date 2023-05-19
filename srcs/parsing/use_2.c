@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:06:13 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/03/03 14:13:27 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/05/18 21:05:14 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,14 @@ void	ft_add_outfile(t_use **use, t_list **collector, int outfile, int append)
 		new->tokken = OUTFILE;
 		new->tab = NULL;
 		new->fd = outfile;
+		new->eof = NULL;
 	}
 	else if (append > 0)
 	{
 		new->tokken = APPEND;
 		new->tab = NULL;
 		new->fd = append;
+		new ->eof = NULL;
 	}
 	ft_lstadd_back_use(use, new);
 }

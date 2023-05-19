@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rstrub <rstrub@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 08:11:43 by ertupop           #+#    #+#             */
-/*   Updated: 2023/03/31 11:50:54 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/03/31 15:08:03 by rstrub           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,8 @@ int	ft_exec_all(t_use *use, t_env *env, t_list *gc, t_pipex *pip)
 
 	tmp = use;
 	outfile = use;
-	pip->pipe = malloc(sizeof(int) * 4);
-	if (pip->pipe == NULL)
-		return (-1);
 	pip->count_command = 0;
+	pip->prev_pipes = -1;
 	while (pip->count_command < pip->nbr_command)
 	{
 		ft_exec_all2(pip, &outfile);
@@ -49,18 +47,22 @@ int	ft_exec_all(t_use *use, t_env *env, t_list *gc, t_pipex *pip)
 		if (pip->childs == 0)
 			ft_exec_pipe(tmp, env, gc, pip);
 		tmp = tmp->next;
-		ft_close_pipe(pip->count_command, pip->pipe, pip->nbr_command, pip);
+		if (pip->prev_pipes != -1)
+			close(pip->prev_pipes);
+		pip->prev_pipes = pip->pipe[0];
+		close(pip->pipe[1]);
 		pip->count_command ++;
 		if (outfile != NULL)
 			outfile = outfile->next;
 	}
+	close(pip->prev_pipes);
 	return (ft_wait_lstchild(pip));
 }
 
 void	ft_exec_all2(t_pipex *pip, t_use **outfile)
 {
-	if (pip->count_command < pip->nbr_command - 1)
-		ft_create_pipe(pip->count_command, pip->pipe);
+	if (pipe(pip->pipe))
+		return ;
 	pip->outfile = 1;
 	pip->infile = 0;
 	while (*outfile && (*outfile)->tokken != PIPE)
@@ -81,7 +83,6 @@ int	ft_wait_lstchild(t_pipex *pip)
 	int		tmprtr;
 	int		pidw;
 
-	free(pip->pipe);
 	pidw = waitpid(-1, &tmprtr, 0);
 	while (pip->count_command != 0)
 	{
