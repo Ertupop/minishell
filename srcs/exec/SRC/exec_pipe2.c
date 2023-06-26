@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 09:00:09 by ertupop           #+#    #+#             */
-/*   Updated: 2023/03/22 11:00:37 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/06/14 11:48:15 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ void	ft_exec_pipe5(t_pipex *pip, t_env *env, t_use *tmp, t_list *gc)
 	if (execve(pip->command, tmp->tab, pip->env) == -1)
 	{
 		ft_free_envp(pip->env);
+		gc_dell(gc);
 		exit(1);
 	}
 }

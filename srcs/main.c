@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:44:58 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/05/18 21:33:39 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/06/12 18:05:07 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,7 @@ void	ft_prompt(t_list **collector, t_env **env)
 			add_history(parse.str);
 			if (!ft_parse(&use, &parse, collector, env))
 			{
-				//ft_exec(&use, *env, *collector);
-				while (use)
-				{
-					if (use->tokken == COMMAND)
-						printf("commande : %s\n", use->tab[0]);
-					if (use->tokken == PIPE)
-						printf("pipe\n");
-					if (use->tokken == OUTFILE)
-						printf("outfile fd : %d\n", use->fd);
-					if (use->tokken == APPEND)
-						printf("APPEND fd : %d\n", use->fd);
-					if (use->tokken == INFILE)
-						printf("infile fd : %d\n", use->fd);
-					if (use->tokken == LIMITER)
-						printf("EOF : %s, fd : %d\n", use->eof, use->fd);
-					use = use->next;
-				}
+				ft_exec(&use, *env, *collector);
 			}
 		}
 	}

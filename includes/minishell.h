@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/05/18 21:12:17 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/06/17 17:17:34 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ typedef enum s_bultins
 	EXPORT,
 	PWD,
 	UNSET,
-	NO
+	NO,
 }	t_bultins;
 
 typedef struct s_easy
@@ -71,6 +71,7 @@ typedef struct s_use
 	char			**tab;
 	int				fd;
 	char			*eof;
+	char			*file_name;
 	struct s_use	*next;
 }	t_use;
 
@@ -127,12 +128,6 @@ void		ft_sig_handler(int signum);
 void		ft_set_sa(t_sig *signal, void (*f)(int));
 void		ft_sig_handler_heredoc(int signum);
 void		ft_set_sa_heredoc(t_sig *signale, void (*f)(int), void *end);
-
-/*----------------------------------------------------------------------------*/
-/*                                   heredoc                                  */
-/*----------------------------------------------------------------------------*/
-
-void		ft_heredoc(int fd, const char *end);
 
 /*----------------------------------------------------------------------------*/
 /*                                   BULTINS                                  */
@@ -196,22 +191,26 @@ int			ft_exec_one2(t_use **use, t_use **tmp, t_pipex **pip);
 int			ft_exec_bultins(t_use *use, t_env *env, t_list *gc, int tokken);
 int			ft_execve_one(t_env *env, t_pipex *pip, t_use *tmp, t_list *gc);
 void		ft_free_pip(t_pipex *pip);
-
+//exec_one2.c
+void		ft_execve_one2(t_pipex *pip, t_use *tmp, t_list *gc);
 //exec_pipe.c
 int			ft_exec_pipe(t_use *tmp, t_env *env, t_list *gc, t_pipex *pip);
 void		ft_exec_pipe2(t_pipex *pip);
 void		ft_exec_pipe4(t_pipex *pip);
 void		ft_exec_pipe4bis(t_pipex *pip);
-void    ft_exec_pipe3(t_pipex *pip);
+void		ft_exec_pipe3(t_pipex *pip);
 
 //exec_pipe2.c
 void		ft_exec_pipe5(t_pipex *pip, t_env *env, t_use *tmp, t_list *gc);
 int			ft_exec_pipe6(t_use *tmp, t_env *env, t_list *gc, int tokken);
 void		ft_close_one(int s, int i);
 
+//exec0.c
+int			ft_exec_all(t_use *use, t_env *env, t_list *gc, t_pipex *pip);
+void		ft_exec_all0(t_use **outfile, t_pipex **pip);
+
 //exec.c
 void		ft_exec(t_use **use, t_env *env, t_list *gc);
-int			ft_exec_all(t_use *use, t_env *env, t_list *gc, t_pipex *pip);
 void		ft_exec_all2(t_pipex *pip, t_use **outfile);
 int			ft_wait_lstchild(t_pipex *pip);
 int			ft_close_pipe(int count, int *pipe, int nbr_command, t_pipex *pip);
@@ -221,6 +220,7 @@ int			ft_create_pipe(int count, int *pipes);
 int			ft_init_fd(t_pipex *pip, t_use *use);
 void		ft_close_fd(int in, int out);
 int			ft_check2(char *s);
+void		ft_lunch_heredoc(t_use *here, t_env *env);
 
 //exec_pars.c
 void		ft_path(t_env *env, t_pipex *pip);
@@ -284,6 +284,10 @@ void		ft_init_easy(t_easy *easy);
 void		ft_start_easy(t_easy **easy, t_list **collector, t_parse *parse);
 int			ft_parse(t_use **use, t_parse *parse, t_list **collector,
 				t_env **env);
+void		ft_good_place(t_easy **first, t_list **collector);
+void		ft_good_help(t_easy *easy, int *s, int *d);
+void		ft_good_help_2(t_easy **new, t_easy **easy, t_list **collector);
+void		ft_good_help_3(t_easy **new, t_easy **easy, t_list **collector);
 
 //quote_gestion.c
 void		ft_good_double(t_easy **tmp, int *i);
@@ -315,6 +319,8 @@ void		ft_good_outfile(t_bridge *bridge, int *outfile, int *append);;
 void		ft_fill_use(t_list **collector, t_use **use,
 				t_bridge **bridge, int len);
 void		ft_use(t_use **use, t_bridge *bridge, t_list **collector);
+void		ft_init_for_use(int *i, int *o, int *a, int *l);
+void		ft_fill_use_2(t_bridge **bridge, t_use **new);
 
 /*----------------------------------------------------------------------------*/
 /*                                    UTILS                                   */
@@ -355,9 +361,13 @@ int			ft_strcmp(char *s1, char *s2);
 /*                                   heredoc                                  */
 /*----------------------------------------------------------------------------*/
 //heredoc.c
-int			ft_acces_heredoc(void);
+int			ft_acces_heredoc(t_use *use);
 int			ft_heredoc_while(int i, char *str, char *number, char *heredoc);
 void		ft_acces_free(char *str, char *number, char *heredoc);
-void		ft_heredoc(int fd, const char *end);
-
+void		ft_heredoc(int fd, const char *end, t_env *env);
+void		ft_heredoc2(const char *end, char *str, t_list *gc);
+void		ft_heredoc3(t_easy *work, t_list *gc, int fd);
+void		ft_start_easy_here(t_easy **easy, t_list **collector,
+				int *i, char *str);
+void		ft_make_string_easy(t_easy *work, t_list **gc, int fd);
 #endif

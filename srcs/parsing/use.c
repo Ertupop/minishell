@@ -6,11 +6,18 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 14:56:25 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/03/11 11:37:15 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/06/12 16:57:12 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+void	ft_prompt_infile_error(t_bridge *bridge)
+{
+	ft_putstr_fd("minishell : ", 2);
+	ft_putstr_fd(bridge->str, 2);
+	ft_putstr_fd(":no such file or directory\n", 2);
+}
 
 void	ft_good_infile(t_bridge *bridge, int *infile, int *limiter)
 {
@@ -27,11 +34,7 @@ void	ft_good_infile(t_bridge *bridge, int *infile, int *limiter)
 			*infile = 0;
 			fd = access(bridge->str, fd);
 			if (fd == -1)
-			{
-				ft_putstr_fd("minishell : ", 2);
-				ft_putstr_fd(bridge->str, 2);
-				ft_putstr_fd(":no such file or directory\n", 2);
-			}
+				ft_prompt_infile_error(bridge);
 			else
 				*infile = open(bridge->str, O_RDONLY, 00644);
 		}
@@ -85,52 +88,10 @@ void	ft_fill_use_2(t_bridge **bridge, t_use **new)
 			*bridge = (*bridge)->next;
 }
 
-void	ft_fill_use(t_list **collector, t_use **use, t_bridge **bridge, int len)
+void	ft_init_for_use(int *i, int *o, int *a, int *l)
 {
-	t_use	*new;
-	int		infile;
-	int		append;
-	int		outfile;
-	int		limiter;
-
-	infile = 0;
-	outfile = 0;
-	append = 0;
-	limiter = 0;
-	new = gc_alloc_use(collector);
-	ft_good_outfile(*bridge, &outfile, &append);
-	ft_good_infile(*bridge, &infile, &limiter);
-	new->fd = 0;
-	if ((*bridge)->tokken == PIPE)
-		len = 1;
-	else
-		len = ft_tab_size(*bridge);
-	new->tab = ft_use_tab(*bridge, collector, len);
-	ft_lstadd_back_use(use, new);
-	if (limiter > 0)
-		ft_add_heredoc(use, collector, limiter, *bridge);
-	ft_fill_use_2(bridge, &new);
-	if (outfile > 0 || append > 0)
-		ft_add_outfile(use, collector, outfile, append);
-	if (infile > 0)
-		ft_add_infile(use, collector, infile);
-}
-
-void	ft_use(t_use **use, t_bridge *bridge, t_list **collector)
-{
-	int		slots;
-	int		len;
-	t_use	*tmp;
-
-	len = 0;
-	slots = ft_nbr_slots(bridge);
-	while (slots-- && bridge)
-		ft_fill_use(collector, use, &bridge, len);
-	tmp = *use;
-	while (tmp)
-	{
-		if (tmp->tokken < 0 || tmp->tokken > 5)
-			tmp->tokken = 0;
-		tmp = tmp->next;
-	}
+	*i = 0;
+	*o = 0;
+	*a = 0;
+	*l = 0;
 }

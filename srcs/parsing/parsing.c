@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 12:35:20 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/03/03 14:13:07 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/06/12 17:10:03 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,39 +22,66 @@ void	ft_init_easy(t_easy *easy)
 	easy->next = NULL;
 }
 
-void	ft_start_easy(t_easy **easy, t_list **collector, t_parse *parse)
+void	ft_good_help_3(t_easy **new, t_easy **easy, t_list **collector)
 {
-	t_easy	*new;
-
-	new = gc_create_easy(collector);
-	ft_init_easy(new);
-	new->c = parse->str[parse->i++];
-	if (new->c == ' ')
-		new->space = 1;
-	ft_check_quote(&new);
-	ft_lstadd_back_easy(easy, new);
+	*new = gc_create_easy(collector);
+	ft_init_easy(*new);
+	(*new)->space = 1;
+	(*new)->c = ' ';
+	(*new)->next = (*easy)->next;
+	(*easy)->next = *new;
 }
 
-int	ft_parse(t_use **use, t_parse *parse, t_list **collector, t_env **env)
+void	ft_good_help_2(t_easy **new, t_easy **easy, t_list **collector)
 {
-	t_easy	*easy;
-	t_easy	*dell;
+	*new = gc_create_easy(collector);
+	ft_init_easy(*new);
+	(*new)->space = 1;
+	(*new)->c = ' ';
+	(*new)->next = (*easy)->next;
+	(*easy)->next = *new;
+}
 
-	easy = NULL;
-	if (ft_check_parse(parse->str))
-		return (1);
-	while (parse->str[parse->i])
-		ft_start_easy(&easy, collector, parse);
-	ft_good_quote(&easy);
-	ft_expand(&easy, collector, env);
-	ft_skip_space(&easy, collector);
-	gc_dell_one(*collector, &parse->str);
-	ft_create_bridge(easy, use, collector);
+void	ft_good_help(t_easy *easy, int *s, int *d)
+{
+	if (easy->c == '\'' && *d == 0)
+	{
+		if (*s == 0)
+			*s = 1;
+		else
+			*s = 0;
+	}
+	if (easy->c == '\"' && *s == 0)
+	{
+		if (*d == 0)
+			*d = 1;
+		else
+			*d = 0;
+	}
+}
+
+void	ft_good_place(t_easy **first, t_list **collector)
+{
+	int		s;
+	int		d;
+	t_easy	*new;
+	t_easy	*easy;
+
+	easy = *first;
+	new = NULL;
+	s = 0;
+	d = 0;
 	while (easy)
 	{
-		dell = easy;
+		ft_good_help(easy, &s, &d);
+		if (!s && !d && easy->c != ' ' && easy->c != '<'
+			&& easy->c != '>' && easy->next && ((easy->next->c == '<')
+				|| (easy->next->c == '>') || (easy->next->c == '|')))
+			ft_good_help_2(&new, &easy, collector);
+		if (!s && !d && (easy->c == '>' || easy->c == '<') && easy->next
+			&& easy->next->c != '>' && easy->next->c != '<'
+			&& easy->next->c != ' ')
+			ft_good_help_3(&new, &easy, collector);
 		easy = easy->next;
-		gc_dell_one(*collector, &dell);
 	}
-	return (0);
 }

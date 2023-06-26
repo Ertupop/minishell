@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rstrub <rstrub@student.42.fr>              +#+  +:+       +#+        */
+/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 08:11:43 by ertupop           #+#    #+#             */
-/*   Updated: 2023/03/31 15:08:03 by rstrub           ###   ########.fr       */
+/*   Updated: 2023/06/12 17:20:32 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,18 @@
 void	ft_exec(t_use **use, t_env *env, t_list *gc)
 {
 	t_pipex	pipex;
+	t_use	*here;
 	int		result;
 
+	here = *use;
+	while (here)
+	{
+		if (here->tokken == LIMITER)
+		{
+			ft_lunch_heredoc(here, env);
+		}
+		here = here->next;
+	}
 	pipex.outfile = 1;
 	pipex.nbr_command = ft_init_fd(&pipex, *use);
 	if (pipex.nbr_command == 0)
@@ -27,36 +37,6 @@ void	ft_exec(t_use **use, t_env *env, t_list *gc)
 		result = ft_exec_all(*use, env, gc, &pipex);
 	ft_close_fd(pipex.infile, pipex.outfile);
 	g_exit = result;
-}
-
-int	ft_exec_all(t_use *use, t_env *env, t_list *gc, t_pipex *pip)
-{
-	t_use	*tmp;
-	t_use	*outfile;
-
-	tmp = use;
-	outfile = use;
-	pip->count_command = 0;
-	pip->prev_pipes = -1;
-	while (pip->count_command < pip->nbr_command)
-	{
-		ft_exec_all2(pip, &outfile);
-		while (tmp && tmp->tokken != COMMAND)
-			tmp = tmp->next;
-		pip->childs = fork();
-		if (pip->childs == 0)
-			ft_exec_pipe(tmp, env, gc, pip);
-		tmp = tmp->next;
-		if (pip->prev_pipes != -1)
-			close(pip->prev_pipes);
-		pip->prev_pipes = pip->pipe[0];
-		close(pip->pipe[1]);
-		pip->count_command ++;
-		if (outfile != NULL)
-			outfile = outfile->next;
-	}
-	close(pip->prev_pipes);
-	return (ft_wait_lstchild(pip));
 }
 
 void	ft_exec_all2(t_pipex *pip, t_use **outfile)
@@ -70,9 +50,7 @@ void	ft_exec_all2(t_pipex *pip, t_use **outfile)
 		if ((*outfile)->tokken == OUTFILE || (*outfile)->tokken == APPEND)
 			pip->outfile = (*outfile)->fd;
 		if ((*outfile)->tokken == INFILE || (*outfile)->tokken == LIMITER)
-		{
 			pip->infile = (*outfile)->fd;
-		}
 		*outfile = (*outfile)->next;
 	}
 }

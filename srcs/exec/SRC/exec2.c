@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 09:14:40 by ertupop           #+#    #+#             */
-/*   Updated: 2023/01/18 07:10:20 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/06/17 17:17:45 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	ft_init_fd(t_pipex *pip, t_use *use)
 	(void) pip;
 	while (tmp)
 	{
-		if (tmp->tokken == COMMAND)
+		if (tmp->tokken == COMMAND && tmp->tab != NULL)
 			command++;
 		tmp = tmp->next;
 	}
@@ -67,4 +67,14 @@ int	ft_check2(char *s)
 	if (ft_strcmp("unset", s) == 0)
 		return (UNSET);
 	return (NO);
+}
+
+void	ft_lunch_heredoc(t_use *here, t_env *env)
+{
+	ft_heredoc(here->fd, here->eof, env);
+	close(here->fd);
+	here->fd = open(here->file_name, O_RDONLY);
+	unlink(here->file_name);
+	free(here->file_name);
+	free(here->eof);
 }

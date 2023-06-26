@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/18 16:25:30 by rstrub            #+#    #+#             */
-/*   Updated: 2023/03/16 09:02:30 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/06/12 17:59:55 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,6 @@ int	ft_check(int std, char c, va_list args)
 	else if (c == 'x')
 		total += ft_puthexa_fd_print(std, va_arg(args, unsigned int),
 				"0123456789abcdef");
-	else if (c == 'X')
-		total += ft_puthexa_fd_print(std, va_arg(args, unsigned int),
-				"0123456789ABCDEF");
 	else
 		total += ft_putchar_fd_print(std, c);
 	return (total);

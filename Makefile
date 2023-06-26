@@ -6,7 +6,7 @@
 #    By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 09:30:42 by jule-mer          #+#    #+#              #
-#    Updated: 2023/03/11 11:39:58 by jule-mer         ###   ########.fr        #
+#    Updated: 2023/06/17 17:17:11 by jule-mer         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,8 +40,10 @@ SRCS	+=	$(addprefix srcs/errors/, \
 
 SRCS	+= $(addprefix srcs/exec/SRC/, \
 			exec_one.c \
+			exec_one2.c \
 			exec_pipe.c \
 			exec_pipe2.c \
+			exec0.c \
 			exec.c \
 			exec2.c \
 			exev_pars.c)
@@ -56,10 +58,12 @@ SRCS	+=	$(addprefix srcs/parsing/, \
 			check.c \
 			expand_dell.c \
 			expand.c \
+			parsing_0.c \
 			parsing.c \
 			quote_gestion.c \
 			spaces_gestion.c \
 			tokkenisation.c \
+			use_0.c \
 			use_2.c \
 			use_3.c \
 			use.c)
@@ -74,6 +78,7 @@ SRCS	+=	$(addprefix srcs/utils/, \
 
 SRCS	+=	$(addprefix srcs/, \
 			heredoc.c \
+			heredoc2.c \
 			main.c \
 			signal.c)
 
