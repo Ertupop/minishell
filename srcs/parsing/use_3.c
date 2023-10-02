@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   use_3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:09:16 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/06/12 14:05:34 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/09/22 15:19:16 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ft_add_heredoc(t_use **use, t_list **collector, int limiter,
 		new = gc_alloc_use(collector);
 		new->tokken = LIMITER;
 		new->tab = NULL;
-		new->fd = ft_acces_heredoc(new);
+		new->fd = ft_acces_heredoc(new, collector);
 		if (new->fd == -1)
 			return ;
 		while (bridge && bridge->tokken != PIPE)

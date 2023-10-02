@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 09:14:40 by ertupop           #+#    #+#             */
-/*   Updated: 2023/06/17 17:17:45 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:10:50 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,21 @@ int	ft_init_fd(t_pipex *pip, t_use *use)
 	(void) pip;
 	while (tmp)
 	{
-		if (tmp->tokken == COMMAND && tmp->tab != NULL)
+		if (tmp->tokken == PIPE)
 			command++;
 		tmp = tmp->next;
+	}
+	if (command > 0)
+		command++;
+	tmp = use;
+	if (command == 0)
+	{
+		while (tmp)
+		{
+			if (tmp->tokken == COMMAND)
+			command++;
+			tmp = tmp->next;
+		}
 	}
 	return (command);
 }
@@ -69,12 +81,26 @@ int	ft_check2(char *s)
 	return (NO);
 }
 
-void	ft_lunch_heredoc(t_use *here, t_env *env)
+void	ft_lunch_heredoc(t_use *here, t_env *env, t_list *gc)
 {
-	ft_heredoc(here->fd, here->eof, env);
+	pid_t	child;
+	t_sig	signal;
+
+	child = fork();
+	ft_set_sa(&signal, ft_sig_handler_2);
+	if (child == 0)
+	{
+		ft_exit_sig_heredoc(1, here->eof, gc, here->fd);
+		ft_set_sa(&signal, ft_sig_handler_heredoc);
+		gc_dell_one(gc, &here->file_name);
+		ft_heredoc(here->fd, here->eof, env);
+		close(here->fd);
+		here = here->next;
+		ft_clear_here(here, gc);
+		gc_dell(gc);
+		exit(0);
+	}
 	close(here->fd);
-	here->fd = open(here->file_name, O_RDONLY);
-	unlink(here->file_name);
-	free(here->file_name);
-	free(here->eof);
+	waitpid(child, NULL, 0);
+	ft_set_sa(&signal, ft_sig_handler);
 }

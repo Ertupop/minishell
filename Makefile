@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+         #
+#    By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 09:30:42 by jule-mer          #+#    #+#              #
-#    Updated: 2023/06/17 17:17:11 by jule-mer         ###   ########.fr        #
+#    Updated: 2023/09/27 08:45:52 by ertupop          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRCS	+= $(addprefix srcs/exec/SRC/, \
 			exec0.c \
 			exec.c \
 			exec2.c \
+			exec3.c \
 			exev_pars.c)
 
 SRCS	+=	$(addprefix srcs/garbage_collector/, \
@@ -79,8 +80,12 @@ SRCS	+=	$(addprefix srcs/utils/, \
 SRCS	+=	$(addprefix srcs/, \
 			heredoc.c \
 			heredoc2.c \
-			main.c \
-			signal.c)
+			finish.c \
+			main.c)
+SRCS	+= $(addprefix srcs/Signaux/, \
+			signal.c \
+			signal2.c \
+			ft_exit_sig.c)
 
 all:	$(NAME)
 

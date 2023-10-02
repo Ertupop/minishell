@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rstrub <rstrub@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:29:12 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/03/03 14:10:05 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/09/11 13:09:59 by rstrub           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	ft_expand_exit(t_easy **easy, t_list **collector)
 
 	tmp = (*easy)->next;
 	expand = ft_create_expand(ft_itoa_2(g_exit, collector), collector);
-	expand->next = tmp->next;
 	(*easy)->next = expand;
 	(*easy)->dell = 1;
 	gc_dell_one(*collector, tmp);

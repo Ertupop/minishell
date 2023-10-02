@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:06:13 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/05/18 21:05:14 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/09/06 18:38:15 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,21 +40,28 @@ char	**ft_use_tab(t_bridge *bridge, t_list **collector, int len)
 	char	**tab;
 
 	i = -1;
+	if (len == 0)
+		return (NULL);
 	tab = gc_alloc_char_r(collector, len);
 	while (++i < len)
 	{
-		while (bridge->tokken == OUTFILE || bridge->tokken == INFILE
-			|| bridge->tokken == APPEND || bridge->tokken == LIMITER)
+		while (bridge && (bridge->tokken == OUTFILE || bridge->tokken == INFILE
+				|| bridge->tokken == APPEND || bridge->tokken == LIMITER))
 			bridge = bridge->next;
-		tab[i] = ft_gc_strdup(bridge->str, collector);
-		bridge = bridge->next;
+		if (bridge)
+		{
+			tab[i] = ft_gc_strdup(bridge->str, collector);
+			bridge = bridge->next;
+		}
+		else
+			tab[i] = NULL;
 	}
 	return (tab);
 }
 
 int	ft_tab_size(t_bridge *bridge)
 {
-	int	i;
+	int		i;
 
 	i = 0;
 	while (bridge && bridge->tokken != PIPE)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   garbage_2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:01:19 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/02/19 17:24:30 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/09/06 23:20:59 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_use	*gc_alloc_use(t_list **collector)
 		exit (1);
 	}
 	new->next = NULL;
+	new->tab = NULL;
 	new->tokken = 0;
 	ft_lstadd_back(collector, col);
 	return (new);

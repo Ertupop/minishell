@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/06/17 17:17:34 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:20:55 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,14 @@ typedef struct s_easy
 	char			c;
 	struct s_easy	*next;
 }	t_easy;
+
+typedef struct s_exec
+{
+	int	tokken;
+	int	s;
+	int	i;
+	int	result;
+}	t_exec;
 
 typedef struct s_bridge
 {
@@ -116,18 +124,28 @@ extern int					g_exit;
 
 //main.c
 int			ft_history(char *str);
+void		ft_minishum(t_use **use);
 void		ft_init_parse(t_parse *parse);
 void		ft_prompt(t_list **collector, t_env **env);
 int			main(int ac, char **av, char **envp);
+
+//finish.c
+void		ft_finish(t_list **collector);
 
 /*----------------------------------------------------------------------------*/
 /*                                   Signaux                                  */
 /*----------------------------------------------------------------------------*/
 
+//signal.c
 void		ft_sig_handler(int signum);
+void		ft_sig_handler_2(int signum);
+void		ft_sig_handler_3(int signum);
 void		ft_set_sa(t_sig *signal, void (*f)(int));
 void		ft_sig_handler_heredoc(int signum);
-void		ft_set_sa_heredoc(t_sig *signale, void (*f)(int), void *end);
+void		ft_set_sa_heredoc(t_sig *signale, void (*f)(int));
+
+//ft_exit_sig.c
+void		ft_exit_sig_heredoc(int mode, char *end, t_list *gc, int fd);
 
 /*----------------------------------------------------------------------------*/
 /*                                   BULTINS                                  */
@@ -135,8 +153,6 @@ void		ft_set_sa_heredoc(t_sig *signale, void (*f)(int), void *end);
 
 //cd
 int			ft_cd(char **tab, t_env *env, t_list *gc);
-int			ft_home(t_env *env, t_list *gc);
-int			ft_home2(char *old, t_env *env, t_list *gc, char *tmpo);
 int			ft_cd_2(char *path, t_env *env, t_list *gc);
 void		ft_cd3(char *old, t_env *env, t_list *gc);
 
@@ -148,7 +164,7 @@ void		ft_echo2(char **tab, int i, int n);
 int			ft_print_env(t_env *env);
 
 //exit
-void		ft_exit(char **tab, t_list *gc);
+int			ft_exit(char **tab, t_list *gc);
 long long	ft_exit3(char **tab);
 void		ft_exit2(char **tab, t_list *gc);
 int			ft_check_number(char *number, t_list *gc);
@@ -191,8 +207,10 @@ int			ft_exec_one2(t_use **use, t_use **tmp, t_pipex **pip);
 int			ft_exec_bultins(t_use *use, t_env *env, t_list *gc, int tokken);
 int			ft_execve_one(t_env *env, t_pipex *pip, t_use *tmp, t_list *gc);
 void		ft_free_pip(t_pipex *pip);
+
 //exec_one2.c
 void		ft_execve_one2(t_pipex *pip, t_use *tmp, t_list *gc);
+
 //exec_pipe.c
 int			ft_exec_pipe(t_use *tmp, t_env *env, t_list *gc, t_pipex *pip);
 void		ft_exec_pipe2(t_pipex *pip);
@@ -214,17 +232,22 @@ void		ft_exec(t_use **use, t_env *env, t_list *gc);
 void		ft_exec_all2(t_pipex *pip, t_use **outfile);
 int			ft_wait_lstchild(t_pipex *pip);
 int			ft_close_pipe(int count, int *pipe, int nbr_command, t_pipex *pip);
+void		ft_close_fd_use(t_use *use);
 
 //exec2.c
 int			ft_create_pipe(int count, int *pipes);
 int			ft_init_fd(t_pipex *pip, t_use *use);
 void		ft_close_fd(int in, int out);
 int			ft_check2(char *s);
-void		ft_lunch_heredoc(t_use *here, t_env *env);
+void		ft_lunch_heredoc(t_use *here, t_env *env, t_list *gc);
 
-//exec_pars.c
+//exec3.c
+void		ft_close_here_fd(t_use *here, t_list *gc);
+void		ft_clear_here(t_use *here, t_list *gc);
+
+//exev_pars.c
 void		ft_path(t_env *env, t_pipex *pip);
-char		*ft_command(t_pipex *pip, char *command);
+char		*ft_command(t_pipex *pip, char *command, t_list *gc, t_env *env);
 int			ft_is_a_slash(char	*command);
 void		ft_path2(t_pipex *pip);
 char		*ft_join(char *first, char *second);
@@ -360,14 +383,16 @@ int			ft_strcmp(char *s1, char *s2);
 /*----------------------------------------------------------------------------*/
 /*                                   heredoc                                  */
 /*----------------------------------------------------------------------------*/
-//heredoc.c
-int			ft_acces_heredoc(t_use *use);
+
+//heredoc.c et 2
+int			ft_acces_heredoc(t_use *use, t_list **gc);
 int			ft_heredoc_while(int i, char *str, char *number, char *heredoc);
 void		ft_acces_free(char *str, char *number, char *heredoc);
 void		ft_heredoc(int fd, const char *end, t_env *env);
-void		ft_heredoc2(const char *end, char *str, t_list *gc);
+void		ft_heredoc2(const char *end, char *str, t_list *gc, int fd);
 void		ft_heredoc3(t_easy *work, t_list *gc, int fd);
 void		ft_start_easy_here(t_easy **easy, t_list **collector,
 				int *i, char *str);
 void		ft_make_string_easy(t_easy *work, t_list **gc, int fd);
+void		ft_work(t_easy *work, t_list *gc, int fd, t_env *env);
 #endif

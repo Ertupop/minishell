@@ -6,13 +6,13 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 09:41:53 by ertupop           #+#    #+#             */
-/*   Updated: 2023/01/18 09:38:59 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/09/27 14:15:44 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_exit(char **tab, t_list *gc)
+int	ft_exit(char **tab, t_list *gc)
 {
 	int		i;
 	int		result;
@@ -28,10 +28,11 @@ void	ft_exit(char **tab, t_list *gc)
 	{
 		if (tab[1][i] < '0' || tab[1][i] > '9')
 		{
+			ft_putstr_fd("exit\n", 1);
 			ft_putstr_fd("minishell: exit : ", 1);
 			ft_putstr_fd(tab[1], 1);
 			ft_putstr_fd(": numeric argument required\n", 1);
-			return ;
+			exit(2);
 		}
 	}
 	ft_exit2(tab, gc);

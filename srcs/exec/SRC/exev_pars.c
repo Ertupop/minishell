@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:22:15 by ertupop           #+#    #+#             */
-/*   Updated: 2023/01/06 09:26:08 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/09/29 19:36:59 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,26 +37,46 @@ void	ft_path(t_env *env, t_pipex *pip)
 	free(tmp);
 }
 
-char	*ft_command(t_pipex *pip, char *command)
+char	*ft_command(t_pipex *pip, char *command, t_list *gc, t_env *env)
 {
 	int		i;
 	char	*tmp;
+	int		fd;
 
 	i = -1;
+	fd = 0;
 	if (command == NULL)
 		return (NULL);
 	if (ft_is_a_slash(command) == 1)
 	{
 		if (access(command, 0) == 0)
-			return (command);
+		{
+			fd = open(command, __O_DIRECTORY);
+			if (fd != -1)
+			{
+				close(fd);
+				ft_printf("minishell : %s: Is a Directory\n", command);
+				gc_dell(gc);
+				exit(126);
+			}
+			else
+				return (command);
+		}
 		else
 			return (NULL);
 	}
+	ft_path(env, pip);
+	pip->env = ft_make_env_tab(env);
 	while (pip->path[++i])
 	{
 		tmp = ft_join(pip->path[i], command);
 		if (access(tmp, 0) == 0)
-			return (tmp);
+		{
+			fd = open(command, __O_DIRECTORY);
+			if (fd == -1)
+				return (tmp);
+			close(fd);
+		}
 		free(tmp);
 		tmp = NULL;
 	}

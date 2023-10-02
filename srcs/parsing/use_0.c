@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   use_0.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 16:58:10 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/06/12 16:58:37 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/09/06 23:25:30 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	ft_fill_use(t_list **collector, t_use **use, t_bridge **bridge, int len)
 		len = 2;
 	else
 		len = ft_tab_size(*bridge);
-	new->tab = ft_use_tab(*bridge, collector, len);
+	if (len > 0)
+		new->tab = ft_use_tab(*bridge, collector, len);
 	ft_lstadd_back_use(use, new);
 	if (limiter > 0)
 		ft_add_heredoc(use, collector, limiter, *bridge);

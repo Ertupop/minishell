@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 08:11:43 by ertupop           #+#    #+#             */
-/*   Updated: 2023/06/12 17:20:32 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/09/27 08:45:19 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,18 +19,18 @@ void	ft_exec(t_use **use, t_env *env, t_list *gc)
 	int		result;
 
 	here = *use;
+	pipex.outfile = 1;
+	pipex.nbr_command = ft_init_fd(&pipex, *use);
 	while (here)
 	{
 		if (here->tokken == LIMITER)
-		{
-			ft_lunch_heredoc(here, env);
-		}
+			ft_lunch_heredoc(here, env, gc);
 		here = here->next;
 	}
-	pipex.outfile = 1;
-	pipex.nbr_command = ft_init_fd(&pipex, *use);
+	here = *use;
+	ft_close_here_fd(here, gc);
 	if (pipex.nbr_command == 0)
-		return ;
+		return (ft_close_fd_use(*use));
 	if (pipex.nbr_command == 1)
 		result = ft_exec_one(*use, env, gc, &pipex);
 	else
@@ -60,6 +60,7 @@ int	ft_wait_lstchild(t_pipex *pip)
 	int		lastchilds;
 	int		tmprtr;
 	int		pidw;
+	t_sig	signal;
 
 	pidw = waitpid(-1, &tmprtr, 0);
 	while (pip->count_command != 0)
@@ -67,7 +68,7 @@ int	ft_wait_lstchild(t_pipex *pip)
 		if (pidw == pip->childs)
 			lastchilds = tmprtr;
 		pidw = waitpid(-1, &tmprtr, 0);
-		pip->count_command --;
+		pip->count_command--;
 	}
 	if (WIFSIGNALED(lastchilds))
 	{
@@ -77,7 +78,8 @@ int	ft_wait_lstchild(t_pipex *pip)
 		else if (WTERMSIG(lastchilds) == SIGSEGV)
 			write(STDERR_FILENO, "Segmentation fault (core dumped)\n", 33);
 	}
-	return (lastchilds);
+	ft_set_sa(&signal, ft_sig_handler);
+	return (WEXITSTATUS(lastchilds));
 }
 
 int	ft_close_pipe(int count, int *pipe, int nbr_command, t_pipex *pip)
@@ -106,4 +108,15 @@ int	ft_close_pipe(int count, int *pipe, int nbr_command, t_pipex *pip)
 		close(pipe[3]);
 	}
 	return (0);
+}
+
+void	ft_close_fd_use(t_use *use)
+{
+	while (use)
+	{
+		if (use->tokken == OUTFILE || use->tokken == INFILE
+			|| use->tokken == APPEND || use->tokken == LIMITER)
+			close(use->fd);
+		use = use->next;
+	}
 }

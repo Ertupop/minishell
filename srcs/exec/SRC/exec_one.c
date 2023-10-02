@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_one.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 07:37:59 by ertupop           #+#    #+#             */
-/*   Updated: 2023/06/17 17:17:24 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/09/29 19:32:41 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,29 @@
 int	ft_exec_one(t_use *use, t_env *env, t_list *gc, t_pipex *pip)
 {
 	t_use	*tmp;
-	int		tokken;
-	int		s;
-	int		i;
-	int		result;
+	t_sig	signal;
+	t_exec	exec;
 
 	tmp = NULL;
-	tokken = ft_exec_one2(&use, &tmp, &pip);
-	s = dup(1);
-	i = dup(0);
+	ft_set_sa(&signal, ft_sig_handler_3);
+	exec.tokken = ft_exec_one2(&use, &tmp, &pip);
+	exec.s = dup(1);
+	exec.i = dup(0);
 	dup2(pip->infile, 0);
 	dup2(pip->outfile, 1);
-	if (tokken == NO)
-		result = ft_execve_one(env, pip, tmp, gc);
-	if (ft_check2(use->tab[0]) == EXIT)
-		ft_close_one(s, i);
-	if (tokken != NO)
-		result = ft_exec_bultins(tmp, env, gc, tokken);
-	dup2(s, 1);
-	dup2(i, 0);
-	close(s);
-	close(i);
+	if (exec.tokken == EXIT)
+		ft_close_one(exec.s, exec.i);
+	if (exec.tokken == NO)
+		exec.result = ft_execve_one(env, pip, tmp, gc);
+	else if (exec.tokken != NO)
+		exec.result = ft_exec_bultins(tmp, env, gc, exec.tokken);
+	dup2(exec.s, 1);
+	dup2(exec.i, 0);
+	close(exec.s);
+	close(exec.i);
 	(void) gc;
-	return (result);
+	ft_set_sa(&signal, ft_sig_handler);
+	return (exec.result);
 }
 
 int	ft_exec_one2(t_use **use, t_use **tmp, t_pipex **pip)
@@ -57,7 +57,7 @@ int	ft_exec_one2(t_use **use, t_use **tmp, t_pipex **pip)
 	}
 	*tmp = *use;
 	tokken = ft_check2((*tmp)->tab[0]);
-	while (*tmp && (*tmp)->tokken != COMMAND)
+	while (*tmp != NULL && (*tmp)->tokken != COMMAND)
 		*tmp = (*tmp)->next;
 	return (tokken);
 }
@@ -71,7 +71,7 @@ int	ft_exec_bultins(t_use *use, t_env *env, t_list *gc, int tokken)
 	else if (tokken == ENV)
 		return (ft_print_env(env));
 	else if (tokken == EXIT)
-		ft_exit(use->tab, gc);
+		return (ft_exit(use->tab, gc));
 	else if (tokken == EXPORT)
 		return (ft_export(use->tab, env, gc));
 	else if (tokken == PWD)
@@ -90,9 +90,7 @@ int	ft_execve_one(t_env *env, t_pipex *pip, t_use *tmp, t_list *gc)
 	if (pip->childs == 0)
 	{
 		ft_set_sa(&signal, SIG_DFL);
-		ft_path(env, pip);
-		pip->env = ft_make_env_tab(env);
-		pip->command = ft_command(pip, tmp->tab[0]);
+		pip->command = ft_command(pip, tmp->tab[0], gc, env);
 		ft_close_fd(pip->infile, pip->outfile);
 		ft_execve_one2(pip, tmp, gc);
 	}
@@ -105,7 +103,7 @@ int	ft_execve_one(t_env *env, t_pipex *pip, t_use *tmp, t_list *gc)
 		else if (WTERMSIG(result) == SIGSEGV)
 			write(STDERR_FILENO, "Segmentation fault (core dumped)\n", 33);
 	}
-	return (result);
+	return (WEXITSTATUS(result));
 }
 
 void	ft_free_pip(t_pipex *pip)
@@ -121,6 +119,7 @@ void	ft_free_pip(t_pipex *pip)
 			free(pip->path[i]);
 			i++;
 		}
+		free(pip->path[i]);
 		free(pip->path);
 	}
 }

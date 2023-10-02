@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 08:13:24 by ertupop           #+#    #+#             */
-/*   Updated: 2023/06/12 18:42:43 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/09/27 09:22:43 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	ft_acces_heredoc(t_use *use)
+int	ft_acces_heredoc(t_use *use, t_list **gc)
 {
 	int		fd;
 	char	*str;
@@ -29,12 +29,13 @@ int	ft_acces_heredoc(t_use *use)
 		return (-1);
 	while (fd == -1 && ++i < 101)
 		fd = ft_heredoc_while(i, str, number, heredoc);
-	use->file_name = ft_strjoin(str, ft_itoa(i));
-	if (fd > -1 || i == 99)
-	{
-		free(str);
-		str = NULL;
-	}
+	number = ft_itoa(i);
+	use->file_name = gc_join_str(gc, str, number);
+	free(number);
+	number = NULL;
+	free(str);
+	str = NULL;
+	ft_acces_free(str, number, heredoc);
 	return (fd);
 }
 
@@ -42,16 +43,19 @@ int	ft_heredoc_while(int i, char *str, char *number, char *heredoc)
 {
 	int	fd;
 
-	number = ft_strdup(ft_itoa(i));
+	number = ft_itoa(i);
 	if (number == NULL)
 		return (-1);
 	heredoc = ft_strjoin(str, number);
-	if (heredoc == NULL)
-		return (-1);
 	free(number);
 	number = NULL;
-	if (access(heredoc, 0) == 0)
+	if (heredoc == NULL)
 		return (-1);
+	if (access(heredoc, 0) == 0)
+	{
+		free(heredoc);
+		return (-1);
+	}
 	fd = open(heredoc, O_CREAT | O_RDWR | O_TRUNC, 00644);
 	free(heredoc);
 	heredoc = NULL;
@@ -76,6 +80,8 @@ void	ft_heredoc(int fd, const char *end, t_env *env)
 	int		i;
 
 	gc = NULL;
+	gc_alloc_char(&gc, 1);
+	ft_exit_sig_heredoc(2, NULL, gc, 0);
 	while (1)
 	{
 		i = 0;
@@ -83,17 +89,14 @@ void	ft_heredoc(int fd, const char *end, t_env *env)
 		str = readline(">");
 		if (str == NULL || strcmp(str, end) == 0)
 		{
-			ft_heredoc2(end, str, gc);
+			ft_heredoc2(end, str, gc, fd);
 			return ;
 		}
 		while (str[i])
 			ft_start_easy_here(&work, &gc, &i, str);
 		free(str);
 		str = NULL;
-		ft_good_quote(&work);
-		ft_expand(&work, &gc, &env);
-		ft_skip_space(&work, &gc);
-		ft_heredoc3(work, gc, fd);
+		ft_work(work, gc, fd, env);
 	}
 }
 
