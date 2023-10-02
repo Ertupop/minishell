@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 12:22:15 by ertupop           #+#    #+#             */
-/*   Updated: 2023/09/29 19:36:59 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/10/02 21:43:25 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,20 @@ char	*ft_command(t_pipex *pip, char *command, t_list *gc, t_env *env)
 	}
 	if (tmp != NULL)
 		free(tmp);
+	i = 0;
+	while (pip->env[i])
+	{
+		free(pip->env[i]);
+		i++;
+	}
+	free(pip->env);
+	i = 0;
+	while (pip->path[i])
+	{
+		free(pip->path[i]);
+		i++;
+	}
+	free(pip->path);
 	return (NULL);
 }
 
