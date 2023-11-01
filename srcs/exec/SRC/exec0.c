@@ -6,13 +6,13 @@
 /*   By: rstrub <rstrub@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/12 17:20:12 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/10/27 10:03:07 by rstrub           ###   ########.fr       */
+/*   Updated: 2023/10/31 12:05:14 by rstrub           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int	ft_exec_all(t_use *use, t_env *env, t_list *gc, t_pipex *pip)
+int	ft_exec_all(t_use *use, t_env **env, t_list *gc, t_pipex *pip)
 {
 	t_use	*tmp;
 	t_use	*outfile;
@@ -22,6 +22,7 @@ int	ft_exec_all(t_use *use, t_env *env, t_list *gc, t_pipex *pip)
 	outfile = use;
 	pip->count_command = 0;
 	pip->prev_pipes = -1;
+	ft_set_sa(&signal, ft_sig_handler_3);
 	while (pip->count_command < pip->nbr_command)
 	{
 		ft_exec_all2(pip, &outfile);
@@ -31,10 +32,7 @@ int	ft_exec_all(t_use *use, t_env *env, t_list *gc, t_pipex *pip)
 			return (0);
 		pip->childs = fork();
 		if (pip->childs == 0)
-		{
-			ft_set_sa_exec(&signal, SIG_DFL);
 			ft_exec_pipe(tmp, env, gc, pip);
-		}
 		ft_exec_all0(&outfile, &pip);
 		ft_close_fd(pip->infile, pip->outfile);
 		tmp = tmp->next;

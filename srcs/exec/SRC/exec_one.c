@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_one.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rstrub <rstrub@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 07:37:59 by ertupop           #+#    #+#             */
-/*   Updated: 2023/10/27 10:04:21 by rstrub           ###   ########.fr       */
+/*   Updated: 2023/11/01 16:02:36 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int	ft_exec_one(t_use *use, t_env *env, t_list *gc, t_pipex *pip)
+int	ft_exec_one(t_use *use, t_env **env, t_list *gc, t_pipex *pip)
 {
 	t_use	*tmp;
 	t_sig	signal;
@@ -21,20 +21,20 @@ int	ft_exec_one(t_use *use, t_env *env, t_list *gc, t_pipex *pip)
 	tmp = NULL;
 	ft_set_sa(&signal, ft_sig_handler_3);
 	exec.tokken = ft_exec_one2(&use, &tmp, &pip);
-	exec.s = dup(1);
-	exec.i = dup(0);
+	pip->s = dup(1);
+	pip->i = dup(0);
 	dup2(pip->infile, 0);
 	dup2(pip->outfile, 1);
 	if (exec.tokken == EXIT)
-		ft_close_one(exec.s, exec.i);
+		ft_close_one(pip->s, pip->i);
 	if (exec.tokken == NO)
 		exec.result = ft_execve_one(env, pip, tmp, gc);
 	else if (exec.tokken != NO)
 		exec.result = ft_exec_bultins(tmp, env, gc, exec.tokken);
-	dup2(exec.s, 1);
-	dup2(exec.i, 0);
-	close(exec.s);
-	close(exec.i);
+	dup2(pip->s, 1);
+	dup2(pip->i, 0);
+	close(pip->s);
+	close(pip->i);
 	(void) gc;
 	ft_set_sa(&signal, ft_sig_handler);
 	return (exec.result);
@@ -62,14 +62,14 @@ int	ft_exec_one2(t_use **use, t_use **tmp, t_pipex **pip)
 	return (tokken);
 }
 
-int	ft_exec_bultins(t_use *use, t_env *env, t_list *gc, int tokken)
+int	ft_exec_bultins(t_use *use, t_env **env, t_list *gc, int tokken)
 {
 	if (tokken == CD)
-		return (ft_cd(use->tab, env, gc));
+		return (ft_cd(use->tab, *env, gc));
 	else if (tokken == ECHO)
 		return (ft_echo(use->tab));
 	else if (tokken == ENV)
-		return (ft_print_env(env));
+		return (ft_print_env(*env));
 	else if (tokken == EXIT)
 		return (ft_exit(use->tab, gc));
 	else if (tokken == EXPORT)
@@ -81,7 +81,7 @@ int	ft_exec_bultins(t_use *use, t_env *env, t_list *gc, int tokken)
 	return (NO);
 }
 
-int	ft_execve_one(t_env *env, t_pipex *pip, t_use *tmp, t_list *gc)
+int	ft_execve_one(t_env **env, t_pipex *pip, t_use *tmp, t_list *gc)
 {
 	int		result;
 	t_sig	signal;
@@ -102,8 +102,9 @@ int	ft_execve_one(t_env *env, t_pipex *pip, t_use *tmp, t_list *gc)
 			write(STDERR_FILENO, "Quit (core dumped)\n", 19);
 		else if (WTERMSIG(result) == SIGSEGV)
 			write(STDERR_FILENO, "Segmentation fault (core dumped)\n", 33);
+		return (result);
 	}
-	return (WEXITSTATUS(result));
+	return (WIFEXITED(result));
 }
 
 void	ft_free_pip(t_pipex *pip)

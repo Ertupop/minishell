@@ -1,30 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   exit2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rstrub <rstrub@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/08 07:06:11 by ertupop           #+#    #+#             */
-/*   Updated: 2023/10/31 12:31:26 by rstrub           ###   ########.fr       */
+/*   Created: 2023/10/30 07:28:10 by rstrub            #+#    #+#             */
+/*   Updated: 2023/10/30 07:31:24 by rstrub           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_print_env(t_env *env)
+void	ft_exit5(char **tab)
 {
-	t_env	*tmp;
-
-	tmp = env;
-	while (tmp)
-	{
-		if (tmp->str)
-		{
-			ft_putstr_fd(tmp->str, 1);
-			write(1, "\n", 1);
-		}
-		tmp = tmp->next;
-	}
-	return (0);
+	ft_putstr_fd("exit\nminishell: exit : ", 1);
+	ft_putstr_fd(tab[1], 1);
+	ft_putstr_fd(": numeric argument required\n", 1);
 }

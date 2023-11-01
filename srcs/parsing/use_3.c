@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   use_3.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:09:16 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/09/22 15:19:16 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/10/30 16:43:22 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ft_add_heredoc(t_use **use, t_list **collector, int limiter,
 {
 	t_use	*new;
 
-	if (limiter > 0)
+	while (limiter > 0)
 	{
 		new = gc_alloc_use(collector);
 		new->tokken = LIMITER;
@@ -31,10 +31,13 @@ void	ft_add_heredoc(t_use **use, t_list **collector, int limiter,
 			{
 				bridge = bridge->next;
 				new->eof = bridge->str;
+				bridge = bridge->next;
+				break ;
 			}
 			bridge = bridge->next;
 		}
 		ft_lstadd_back_use(use, new);
+		limiter--;
 	}
 }
 

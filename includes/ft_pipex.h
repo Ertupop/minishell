@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/18 08:43:37 by ertupop           #+#    #+#             */
-/*   Updated: 2023/03/16 09:07:53 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/11/01 15:59:07 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ typedef struct s_pipex
 	pid_t	child2;
 	int		infile;
 	int		outfile;
+	int		s;
+	int		i;
 	int		pipe[2];
 }	t_pipex;
 

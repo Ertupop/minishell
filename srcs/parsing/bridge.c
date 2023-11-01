@@ -6,30 +6,11 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/29 11:51:29 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/10/27 14:28:22 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/10/31 14:52:06 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-void	ft_help_line(int *i, char *c, char d, int ca)
-{
-	if (ca == 1)
-	{
-		*i = 1;
-		*c = d;
-	}
-	else if (ca == 0)
-	{
-		*i = 0;
-		*c = ' ';
-	}
-	else
-	{
-		*i = 2;
-		*c = ' ';
-	}
-}
 
 int	ft_size_of_str(t_easy **easy, int i, int len)
 {
@@ -42,22 +23,30 @@ int	ft_size_of_str(t_easy **easy, int i, int len)
 	len = 0;
 	c = ' ';
 	tmp = *easy;
+	if (!tmp)
+		return (0);
 	while (tmp && ((tmp->c != ' ' && i == 0)
 			|| (tmp->c != ' ' && i == 1)) && ++len)
 	{
-		if ((tmp->c == '\'' || tmp->c == '\"') && i == 0)
-		{
-			ft_help_line(&i, &c, tmp->c, 1);
-			min++;
-		}
-		else if (tmp->c == c && i == 1)
-		{
-			ft_help_line(&i, &c, tmp->c, 0);
-			min++;
-		}
+		ft_zos(tmp, &i, &c, &min);
 		tmp = tmp->next;
 	}
 	return (ft_the_result(len, min));
+}
+
+int	ft_please(t_easy **easy, int i, int j)
+{
+	if (*easy && ft_size_of_str(easy, i, j) == 1
+		&& (*easy)->c == '\"')
+	{
+		*easy = (*easy)->next;
+		if ((*easy)->next)
+			*easy = (*easy)->next;
+		if ((*easy)->next)
+			*easy = (*easy)->next;
+		return (1);
+	}
+	return (0);
 }
 
 char	*ft_the_str(t_easy **easy, t_list **collector, int i, int j)
@@ -68,6 +57,8 @@ char	*ft_the_str(t_easy **easy, t_list **collector, int i, int j)
 	i = 0;
 	j = 0;
 	c = ' ';
+	if (ft_please(easy, i, j))
+		return (NULL);
 	str = gc_alloc_char(collector, ft_size_of_str(easy, i, j));
 	while (*easy)
 	{
@@ -115,7 +106,7 @@ int	ft_number_space(t_easy *easy)
 	return (len + 1);
 }
 
-void	ft_create_bridge(t_easy *easy, t_use **use, t_list **collector)
+int	ft_create_bridge(t_easy *easy, t_use **use, t_list **collector)
 {
 	t_bridge	*bridge;
 	t_bridge	*new;
@@ -123,18 +114,18 @@ void	ft_create_bridge(t_easy *easy, t_use **use, t_list **collector)
 	int			j;
 
 	bridge = NULL;
+	new = NULL;
 	j = 0;
 	len = ft_number_space(easy);
-	while (len)
+	while (len--)
 	{
 		new = gc_create_bridge(collector);
 		new->str = ft_the_str(&easy, collector, len, j);
 		if (easy)
-		easy = easy->next;
-		len--;
-		ft_lstadd_back_bridge(&bridge, new);
+			easy = easy->next;
+		if (new && new->str[0])
+			ft_lstadd_back_bridge(&bridge, new);
 	}
 	ft_tokkenisation(&bridge);
-	ft_use(use, bridge, collector);
-	(void)use;
+	return (ft_use(use, bridge, collector));
 }

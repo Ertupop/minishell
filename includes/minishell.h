@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:43:27 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/10/27 14:29:10 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/11/01 16:00:52 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,6 @@ typedef struct s_easy
 typedef struct s_exec
 {
 	int	tokken;
-	int	s;
-	int	i;
 	int	result;
 }	t_exec;
 
@@ -110,6 +108,8 @@ typedef struct s_pipex
 	int		prev_pipes;
 	int		infile;
 	int		outfile;
+	int		i;
+	int		s;
 	int		pipe[2];
 	int		exit;
 }	t_pipex;
@@ -165,17 +165,19 @@ void		ft_echo2(char **tab, int i, int n);
 int			ft_print_env(t_env *env);
 
 //exit
+int			ft_exit_4(char **tab, t_list *gc);
 int			ft_exit(char **tab, t_list *gc);
 long long	ft_exit3(char **tab);
 void		ft_exit2(char **tab, t_list *gc);
 int			ft_check_number(char *number, t_list *gc);
-
+//exit2
+void		ft_exit5(char **tab);
 //export
-int			ft_export(char **tab, t_env *env, t_list *garbage);
-void		ft_export2(char *tab, t_env *tmp, t_list *garbage, t_env *env);
+int			ft_export(char **tab, t_env **env, t_list *garbage);
+void		ft_export2(char *tab, t_env *tmp, t_list *garbage, t_env **env);
 int			ft_find_plus(char *str);
 int			ft_find_equal(char *str);
-t_env		*ft_add_export(char *str, t_env *env, t_list *garbage);
+t_env		*ft_add_export(char *str, t_env **env, t_list *garbage);
 
 //export2
 int			ft_size_tab(char **tab);
@@ -186,9 +188,9 @@ void		ft_join_export(char *str, t_env *tmp, t_list *garbage);
 int			ft_pwd(void);
 
 //unset
-int			ft_unset(t_list *collect, t_env *env, char **tab);
+int			ft_unset(t_list *collect, t_env **env, char **tab);
 int			ft_unset_cmp(char *s1, char *s2);
-void		ft_unset_remove(t_list *collect, t_env	*tmp, t_env *env);
+void		ft_unset_remove(t_list *collect, t_env	*tmp, t_env **env);
 
 /*----------------------------------------------------------------------------*/
 /*                                   ERRORS                                   */
@@ -203,33 +205,33 @@ int			ft_error(int i, char c);
 /*----------------------------------------------------------------------------*/
 
 //exec_one.c
-int			ft_exec_one(t_use *use, t_env *env, t_list *gc, t_pipex *pip);
+int			ft_exec_one(t_use *use, t_env **env, t_list *gc, t_pipex *pip);
 int			ft_exec_one2(t_use **use, t_use **tmp, t_pipex **pip);
-int			ft_exec_bultins(t_use *use, t_env *env, t_list *gc, int tokken);
-int			ft_execve_one(t_env *env, t_pipex *pip, t_use *tmp, t_list *gc);
+int			ft_exec_bultins(t_use *use, t_env **env, t_list *gc, int tokken);
+int			ft_execve_one(t_env **env, t_pipex *pip, t_use *tmp, t_list *gc);
 void		ft_free_pip(t_pipex *pip);
 
 //exec_one2.c
-void		ft_execve_one2(t_pipex *pip, t_use *tmp, t_list *gc, t_env *env);
+void		ft_execve_one2(t_pipex *pip, t_use *tmp, t_list *gc, t_env **env);
 
 //exec_pipe.c
-int			ft_exec_pipe(t_use *tmp, t_env *env, t_list *gc, t_pipex *pip);
+int			ft_exec_pipe(t_use *tmp, t_env **env, t_list *gc, t_pipex *pip);
 void		ft_exec_pipe2(t_pipex *pip);
 void		ft_exec_pipe4(t_pipex *pip);
 void		ft_exec_pipe4bis(t_pipex *pip);
 void		ft_exec_pipe3(t_pipex *pip);
 
 //exec_pipe2.c
-void		ft_exec_pipe5(t_pipex *pip, t_env *env, t_use *tmp, t_list *gc);
-int			ft_exec_pipe6(t_use *tmp, t_env *env, t_list *gc, int tokken);
+void		ft_exec_pipe5(t_pipex *pip, t_env **env, t_use *tmp, t_list *gc);
+int			ft_exec_pipe6(t_use *tmp, t_env **env, t_list *gc, int tokken);
 void		ft_close_one(int s, int i);
 
 //exec0.c
-int			ft_exec_all(t_use *use, t_env *env, t_list *gc, t_pipex *pip);
+int			ft_exec_all(t_use *use, t_env **env, t_list *gc, t_pipex *pip);
 void		ft_exec_all0(t_use **outfile, t_pipex **pip);
 
 //exec.c
-void		ft_exec(t_use **use, t_env *env, t_list *gc);
+void		ft_exec(t_use **use, t_env **env, t_list *gc);
 void		ft_exec_all2(t_pipex *pip, t_use **outfile);
 int			ft_wait_lstchild(t_pipex *pip);
 int			ft_close_pipe(int count, int *pipe, int nbr_command, t_pipex *pip);
@@ -247,14 +249,14 @@ void		ft_close_here_fd(t_use *here, t_list *gc);
 void		ft_clear_here(t_use *here, t_list *gc);
 
 //exev_pars.c
-void		ft_path(t_env *env, t_pipex *pip);
-char		*ft_command(t_pipex *pip, char *command, t_list *gc, t_env *env);
+void		ft_path(t_env **env, t_pipex *pip);
+char		*ft_command(t_pipex *pip, char *command, t_list *gc, t_env **env);
 int			ft_is_a_slash(char	*command);
 void		ft_path2(t_pipex *pip);
 char		*ft_join(char *first, char *second);
 
 //exec_ft_command.c
-char		*ft_command2(t_pipex *pip, char *command, t_env *env, int i);
+char		*ft_command2(t_pipex *pip, char *command, t_env **env, int i);
 char		*ft_command2bis(t_pipex *pip);
 void		ft_command3(t_pipex *pip);
 char		*ft_command4(int fd, t_list *gc, char *command);
@@ -284,7 +286,7 @@ void		ft_help_line(int *i, char *c, char d, int ca);
 int			ft_size_of_str(t_easy **easy, int i, int len);
 char		*ft_the_str(t_easy **easy, t_list **collector, int i, int j);
 int			ft_number_space(t_easy *easy);
-void		ft_create_bridge(t_easy *easy, t_use **use, t_list **collector);
+int			ft_create_bridge(t_easy *easy, t_use **use, t_list **collector);
 
 //check_env.c
 char		*ft_split_env(char *str);
@@ -318,6 +320,7 @@ void		ft_good_place(t_easy **first, t_list **collector);
 void		ft_good_help(t_easy *easy, int *s, int *d);
 void		ft_good_help_2(t_easy **new, t_easy **easy, t_list **collector);
 void		ft_good_help_3(t_easy **new, t_easy **easy, t_list **collector);
+void		ft_dell_tab(t_parse *parse);
 
 //quote_gestion.c
 void		ft_good_double(t_easy **tmp, int *i);
@@ -344,11 +347,12 @@ char		**ft_use_tab(t_bridge *bridge, t_list **collector, int len);
 int			ft_tab_size(t_bridge *bridge);
 int			ft_nbr_file(t_bridge *bridge, int *infile, int *outfile);
 int			ft_nbr_slots(t_bridge *bridge);
-void		ft_good_infile(t_bridge *bridge, int *infile, int *limiter);
-void		ft_good_outfile(t_bridge *bridge, int *outfile, int *append);;
-void		ft_fill_use(t_list **collector, t_use **use,
+int			ft_prompt_infile_error(t_bridge *bridge);
+int			ft_good_infile(t_bridge *bridge, int *infile, int *limiter);
+int			ft_good_outfile(t_bridge *bridge, int *outfile, int *append);;
+int			ft_fill_use(t_list **collector, t_use **use,
 				t_bridge **bridge, int len);
-void		ft_use(t_use **use, t_bridge *bridge, t_list **collector);
+int			ft_use(t_use **use, t_bridge *bridge, t_list **collector);
 void		ft_init_for_use(int *i, int *o, int *a, int *l);
 void		ft_fill_use_2(t_bridge **bridge, t_use **new);
 
@@ -380,6 +384,8 @@ void		ft_lstadd_back_easy(t_easy **alst, t_easy *new);
 
 //utils_bultins.c
 char		*ft_find_env(t_env *env, char *find);
+void		ft_for_dollar(char **str, t_easy *start);
+void		ft_first(t_easy **easy, t_list **collector, t_env **env);
 
 //utils.c
 char		*ft_gc_strdup(const char *s1, t_list **collector);
@@ -387,6 +393,10 @@ void		ft_free_envp(char **envp);
 char		*ft_strcat(char *s1, char *s2, t_list **collector);
 int			ft_strcmp(char *s1, char *s2);
 int			ft_the_result(int len, int min);
+int			ft_prompt_check_error(void);
+void		ft_p2(t_easy **easy, t_list **collector, t_parse *parse);
+void		ft_p(t_easy **easy, t_list **collector, t_env **env);
+void		ft_zos(t_easy *tmp, int *i, char *c, int *min);
 
 /*----------------------------------------------------------------------------*/
 /*                                   heredoc                                  */

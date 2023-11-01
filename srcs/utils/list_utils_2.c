@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:12:14 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/02/08 14:12:54 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:47:37 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,24 @@ t_use	*ft_lstlast_use(t_use *lst)
 		lst = lst->next;
 	}
 	return (tmp);
+}
+
+void	ft_dell_easy(t_easy *easy, t_list **collector)
+{
+	t_easy	*dell;
+
+	while (easy)
+	{
+		dell = easy;
+		easy = easy->next;
+		gc_dell_one(*collector, &dell);
+	}
+}
+
+void	ft_init_for_use(int *i, int *o, int *a, int *l)
+{
+	*i = 0;
+	*o = 0;
+	*a = 0;
+	*l = 0;
 }

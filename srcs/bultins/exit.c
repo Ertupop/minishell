@@ -3,19 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rstrub <rstrub@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 09:41:53 by ertupop           #+#    #+#             */
-/*   Updated: 2023/10/27 06:17:30 by rstrub           ###   ########.fr       */
+/*   Updated: 2023/11/01 12:07:49 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
+int	ft_exit_4(char **tab, t_list *gc)
+{
+	int		result;
+
+	ft_exit2(tab, gc);
+	if (ft_size_tab(tab) > 2)
+	{
+		ft_putstr_fd("exit\nminishell: exit : too many arguments\n", 1);
+		return (1);
+	}
+	result = ft_exit3(tab);
+	gc_dell(gc);
+	ft_putstr_fd("exit\n", 1);
+	exit(result);
+}
+
 int	ft_exit(char **tab, t_list *gc)
 {
 	int		i;
-	int		result;
 
 	i = -1;
 	if (tab == NULL || ft_size_tab(tab) == 1)
@@ -30,17 +45,11 @@ int	ft_exit(char **tab, t_list *gc)
 	{
 		if (tab[1][i] < '0' || tab[1][i] > '9')
 		{
-			ft_putstr_fd("exit\n", 1);
-			ft_putstr_fd("minishell: exit : ", 1);
-			ft_putstr_fd(tab[1], 1);
-			ft_putstr_fd(": numeric argument required\n", 1);
+			ft_exit5(tab);
 			exit(2);
 		}
 	}
-	ft_exit2(tab, gc);
-	result = ft_exit3(tab);
-	gc_dell(gc);
-	exit(result);
+	return (ft_exit_4(tab, gc));
 }
 
 long long	ft_exit3(char **tab)
@@ -60,18 +69,11 @@ void	ft_exit2(char **tab, t_list *gc)
 {
 	if (ft_check_number(tab[1], gc) == 1)
 	{
-		ft_putstr_fd("minishell: exit : ", 1);
 		ft_putstr_fd(tab[1], 1);
 		ft_putstr_fd(": numeric argument required\n", 1);
 		gc_dell(gc);
 		ft_putstr_fd("exit\n", 1);
 		exit(g_exit);
-	}
-	if (ft_size_tab(tab) > 2)
-	{
-		ft_putstr_fd("minishell: exit : too many arguments\n", 1);
-		gc_dell(gc);
-		exit(1);
 	}
 }
 

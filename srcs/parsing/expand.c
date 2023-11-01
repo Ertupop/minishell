@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/25 16:29:12 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/10/26 20:18:29 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:27:34 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_apply_expand(char *str, t_easy **easy, t_list **collector)
 	tmp = (*easy)->next;
 	expand = ft_create_expand(str, collector);
 	tmp_2 = expand;
-	while (tmp && tmp->d_quote == 0 && tmp->c != '$' && tmp->c != ' ')
+	while (tmp && tmp->d_quote == 0 && ft_isalnum(tmp->c))
 	{
 		dell = tmp;
 		tmp = tmp->next;
@@ -84,22 +84,20 @@ void	ft_check_expand(t_easy **easy, t_list **collector, t_env **env)
 	tmp = (*easy)->next;
 	start = tmp;
 	len = 0;
-	while (tmp && tmp->d_quote == 0 && tmp->c != '$' && tmp->c != ' '
-		&& ++len >= 0)
+	while (tmp && tmp->d_quote == 0 && ft_isalnum(tmp->c) && ++len >= 0)
 		tmp = tmp->next;
 	str = gc_alloc_char(collector, len);
 	len = 0;
-	while (start && start->d_quote == 0 && start->c != '$' && start->c != ' ')
-	{
-		str[len++] = start->c;
-		start = start->next;
-	}
+	ft_for_dollar(&str, start);
 	if (ft_find_env(*env, ft_strcat(str, "=", collector)))
 		ft_apply_expand(ft_split_env(
 				ft_find_env(*env, ft_strcat(
 						str, "=", collector))), easy, collector);
 	else
-		ft_apply_expand(" ", easy, collector);
+	{
+		(*easy)->next = tmp;
+		(*easy)->dell = 1;
+	}
 }
 
 void	ft_expand(t_easy **easy, t_list **collector, t_env **env)
@@ -119,13 +117,14 @@ void	ft_expand(t_easy **easy, t_list **collector, t_env **env)
 			j *= -1;
 		if (tmp->c == '$' && tmp->next && tmp->next->c == '?')
 			ft_expand_exit(&tmp, collector);
-		else if (tmp->c == '$' && j == 1 && tmp->next
-			&& tmp->next->c != ' ' && tmp->next->c != '\"')
+		else if ((tmp->c == '$' && j == 1 && tmp->next
+				&& tmp->next->c != ' ' && tmp->next->c != '\"')
+			|| (tmp->c == '$' && i == 1 && tmp->next && tmp->next->c != ' '
+				&& tmp->next->c != '\"' && tmp->next->c != '\''))
 			ft_check_expand(&tmp, collector, env);
-		else if (tmp->c == '$' && i == 1 && tmp->next && tmp->next->c != ' '
-			&& tmp->next->c != '\"' && tmp->next->c != '\'')
-			ft_check_expand(&tmp, collector, env);
+		else if (tmp->c == '$' && i == 1 && j == -1 && tmp->next
+			&& (tmp->next->c == '\'' || tmp->next->c == '\"'))
+			tmp->dell = 1;
 		tmp = tmp->next;
 	}
-	ft_dell_dollar(easy, collector);
 }

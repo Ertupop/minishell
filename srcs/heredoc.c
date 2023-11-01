@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 08:13:24 by ertupop           #+#    #+#             */
-/*   Updated: 2023/09/27 09:22:43 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/11/01 11:13:43 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_heredoc(int fd, const char *end, t_env *env)
 		i = 0;
 		work = NULL;
 		str = readline(">");
-		if (str == NULL || strcmp(str, end) == 0)
+		if (str == NULL || ft_strstr(str, end) == 0)
 		{
 			ft_heredoc2(end, str, gc, fd);
 			return ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/23 09:44:58 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/10/26 20:18:52 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/11/01 18:01:51 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_history(char *str)
 	if (!str)
 		return (0);
 	i = 0;
-	while (str[i] && str[i] == ' ')
+	while (str[i] && (str[i] == ' ' || str[i] == '\t'))
 		i++;
 	if (!str[i])
 		return (0);
@@ -75,7 +75,7 @@ void	ft_prompt(t_list **collector, t_env **env)
 	{
 		ft_init_parse(&parse);
 		use = NULL;
-		parse.str = readline("\033[0;36mminishell \033[0;31m➜ \033[0m ");
+		parse.str = readline("minishell ➜ ");
 		if (parse.str == NULL)
 		{
 			gc_dell(*collector);
@@ -87,7 +87,7 @@ void	ft_prompt(t_list **collector, t_env **env)
 			if (!ft_parse(&use, &parse, collector, env))
 			{
 				ft_minishum(&use);
-				ft_exec(&use, *env, *collector);
+				ft_exec(&use, env, *collector);
 			}
 		}
 	}
@@ -99,11 +99,22 @@ int	main(int ac, char **av, char **envp)
 	t_list	*collector;
 	t_env	*env;
 	t_sig	signal;
+	t_env	*tmp;
+	int		shlvl;
 
 	collector = NULL;
 	g_exit = 0;
 	ft_set_sa(&signal, ft_sig_handler);
 	env = ft_env(&collector, envp);
+	tmp = ft_get_env_pos(env, "SHLVL");
+	if (tmp)
+	{
+		shlvl = ft_atoi(tmp->str + 6);
+		shlvl++;
+		gc_dell_one(collector, tmp->str);
+		tmp->str = NULL;
+		tmp->str = gc_join_str(&collector, "SHLVL=", ft_itoa(shlvl));
+	}
 	ft_prompt(&collector, &env);
 	(void)ac;
 	(void)av;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rstrub <rstrub@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/01 06:50:00 by ertupop           #+#    #+#             */
-/*   Updated: 2023/09/27 13:00:38 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/10/31 11:55:30 by rstrub           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,14 @@ int	ft_cd_2(char *path, t_env *env, t_list *gc)
 	char	*tmpo;
 
 	tmpo = NULL;
-	if (chdir(path) != 0)
+	tmpo = getcwd(tmpo, 0);
+	if (chdir(path) != 0 || tmpo == NULL)
 	{
 		ft_putstr_fd("minishell: cd : No Such file or directory\n", 1);
 		return (1);
 	}
+	free(tmpo);
+	tmpo = NULL;
 	tmp = ft_get_env_pos(env, "PWD");
 	if (tmp == NULL)
 		return (1);
@@ -54,6 +57,6 @@ void	ft_cd3(char *old, t_env *env, t_list *gc)
 	char	*tmpo;
 
 	tmpo = ft_strjoin("OLDPWD=", old);
-	ft_add_export(tmpo, env, gc);
+	ft_add_export(tmpo, &env, gc);
 	free(tmpo);
 }

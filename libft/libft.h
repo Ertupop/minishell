@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/17 15:25:55 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/03/03 09:43:08 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/11/01 11:14:22 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	*ft_memset(void *s, int c, size_t n);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
-void	ft_putstr_fd(char *s, int fd);
+int		ft_putstr_fd(char *s, int fd);
 char	**ft_split(char const *s, char c);
 char	*ft_strchr(const char *s, int c);
 char	*ft_strdup(const char *s1);
@@ -70,6 +70,7 @@ size_t	ft_strlen(const char *s);
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 char	*ft_strnstr(const char *haystak, const char *needle, size_t len);
+int		ft_strstr(const char *haystak, const char *needle);
 char	*ft_strrchr(const char *s, int c);
 char	*ft_strtrim(char const *s, char const *set);
 char	*ft_substr(char const *s, unsigned int start, size_t len);

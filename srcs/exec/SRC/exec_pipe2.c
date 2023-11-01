@@ -6,20 +6,25 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 09:00:09 by ertupop           #+#    #+#             */
-/*   Updated: 2023/10/02 21:45:07 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/11/01 16:22:01 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	ft_exec_pipe5(t_pipex *pip, t_env *env, t_use *tmp, t_list *gc)
+void	ft_exec_pipe5(t_pipex *pip, t_env **env, t_use *tmp, t_list *gc)
 {
 	pip->command = ft_command(pip, tmp->tab[0], gc, env);
 	if (pip->command == NULL)
 	{
-		ft_fprintf(2, "\033[0;36mminishell \033[0;31m: \033[0m ");
+		ft_fprintf(2, "minishell : ");
 		ft_fprintf(2, "%s: command not found\n", tmp->tab[0]);
 		g_exit = 127;
+		close(pip->pipe[0]);
+		close(pip->pipe[1]);
+		close(0);
+		close(1);
+		close(2);
 		gc_dell(gc);
 		exit(127);
 	}
@@ -32,17 +37,17 @@ void	ft_exec_pipe5(t_pipex *pip, t_env *env, t_use *tmp, t_list *gc)
 	}
 }
 
-int	ft_exec_pipe6(t_use *tmp, t_env *env, t_list *gc, int tokken)
+int	ft_exec_pipe6(t_use *tmp, t_env **env, t_list *gc, int tokken)
 {
 	int	result;
 
 	result = 0;
 	if (tokken == CD)
-		result = ft_cd(tmp->tab, env, gc);
+		result = ft_cd(tmp->tab, *env, gc);
 	else if (tokken == ECHO)
 		result = ft_echo(tmp->tab);
 	else if (tokken == ENV)
-		result = ft_print_env(env);
+		result = ft_print_env(*env);
 	else if (tokken == EXIT)
 		ft_exit(tmp->tab, gc);
 	else if (tokken == EXPORT)

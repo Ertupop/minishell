@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rstrub <rstrub@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 08:11:43 by ertupop           #+#    #+#             */
-/*   Updated: 2023/09/27 08:45:19 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/10/31 14:15:28 by rstrub           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-void	ft_exec(t_use **use, t_env *env, t_list *gc)
+void	ft_exec(t_use **use, t_env **env, t_list *gc)
 {
 	t_pipex	pipex;
 	t_use	*here;
@@ -24,7 +24,7 @@ void	ft_exec(t_use **use, t_env *env, t_list *gc)
 	while (here)
 	{
 		if (here->tokken == LIMITER)
-			ft_lunch_heredoc(here, env, gc);
+			ft_lunch_heredoc(here, *env, gc);
 		here = here->next;
 	}
 	here = *use;
@@ -79,7 +79,7 @@ int	ft_wait_lstchild(t_pipex *pip)
 			write(STDERR_FILENO, "Segmentation fault (core dumped)\n", 33);
 	}
 	ft_set_sa(&signal, ft_sig_handler);
-	return (WEXITSTATUS(lastchilds));
+	return (lastchilds);
 }
 
 int	ft_close_pipe(int count, int *pipe, int nbr_command, t_pipex *pip)

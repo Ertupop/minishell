@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+         #
+#    By: rstrub <rstrub@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/23 09:30:42 by jule-mer          #+#    #+#              #
-#    Updated: 2023/10/09 10:56:08 by ertupop          ###   ########.fr        #
+#    Updated: 2023/10/30 09:41:18 by rstrub           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SRCS	=	$(addprefix srcs/bultins/, \
 			echo.c \
 			env.c \
 			exit.c \
+			exit2.c \
 			export.c \
 			export2.c\
 			pwd.c \

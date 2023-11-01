@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 07:28:09 by ertupop           #+#    #+#             */
-/*   Updated: 2023/03/03 14:14:47 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/10/30 15:48:27 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,48 @@ char	*ft_find_env(t_env *env, char *find)
 			tmp = tmp->next;
 	}
 	return (NULL);
+}
+
+void	ft_for_dollar(char **str, t_easy *start)
+{
+	int	i;
+
+	i = 0;
+	while (start && start->d_quote == 0 && ft_isalnum(start->c))
+	{
+		(*str)[i++] = start->c;
+		start = start->next;
+	}
+}
+
+void	ft_help_line(int *i, char *c, char d, int ca)
+{
+	if (ca == 1)
+	{
+		*i = 1;
+		*c = d;
+	}
+	else if (ca == 0)
+	{
+		*i = 0;
+		*c = ' ';
+	}
+	else
+	{
+		*i = 2;
+		*c = ' ';
+	}
+}
+
+int	ft_prompt_check_error(void)
+{
+	ft_putstr_fd("minishell : : no such file or directory\n", 2);
+	return (1);
+}
+
+void	ft_first(t_easy **easy, t_list **collector, t_env **env)
+{
+	ft_good_place(easy, collector);
+	ft_good_quote(easy);
+	ft_expand(easy, collector, env);
 }

@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 14:06:13 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/10/27 14:07:25 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:14:21 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ int	ft_nbr_slots(t_bridge *bridge)
 		{
 			pipe_infile = 0;
 			pipe_outfile = 0;
-			if (bridge->next->tokken == 0)
+			if (bridge->next && bridge->next->tokken == 0)
 				res += 2;
 			else
 				res++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jule-mer <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:04:38 by jule-mer          #+#    #+#             */
-/*   Updated: 2021/11/24 13:36:02 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/11/01 11:15:06 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,23 @@ char	*ft_strnstr(const char *haystak, const char *needle, size_t len)
 			return ((char *)&haystak[i]);
 	}
 	return (NULL);
+}
+
+int	ft_strstr(const char *haystak, const char *needle)
+{
+	size_t	i;
+	size_t	j;
+
+	if (!needle[0])
+		return (1);
+	i = -1;
+	while (haystak[++i])
+	{
+		j = 0;
+		while (haystak[i + j] == needle[j])
+			j++;
+		if (!needle[j])
+			return (0);
+	}
+	return (1);
 }

@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rstrub <rstrub@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/10 11:31:37 by ertupop           #+#    #+#             */
-/*   Updated: 2023/09/20 13:55:05 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/10/31 12:02:44 by rstrub           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/minishell.h"
 
-int	ft_exec_pipe(t_use *tmp, t_env *env, t_list *gc, t_pipex *pip)
+int	ft_exec_pipe(t_use *tmp, t_env **env, t_list *gc, t_pipex *pip)
 {
 	int		tokken;
 	int		result;
 	t_sig	signal;
 
 	result = 0;
-	ft_set_sa(&signal, SIG_DFL);
+	ft_set_sa_exec(&signal, SIG_DFL);
 	tokken = ft_check2(tmp->tab[0]);
 	ft_exec_pipe2(pip);
 	if (tokken == NO)

@@ -6,7 +6,7 @@
 /*   By: jule-mer <jule-mer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/04 13:30:33 by firawar           #+#    #+#             */
-/*   Updated: 2023/10/27 14:28:42 by jule-mer         ###   ########.fr       */
+/*   Updated: 2023/10/30 14:01:52 by jule-mer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,6 @@ int	ft_the_result(int len, int min)
 {
 	len = len - min;
 	if (len == 0)
-		len = 1;
+		len ++;
 	return (len);
 }
