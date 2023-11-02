@@ -6,7 +6,7 @@
 /*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/24 13:04:38 by jule-mer          #+#    #+#             */
-/*   Updated: 2023/11/01 11:15:06 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/11/02 15:02:18 by ertupop          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	ft_strstr(const char *haystak, const char *needle)
 	while (haystak[++i])
 	{
 		j = 0;
-		while (haystak[i + j] == needle[j])
+		while (needle[j] && haystak[i + j] && haystak[i + j] == needle[j])
 			j++;
 		if (!needle[j])
 			return (0);
