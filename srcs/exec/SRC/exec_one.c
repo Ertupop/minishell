@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_one.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ertupop <ertupop@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rstrub <rstrub@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/04 07:37:59 by ertupop           #+#    #+#             */
-/*   Updated: 2023/11/01 16:02:36 by ertupop          ###   ########.fr       */
+/*   Updated: 2023/11/03 10:59:24 by rstrub           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	ft_execve_one(t_env **env, t_pipex *pip, t_use *tmp, t_list *gc)
 			write(STDERR_FILENO, "Segmentation fault (core dumped)\n", 33);
 		return (result);
 	}
-	return (WIFEXITED(result));
+	return (WEXITSTATUS(result));
 }
 
 void	ft_free_pip(t_pipex *pip)

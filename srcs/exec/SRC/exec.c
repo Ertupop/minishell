@@ -6,7 +6,7 @@
 /*   By: rstrub <rstrub@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/09 08:11:43 by ertupop           #+#    #+#             */
-/*   Updated: 2023/10/31 14:15:28 by rstrub           ###   ########.fr       */
+/*   Updated: 2023/11/03 11:02:46 by rstrub           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,10 @@ int	ft_wait_lstchild(t_pipex *pip)
 			write(STDERR_FILENO, "Quit (core dumped)\n", 19);
 		else if (WTERMSIG(lastchilds) == SIGSEGV)
 			write(STDERR_FILENO, "Segmentation fault (core dumped)\n", 33);
+		return (lastchilds);
 	}
 	ft_set_sa(&signal, ft_sig_handler);
-	return (lastchilds);
+	return (WEXITSTATUS(lastchilds));
 }
 
 int	ft_close_pipe(int count, int *pipe, int nbr_command, t_pipex *pip)
